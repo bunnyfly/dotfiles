@@ -1,0 +1,20 @@
+[user]
+  email = bunnyfly@gmail.com
+  name = Chloe Adeline
+
+[core]
+	excludesfile = /Users/Bunnyfly/.gitignore_global
+
+[color]
+  ui = auto
+
+[alias]
+  a = add
+  b = branch
+  co = checkout
+  ci = commit
+  d = diff
+  h = help
+  s = status -s
+  tr = log --graph --decorate --pretty=oneline --abbrev-commit
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit

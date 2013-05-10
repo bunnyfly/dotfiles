@@ -1,0 +1,46 @@
+" Colemak Homerow
+map -builtin n <Down>
+map -builtin N 20<Down>
+map -builtin e <Up>
+map -builtin E 20<Up>
+map -builtin i l
+map -builtin I L
+
+" Colemak Tabbing
+map -builtin <c-i>   gt
+imap -builtin <c-i>  <esc>gt
+map -builtin <c-s-I>   :tabmove! +1<CR>
+map -builtin <c-h>   gT
+imap -builtin <c-h>  <esc>gT
+map -builtin <c-s-H>   :tabmove! -1<CR>
+
+" Last search
+map -builtin k n
+map -builtin K N
+
+" Swap ; and :
+map -builtin ; :
+map -builtin : ;
+
+" GOTOs
+map -builtin ge o gmail.com<cr>
+map -builtin gE t gmail.com<cr>
+map -builtin gr o google.com/reader<cr>
+map -builtin gR t google.com/reader<cr>
+map -builtin gc o google.com/calendar<cr>
+map -builtin gC t google.com/calendar<cr>
+map -builtin gd o docs.google.com<cr>
+map -builtin gD t docs.google.com<cr>
+
+" Pass Gmail Shortcut Keys
+set passkeys+=mail.google.com:c/uenxsyDpkrRIUdli{}m,gi,gs,gd,ga,zz,gp,gl
+
+" Misc
+set hlfind
+set titlestring=
+
+" Allow focus changes by scripts.
+set strictfocus='chrome:*':laissez-faire,*:laissez-faire
+
+" Keep wikipedia from triggering
+"set! ui.key.contentAccess=3
