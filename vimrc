@@ -2,10 +2,24 @@
 " Initialization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-" Start Pathogen to load plugin bundles.
+" Vundle plugin manager.
   filetype off
-  call pathogen#infect()
-  call pathogen#helptags()
+  set rtp+=~/.vim/bundle/vundle/
+  call vundle#rc()
+  Bundle 'gmarik/vundle'
+  Bundle 'scrooloose/nerdtree'
+  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-fugitive'
+
+
+" Machine specific settings.
+  let hostname = substitute(substitute(system('hostname'), '\n', '', ''), '\.local', '', '')
+  if hostname == "Snail"                                   " Mac Mini
+  elseif hostname == "sparrow.sea.corp.google.com"         " Workstation
+    let g:enable_local_swap_dirs = 1   " Swap files > /usr/local/google/tmp/vim_tmp
+    source /usr/share/vim/google/google.vim
+  else
+  endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -25,6 +39,8 @@ set nocompatible
   onoremap r i
 " High/Low/Mid.
   noremap <c-e> H|noremap <c-n> L|noremap <c-m> M
+" Scroll up/down.
+  noremap zn <c-y>|noremap ze <c-e>
 " Switch tabs.
   nnoremap <c-i> <C-PageDown>|nnoremap <c-h> <C-PageUp>
 " Switch panes.
@@ -50,15 +66,13 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Options
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set runtimepath+=/usr/local/share/python/powerline/bindings/vim
-
 " Vim Display.
   set t_Co=256                         " 256 Colors.
   set shortmess+=I                     " Hide splash screen.
   set display+=lastline                " Show partial lines.
   set showtabline=1                    " Show tabs only when multiple tabs are open.
   set laststatus=2                     " Always show status bar.
-  "set statusline=%<%t%h%m%r%h%w%y%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
+  set statusline=%<%t%h%m%r%h%w%y%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
 " Text Display.
   syntax on                            " Syntax highlighting.
   set number                           " Show line numbers.
@@ -78,6 +92,7 @@ set runtimepath+=/usr/local/share/python/powerline/bindings/vim
   set whichwrap+=<,>,h,l,b,s,[,]       " Backspace and arrows can wrap to previous/next line.
   set splitbelow|set splitright        " Open new splits below and to the right.
 " Searching and matching.
+  set nowrapscan                       " Don't wrap search to beginning of file.
   set incsearch                        " Incremental searching.
   set ignorecase|set smartcase         " Ignore case when only lowercase letters are used.
                                        " Force matching with \c (ignore) or \C (match).
@@ -90,11 +105,6 @@ set runtimepath+=/usr/local/share/python/powerline/bindings/vim
   set confirm                          " Confirm quit/save/etc.
   set wildmenu                         " Tab completion on.
   set wildmode=longest,full            " Tab complete longest common string, then each full match.
-" Machine/MacVim specific settings.
-  let hostname = substitute(substitute(system('hostname'), '\n', '', ''), '\.local', '', '')
-  if hostname == "Snail"  " Mac Mini
-  else
-  endif
   if has("gui_macvim")
     set guioptions=aegm
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
