@@ -50,7 +50,6 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","
 " Swapping : and ; completely causes issues with scripts that rely on :.
   noremap ; :
 " Redo with U.
@@ -61,6 +60,27 @@ let mapleader = ","
   noremap ' `|noremap ` '
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Leader Mappings
+"
+" Reserved:
+"   <Leader><Leader> (NERDTree)
+"   <Leader>j* (Eclim Java)
+"   <Leader>w* (VimWiki)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+  nnoremap <silent> <Leader>dt :diffthis<CR>
+  nnoremap <silent> <Leader>do :diffoff<CR>
+  nnoremap <silent> <Leader>dd :call DiffToggle()<CR>
+    function! DiffToggle()
+      if &diff
+        diffoff
+      else
+        diffthis
+      endif
+    :endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -126,7 +146,7 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>d :NERDTreeToggle<CR>
+  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
 " Colemak
   let g:NERDTreeMapJumpFirstChild = "ge"
   let g:NERDTreeMapJumpLastChild = "gn"
@@ -155,8 +175,8 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tlist - taglist
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  noremap <Leader>t    :TlistToggle<cr>
-  noremap <Leader>T    :TlistUpdate<cr>
+  "noremap <Leader>t    :TlistToggle<cr>
+  "noremap <Leader>T    :TlistUpdate<cr>
   " this is just to keep it from throwing an already mapped <Leader>t warning
   noremap <Leader><c-t> <Plug>TaskList
 " Options
