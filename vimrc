@@ -10,6 +10,8 @@ set nocompatible
   Bundle 'scrooloose/nerdtree'
   Bundle 'tpope/vim-surround'
   Bundle 'tpope/vim-fugitive'
+  Bundle 'vim-scripts/vimwiki'
+  Bundle 'Lokaltog/powerline'
 
 
 " Machine specific settings.
@@ -92,7 +94,7 @@ let mapleader = ","
   set display+=lastline                " Show partial lines.
   set showtabline=1                    " Show tabs only when multiple tabs are open.
   set laststatus=2                     " Always show status bar.
-  set statusline=%<%t%h%m%r%h%w%y%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
+  "set statusline=%<%t%h%m%r%h%w%y%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
 " Text Display.
   syntax on                            " Syntax highlighting.
   set number                           " Show line numbers.
@@ -129,6 +131,12 @@ let mapleader = ","
     set guioptions=aegm
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Powerline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
