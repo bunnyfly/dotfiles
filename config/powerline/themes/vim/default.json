@@ -4,7 +4,7 @@
 			"before": " "
 		},
 		"modified_indicator": {
-			"args": { "text": "+" }
+			"args": { "text": "✧" }
 		},
 		"line_percent": {
 			"args": { "gradient": true },
@@ -28,7 +28,13 @@
 			{
 				"name": "branch",
 				"exclude_modes": ["nc"],
-				"priority": 30
+				"priority": 30,
+				"draw_soft_divider": false
+			},
+			{
+				"name": "file_vcs_status",
+				"before": " ",
+				"draw_soft_divider": true
 			},
 			{
 				"name": "readonly_indicator",
@@ -42,11 +48,6 @@
 			},
 			{
 				"name": "file_name",
-				"draw_soft_divider": false
-			},
-			{
-				"name": "file_vcs_status",
-				"before": " ",
 				"draw_soft_divider": false
 			},
 			{

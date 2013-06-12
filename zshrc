@@ -71,3 +71,4 @@
   alias g5='/google/data/ro/projects/shelltoys/g5.sar'
   alias menu='/home/build/static/projects/menu/menu.par kayak,junction'
   alias sandman='/google/data/ro/projects/sandman/sandman.par'
+  alias cdd='/google/data/ro/projects/chubby/cdd/cdd'
