@@ -143,6 +143,9 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Eclim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>pe :PingEclim<CR>
+  nnoremap <silent> <Leader>pi :ProjectInfo<CR>
+  nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
   nnoremap <silent> <Leader>jc :JavaCorrect<CR>
   nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
   nnoremap <silent> <Leader>jf :JavaFormat<CR>
