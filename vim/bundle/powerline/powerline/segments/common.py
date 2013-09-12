@@ -104,10 +104,10 @@ def cwd(pl, segment_info, dir_shorten_len=None, dir_limit_depth=None, use_path_s
 		cwd = re.sub('^' + re.escape(home), '~', cwd, 1)
 	cwd_split = cwd.split(os.sep)
 	cwd_split_len = len(cwd_split)
-	if dir_limit_depth and cwd_split_len > dir_limit_depth + 1:
-		del(cwd_split[0:-dir_limit_depth])
-		cwd_split.insert(0, '⋯')
 	cwd = [i[0:dir_shorten_len] if dir_shorten_len and i else i for i in cwd_split[:-1]] + [cwd_split[-1]]
+	if dir_limit_depth and cwd_split_len > dir_limit_depth + 1:
+		del(cwd[0:-dir_limit_depth])
+		cwd.insert(0, '⋯')
 	ret = []
 	if not cwd[0]:
 		cwd[0] = '/'
@@ -497,7 +497,10 @@ try:
 	import psutil
 
 	def _get_bytes(interface):
-		io_counters = psutil.network_io_counters(pernic=True)
+		try:
+			io_counters = psutil.net_io_counters(pernic=True)
+		except AttributeError:
+			io_counters = psutil.network_io_counters(pernic=True)
 		if_io = io_counters.get(interface)
 		if not if_io:
 			return None
@@ -1014,3 +1017,54 @@ class NowPlayingSegment(object):
 			'total': now_playing[4],
 		}
 now_playing = NowPlayingSegment()
+
+
+if os.path.exists('/sys/class/power_supply/BAT0/capacity'):
+	def _get_capacity():
+		with open('/sys/class/power_supply/BAT0/capacity', 'r') as f:
+			return int(float(f.readline().split()[0]))
+else:
+	def _get_capacity():
+		raise NotImplementedError
+
+
+def battery(pl, format='{batt:3.0%}', steps=5, gamify=False):
+	'''Return battery charge status.
+
+	:param int steps:
+		number of discrete steps to show between 0% and 100% capacity
+	:param bool gamify:
+		measure in hearts (♥) instead of percentages
+
+	Highlight groups used: ``battery_gradient`` (gradient), ``battery``.
+	'''
+	try:
+		capacity = _get_capacity()
+	except NotImplementedError:
+		pl.warn('Unable to get battery capacity.')
+		return None
+	ret = []
+	denom = int(steps)
+	numer = int(denom * capacity / 100)
+	full_heart = '♥'
+	if gamify:
+		ret.append({
+			'contents': full_heart * numer,
+			'draw_soft_divider': False,
+			'highlight_group': ['battery_gradient', 'battery'],
+			'gradient_level': 99
+		})
+		ret.append({
+			'contents': full_heart * (denom - numer),
+			'draw_soft_divider': False,
+			'highlight_group': ['battery_gradient', 'battery'],
+			'gradient_level': 1
+		})
+	else:
+		batt = numer / float(denom)
+		ret.append({
+			'contents': format.format(batt=batt),
+			'highlight_group': ['battery_gradient', 'battery'],
+			'gradient_level': batt * 100
+		})
+	return ret

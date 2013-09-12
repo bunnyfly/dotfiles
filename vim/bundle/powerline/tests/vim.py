@@ -1,6 +1,7 @@
 # vim:fileencoding=utf-8:noet
 _log = []
 vars = {}
+vvars = {'version': 703}
 _window = 0
 _mode = 'n'
 _buf_purge_events = set()
@@ -155,6 +156,9 @@ def command(cmd):
 	elif cmd.startswith('hi '):
 		sp = cmd.split()
 		_highlights[sp[1]] = sp[2:]
+	elif cmd.startswith('function! Powerline_plugin_ctrlp'):
+		# Ignore CtrlP updating functions
+		pass
 	else:
 		raise NotImplementedError
 
@@ -168,6 +172,8 @@ def eval(expr):
 	elif expr.startswith('PowerlineRegisterCachePurgerEvent'):
 		_buf_purge_events.add(expr[expr.find('"') + 1:expr.rfind('"') - 1])
 		return "0"
+	elif expr.startswith('exists('):
+		return '0'
 	raise NotImplementedError
 
 
@@ -175,6 +181,10 @@ def eval(expr):
 def bindeval(expr):
 	if expr == 'g:':
 		return vars
+	elif expr == '{}':
+		return {}
+	elif expr == '[]':
+		return []
 	import re
 	match = re.compile(r'^function\("([^"\\]+)"\)$').match(expr)
 	if match:
@@ -223,8 +233,15 @@ def _emul_setwinvar(winnr, varname, value):
 
 @_vim
 def _emul_virtcol(expr):
-	if expr == '.':
+	if expr == '.' or isinstance(expr, list):
 		return windows[_window - 1].cursor[1] + 1
+	raise NotImplementedError
+
+
+@_vim
+def _emul_getpos(expr):
+	if expr == '.' or expr == 'v':
+		return [0, windows[_window - 1].cursor[0] + 1, windows[_window - 1].cursor[1] + 1, 0]
 	raise NotImplementedError
 
 

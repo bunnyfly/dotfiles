@@ -16,6 +16,8 @@ def generate_directories(path):
 	if os.path.isdir(path):
 		yield path
 	while True:
+		if os.path.ismount(path):
+			break
 		old_path = path
 		path = os.path.dirname(path)
 		if path == old_path or not path:
@@ -39,8 +41,10 @@ def get_branch_name(directory, config_file, get_func):
 	global branch_name_cache
 	with branch_lock:
 		# Check if the repo directory was moved/deleted
+		fw = file_watcher()
+		is_watched = fw.is_watched(directory)
 		try:
-			changed = file_watcher()(directory)
+			changed = fw(directory)
 		except OSError as e:
 			if getattr(e, 'errno', None) != errno.ENOENT:
 				raise
@@ -48,12 +52,13 @@ def get_branch_name(directory, config_file, get_func):
 		if changed:
 			branch_name_cache.pop(config_file, None)
 			# Remove the watches for this repo
-			file_watcher().unwatch(directory)
-			file_watcher().unwatch(config_file)
+			if is_watched:
+				fw.unwatch(directory)
+				fw.unwatch(config_file)
 		else:
 			# Check if the config file has changed
 			try:
-				changed = file_watcher()(config_file)
+				changed = fw(config_file)
 			except OSError as e:
 				if getattr(e, 'errno', None) != errno.ENOENT:
 					raise
@@ -176,7 +181,7 @@ class TreeStatusCache(dict):
 	def __call__(self, repo, logger):
 		key = repo.directory
 		try:
-			if self.tw(key):
+			if self.tw(key, logger=logger, ignore_event=getattr(repo, 'ignore_event', None)):
 				self.pop(key, None)
 		except OSError as e:
 			logger.warn('Failed to check %s for changes, with error: %s'% key, e)
@@ -209,7 +214,7 @@ def debug():
 	''' To use run python -c "from powerline.lib.vcs import debug; debug()" some_file_to_watch '''
 	import sys
 	dest = sys.argv[-1]
-	repo = guess(dest)
+	repo = guess(os.path.abspath(dest))
 	if repo is None:
 		print ('%s is not a recognized vcs repo' % dest)
 		raise SystemExit(1)
@@ -223,4 +228,6 @@ def debug():
 				print ('File status: %s' % repo.status(dest))
 			raw_input('Press Enter to check again: ')
 	except KeyboardInterrupt:
+		pass
+	except EOFError:
 		pass
