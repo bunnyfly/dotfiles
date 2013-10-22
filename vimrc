@@ -58,8 +58,11 @@ set nocompatible
   noremap U <C-r>
 " Backspace works.
   noremap <BS> X|vnoremap <BS> d
+" Sane incrementing.
+  nnoremap + <C-a>|nnoremap - <C-x>
 " Jump to exact mark location with ' instead of line.
   noremap ' `|noremap ` '
+
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
 
@@ -145,6 +148,7 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nnoremap <silent> <Leader>pe :PingEclim<CR>
   nnoremap <silent> <Leader>pi :ProjectInfo<CR>
+  nnoremap <silent> <Leader>pl :ProjectList<CR>
   nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
   nnoremap <silent> <Leader>jc :JavaCorrect<CR>
   nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
@@ -167,7 +171,7 @@ let mapleader = ","
   let g:NERDTreeMapOpenSplit = "S"
   let g:NERDTreeMapOpenExpl = ""
 " Options
-  let g:NERDTreeWinSize = 30           " Default width.
+  let g:NERDTreeWinSize = 50           " Default width.
   let g:NERDTreeQuitOnOpen = 0         " Stay open.
   let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
 
