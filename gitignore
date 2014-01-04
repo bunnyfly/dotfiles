@@ -2,3 +2,6 @@
 .Spotlight-V100
 .Trash
 .*.swp
+.*.swo
+vim/bundle/**
+~vim/bundle/vundle
