@@ -13,6 +13,7 @@ set nocompatible
   Bundle 'vim-scripts/vimwiki'
   Bundle 'Lokaltog/powerline'
 
+  set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 
 " Machine specific settings.
   let hostname = substitute(substitute(system('hostname'), '\n', '', ''), '\.local', '', '')
