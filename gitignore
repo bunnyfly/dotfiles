@@ -3,5 +3,3 @@
 .Trash
 .*.swp
 .*.swo
-vim/bundle/**
-~vim/bundle/vundle
