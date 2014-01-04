@@ -1,5 +1,6 @@
 [user]
-  name = Chloe Adeline
+	name = Chloe Adeline
+	email = bunnyfly@gmail.com
 
 [core]
   excludesfile = ~/.gitignore_global
