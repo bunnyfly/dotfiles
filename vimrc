@@ -61,9 +61,6 @@ set nocompatible
   noremap k n|noremap K N
 " BOL/EOL/Join Lines.
   noremap l ^|noremap L $|noremap <C-l> J
-" Split Line.
-" TODO: Make Vim continue even if there is no s/// match instead of inserting space, if possible.
-  noremap gl <Esc>i <Enter><Esc>kV:s/\s\+$//<cr>j^
 " _r_ = inneR text objects.
   onoremap r i
 " EOW.
