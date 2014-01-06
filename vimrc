@@ -35,26 +35,40 @@ set nocompatible
 " - Ctrl-l joins lines, making l/L the veritable "Line" key.
 " - r replaces i as the "inneR" modifier [e.g. "diw" becomes "drw"].
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Arrows.
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colemak HNEI Arrows
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Arrows. Swap 'gn'/'ge' and 'n'/'e'.
   noremap n gj|noremap e gk|noremap i l|noremap gn j|noremap ge k
+" Switch tabs.
+  nnoremap <c-i> <C-PageDown>|nnoremap <c-h> <C-PageUp>
+" Switch panes.
+  noremap H <C-W>h|noremap I <C-W>l|noremap N <C-W>j|noremap E <C-W>k
+" Moving windows around.
+  noremap <C-W>N <C-W>J|noremap <C-W>E <C-W>K|noremap <C-W>I <C-W>L
+" High/Low/Mid.
+  noremap <c-e> H|noremap <c-n> L|noremap <c-m> M
+" Scroll up/down.
+  noremap zn <c-y>|noremap ze <c-e>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Colemak Mappings Due to HNEI Arrows
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " In(s)ert. The default s/S is synonymous with cl/cc and is not very useful.
   noremap s i|noremap S I
 " Last search.
   noremap k n|noremap K N
 " BOL/EOL/Join Lines.
   noremap l ^|noremap L $|noremap <C-l> J
-" EOW.
-  noremap j e|noremap J E
+" Split Line.
+" TODO: Make Vim continue even if there is no s/// match instead of inserting space, if possible.
+  noremap gl <Esc>i <Enter><Esc>kV:s/\s\+$//<cr>j^
 " _r_ = inneR text objects.
   onoremap r i
-" High/Low/Mid.
-  noremap <c-e> H|noremap <c-n> L|noremap <c-m> M
-" Scroll up/down.
-  noremap zn <c-y>|noremap ze <c-e>
-" Switch tabs.
-  nnoremap <c-i> <C-PageDown>|nnoremap <c-h> <C-PageUp>
-" Switch panes.
-  noremap H <C-W>h|noremap I <C-W>l|noremap N <C-W>j|noremap E <C-W>k
+" EOW.
+" TODO: I never use this. Use for something else?
+  noremap j e|noremap J E
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,10 +93,16 @@ set nocompatible
 "
 " Reserved:
 "   <Leader><Leader> (NERDTree)
+"   <Leader>d* (Diff Tools)
 "   <Leader>j* (Eclim Java)
+"   <Leader>p* (Eclim Project)
 "   <Leader>w* (VimWiki)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
+
+" Toggle paste mode.
+  nnoremap <Leader>v :set invpaste<CR>:set paste?<CR>
+" Diff
   nnoremap <silent> <Leader>dt :diffthis<CR>
   nnoremap <silent> <Leader>do :diffoff<CR>
   nnoremap <silent> <Leader>dd :call DiffToggle()<CR>
