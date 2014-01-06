@@ -96,7 +96,7 @@ let mapleader = ","
   set display+=lastline                " Show partial lines.
   set showtabline=1                    " Show tabs only when multiple tabs are open.
   set laststatus=2                     " Always show status bar.
-  set statusline=%<%t%h%m%r%h%w%y%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
+  set statusline=%<%t%h%m%r%h%w%y\ %{fugitive#statusline()}%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
 " Text Display.
   syntax on                            " Syntax highlighting.
   set number                           " Show line numbers.
