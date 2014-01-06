@@ -30,15 +30,15 @@ set nocompatible
 "
 " HNEI homerow arrows mean that JKL are free to use and NEI need new keys.
 " - k/K is the new n/N.
-" - s/S is the new i/I ["inSert"]. The default s/S is synonymous with cl/cc and is not very useful.
-" - l/L skips to beginning and end of lines. Much more intuitive and easy than ^ and $.
+" - s/S is the new i/I ["inSert"].
 " - j/J is the new e/E ["Jump" to EOW].
+" - l/L skip to the beginning and end of lines. Much more intuitive than ^/$.
 " - Ctrl-l joins lines, making l/L the veritable "Line" key.
-" - r replaces i as the "inneR" modifier [e.g. "diw" becomes "drw"]
+" - r replaces i as the "inneR" modifier [e.g. "diw" becomes "drw"].
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Arrows.
   noremap n gj|noremap e gk|noremap i l|noremap gn j|noremap ge k
-" In(s)ert.
+" In(s)ert. The default s/S is synonymous with cl/cc and is not very useful.
   noremap s i|noremap S I
 " Last search.
   noremap k n|noremap K N

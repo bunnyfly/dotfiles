@@ -12,10 +12,12 @@ In a nutshell: keep Qwerty HJKL-style homerow arrows and change as little else a
 
 `HNEI` homerow arrows mean that `JKL` are free to use and `NEI` need new keys.
 - `k`/`K` is the new `n`/`N`.
-- `s`/`S` is the new `i`/`I` ["inSert"]. The default `s`/`S` is synonymous with `cl`/`cc` and is not very useful.
-- `l`/`L` skips to beginning and end of lines. Much more intuitive and easy than `^` and `$`.
+- `s`/`S` is the new `i`/`I` ["inSert"].
 - `j`/`J` is the new `e`/`E` ["Jump" to EOW].
-- See `vimrc` for a few other details...
+- `l`/`L` skip to the beginning and end of lines. Much more intuitive than `^`/`$`.
+- `Ctrl-L` joins lines, making `L` the veritable "Line" key.
+- `r` replaces `i` as the "inneR" modifier [e.g. "diw" becomes "drw"].
+- That's most of it! See `vimrc` for a few other details...
 
 Tools
 -----
