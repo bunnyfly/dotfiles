@@ -60,17 +60,16 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Swapping : and ; completely causes issues with scripts that rely on :.
+" Swapping : and ; completely causes issues with some scripts that improperly rely on :.
   noremap ; :
 " Redo with U.
   noremap U <C-r>
 " Backspace works.
   noremap <BS> X|vnoremap <BS> d
-" Sane incrementing.
+" Increment and Decrement with +/-
   nnoremap + <C-a>|nnoremap - <C-x>
 " Jump to exact mark location with ' instead of line.
   noremap ' `|noremap ` '
-
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
 
@@ -139,7 +138,7 @@ let mapleader = ","
   set wildmenu                         " Tab completion on.
   set wildmode=longest,full            " Tab complete longest common string, then each full match.
   if has("gui_macvim")
-    set guioptions=aegm
+    set guioptions=egm
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
 

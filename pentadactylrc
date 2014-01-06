@@ -31,7 +31,7 @@ map -builtin gd o drive.google.com<cr>
 map -builtin gD t drive.google.com<cr>
 
 " Pass Gmail Shortcut Keys
-set passkeys+=mail.google.com:c/uenxsyDpkrRIUdli{}m,gi,gs,gd,ga,zz,gp,gl
+set passkeys+=mail.google.com:c/uenxsyDpkrRIUdli{}[]m,gi,gs,gd,ga,zz,gp,gl
 
 " Misc
 set hlfind
