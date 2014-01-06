@@ -5,7 +5,7 @@
     source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
   fi
 
-  PATH=$PATH:/usr/local/texlive/2013/bin/x86_64-darwin
+  PATH=/usr/local/bin:$PATH:/usr/local/texlive/2013/bin/x86_64-darwin
 
 
 ####################################################################################################
@@ -14,6 +14,7 @@
   export EDITOR='vim'
   export VISUAL='vim'
   export KEYTIMEOUT=1        # Eliminates <Esc> delay for Vi mode.
+  export TERM=screen-256color
 
 # Shortcuts
   alias a='ack-grep'

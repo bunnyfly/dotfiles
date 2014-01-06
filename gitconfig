@@ -18,3 +18,5 @@
   s = status -s
   tr = log --graph --decorate --pretty=oneline --abbrev-commit
   lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[push]
+	default = simple
