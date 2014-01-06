@@ -26,9 +26,8 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colemak-Vim Mappings
 "
-" In a nutshell: keep Qwerty HJKL-style homerow arrows and change as little else as possible.
-"
-" HNEI homerow arrows mean that JKL are free to use and NEI need new keys.
+" The idea is to use HNEI as arrows – keeping the traditional Vim homerow style – and changing as
+" little else as possible. This means JKL are free to use and NEI need new keys.
 " - k/K is the new n/N.
 " - s/S is the new i/I ["inSert"].
 " - j/J is the new e/E ["Jump" to EOW].
