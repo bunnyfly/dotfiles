@@ -35,26 +35,8 @@ set nocompatible
 " - Ctrl-l joins lines, making l/L the veritable "Line" key.
 " - r replaces i as the "inneR" modifier [e.g. "diw" becomes "drw"].
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colemak HNEI Arrows
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Arrows. Swap 'gn'/'ge' and 'n'/'e'.
+" HNEI arrows. Swap 'gn'/'ge' and 'n'/'e'.
   noremap n gj|noremap e gk|noremap i l|noremap gn j|noremap ge k
-" Switch tabs.
-  nnoremap <c-i> <C-PageDown>|nnoremap <c-h> <C-PageUp>
-" Switch panes.
-  noremap H <C-W>h|noremap I <C-W>l|noremap N <C-W>j|noremap E <C-W>k
-" Moving windows around.
-  noremap <C-W>N <C-W>J|noremap <C-W>E <C-W>K|noremap <C-W>I <C-W>L
-" High/Low/Mid.
-  noremap <c-e> H|noremap <c-n> L|noremap <c-m> M
-" Scroll up/down.
-  noremap zn <c-y>|noremap ze <c-e>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colemak Mappings Due to HNEI Arrows
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " In(s)ert. The default s/S is synonymous with cl/cc and is not very useful.
   noremap s i|noremap S I
 " Last search.
@@ -66,6 +48,21 @@ set nocompatible
 " EOW.
 " TODO: I never use this. Use for something else?
   noremap j e|noremap J E
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Other Colemak Arrow-Based Mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Switch tabs.
+  nnoremap <c-i> <C-PageDown>|nnoremap <c-h> <C-PageUp>
+" Switch panes.
+  noremap H <C-W>h|noremap I <C-W>l|noremap N <C-W>j|noremap E <C-W>k
+" Moving windows around.
+  noremap <C-W>N <C-W>J|noremap <C-W>E <C-W>K|noremap <C-W>I <C-W>L
+" High/Low/Mid.
+  noremap <c-e> H|noremap <c-n> L|noremap <c-m> M
+" Scroll up/down.
+  noremap zn <c-y>|noremap ze <c-e>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
