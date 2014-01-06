@@ -24,7 +24,17 @@ set nocompatible
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Colemak Mappings
+" Colemak-Vim Mappings
+"
+" In a nutshell: keep Qwerty HJKL-style homerow arrows and change as little else as possible.
+"
+" HNEI homerow arrows mean that JKL are free to use and NEI need new keys.
+" - k/K is the new n/N.
+" - s/S is the new i/I ["inSert"]. The default s/S is synonymous with cl/cc and is not very useful.
+" - l/L skips to beginning and end of lines. Much more intuitive and easy than ^ and $.
+" - j/J is the new e/E ["Jump" to EOW].
+" - Ctrl-l joins lines, making l/L the veritable "Line" key.
+" - r replaces i as the "inneR" modifier [e.g. "diw" becomes "drw"]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Arrows.
   noremap n gj|noremap e gk|noremap i l|noremap gn j|noremap ge k

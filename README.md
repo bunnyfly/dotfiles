@@ -1,15 +1,21 @@
 Dotfiles by Chloe Adeline
 =========================
-My personal setup! To install:
-- Clone into `~/dotfiles`
-- `./install_dotfiles.sh`
-- Run `:BundleInstall` in Vim to install plugins.
+My personal setup! Probably not useful to most, but you might find some useful stuff in here, especially if you use Colemak and Vim!
 
-Info
-----
-I use the Vim editor and Colemak keyboard layout. All my configs are influenced by this for very consistent keyboard control across all my tools.
+Colemak and Vim!
+----------------
+I have intuitive and concise mappings to reconcile Colemak and Vim with traditional homerow arrows.
 
-How I reconcile Colemak with Vim: my preference is to keep the Vim homerow arrows in the same location, which means that `n`, `e`, & `i` replace `j`, `k`, & `l` as the direction arrows. `k` is in the Qwerty `n` spot, and thus repeats searches. I never use the `s`, and so it becomes the new "insert," or "start," which is my new mnemonic for it. And `l` becomes an incredily handy and intuitive BOL/EOL key!
+All my tools [less, tmux, etc] are configured consistently in this Vim style. I've been using this since 2008 and haven't looked back!
+
+In a nutshell: keep Qwerty HJKL-style homerow arrows and change as little else as possible.
+
+`HNEI` homerow arrows mean that `JKL` are free to use and `NEI` need new keys.
+- `k`/`K` is the new `n`/`N`.
+- `s`/`S` is the new `i`/`I` ["inSert"]. The default `s`/`S` is synonymous with `cl`/`cc` and is not very useful.
+- `l`/`L` skips to beginning and end of lines. Much more intuitive and easy than `^` and `$`.
+- `j`/`J` is the new `e`/`E` ["Jump" to EOW].
+- See `vimrc` for a few other details...
 
 Tools
 -----
@@ -21,3 +27,10 @@ Includes customization for:
 - [pentadactyl](http://5digits.org/pentadactyl/) - Firefox Vim-inspired browsing
 - [powerline](https://github.com/Lokaltog/powerline) - statusline and prompt for vim, tmux, zsh, and others
 - [less](http://www.greenwoodsoftware.com/less/) - pager and file viewer
+
+Setup
+-----
+- Clone into `~/dotfiles`
+- `./install_dotfiles.sh`
+- Vim `:BundleInstall` to install Vim plugins
+...and probably some other steps like installing Powerline-enabled fonts. But that's most of it.
