@@ -68,24 +68,29 @@ set nocompatible
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Swapping : and ; completely causes issues with some scripts that improperly rely on :.
+" The best!
   noremap ; :
-" Redo with U.
+" Sane redo.
   noremap U <C-r>
 " Backspace works.
   noremap <BS> X|vnoremap <BS> d
-" Increment and Decrement with +/-
+" +/- increment and decrement.
   nnoremap + <C-a>|nnoremap - <C-x>
 " Jump to exact mark location with ' instead of line.
   noremap ' `|noremap ` '
+" zT/zB is like zt/zb, but scrolls to the top/bottom quarter of the screen.
+  nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
+  nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Leader Mappings
+" General Leader Mappings
 "
-" Reserved:
+" Plugin-specific mappings are set in the plugin's section.
+"
+" Leader Conventions:
 "   <Leader><Leader> (NERDTree)
 "   <Leader>d* (Diff Tools)
 "   <Leader>j* (Eclim Java)
