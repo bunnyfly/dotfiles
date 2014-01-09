@@ -72,8 +72,6 @@ set nocompatible
   noremap ; :
 " Sane redo.
   noremap U <C-r>
-" Backspace works.
-  noremap <BS> X|vnoremap <BS> d
 " +/- increment and decrement.
   nnoremap + <C-a>|nnoremap - <C-x>
 " Jump to exact mark location with ' instead of line.
@@ -83,6 +81,8 @@ set nocompatible
   nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
+" Disable bad habits.
+  nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <BS> <Nop>|nnoremap <Del> <Nop>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
