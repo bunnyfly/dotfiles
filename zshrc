@@ -18,6 +18,7 @@
 
 # Shortcuts
   alias a='ack-grep'
+  alias d='diff'
   alias g='git'
   alias t='tmux'
   alias v='vim'

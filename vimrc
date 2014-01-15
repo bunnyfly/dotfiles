@@ -75,7 +75,7 @@ source ~/.vimrc-local
   nnoremap <expr> zB 'zb' . winheight(0)/4 . '<C-e>'
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
-" Disable bad habits.
+" Disable bad habits. Unfortunately, <C-m> == <CR>, so Mid is done with M.
   nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <BS> <Nop>|nnoremap <Del> <Nop>
 " Back and forth in jump and changelist.
   nnoremap gh <C-o>|nnoremap gi <C-i>|nnoremap gH g;|nnoremap gI g,
