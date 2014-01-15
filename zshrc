@@ -5,7 +5,7 @@
     source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
   fi
 
-  PATH=/usr/local/bin:$PATH:/usr/local/texlive/2013/bin/x86_64-darwin
+  PATH=/usr/local/bin:$HOME/.local/bin:$PATH:/usr/local/texlive/2013/bin/x86_64-darwin
 
 
 ####################################################################################################

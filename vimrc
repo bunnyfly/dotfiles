@@ -14,13 +14,7 @@ set nocompatible
   Bundle 'Lokaltog/powerline'
 
 " Machine specific settings.
-  let hostname = substitute(substitute(system('hostname'), '\n', '', ''), '\.local', '', '')
-  if hostname == "Snail"                                   " Mac Mini
-  elseif hostname == "sparrow.sea.corp.google.com"         " Workstation
-    let g:enable_local_swap_dirs = 1   " Swap files > /usr/local/google/tmp/vim_tmp
-    source /usr/share/vim/google/google.vim
-  else
-  endif
+source ~/.vimrc-local
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -54,15 +48,15 @@ set nocompatible
 " Other Colemak Arrow-Based Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Switch tabs.
-  nnoremap <c-i> <C-PageDown>|nnoremap <c-h> <C-PageUp>
+  nnoremap <C-i> <C-PageDown>|nnoremap <C-h> <C-PageUp>
 " Switch panes.
-  noremap H <C-W>h|noremap I <C-W>l|noremap N <C-W>j|noremap E <C-W>k
+  noremap H <C-w>h|noremap I <C-w>l|noremap N <C-w>j|noremap E <C-w>k
 " Moving windows around.
-  noremap <C-W>N <C-W>J|noremap <C-W>E <C-W>K|noremap <C-W>I <C-W>L
+  noremap <C-w>N <C-w>J|noremap <C-w>E <C-w>K|noremap <C-w>I <C-w>L
 " High/Low/Mid.
-  noremap <c-e> H|noremap <c-n> L|noremap <c-m> M
+  noremap <C-e> H|noremap <C-n> L|noremap <C-m> M
 " Scroll up/down.
-  noremap zn <c-y>|noremap ze <c-e>
+  noremap zn <C-y>|noremap ze <C-e>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -77,12 +71,14 @@ set nocompatible
 " Jump to exact mark location with ' instead of line.
   noremap ' `|noremap ` '
 " zT/zB is like zt/zb, but scrolls to the top/bottom quarter of the screen.
-  nnoremap <expr> zT 'zt' . winheight(0)/4 . '<c-y>'
-  nnoremap <expr> zB 'zb' . winheight(0)/4 . '<c-e>'
+  nnoremap <expr> zT 'zt' . winheight(0)/4 . '<C-y>'
+  nnoremap <expr> zB 'zb' . winheight(0)/4 . '<C-e>'
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
 " Disable bad habits.
   nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <BS> <Nop>|nnoremap <Del> <Nop>
+" Back and forth in jump and changelist.
+  nnoremap gh <C-o>|nnoremap gi <C-i>|nnoremap gH g;|nnoremap gI g,
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -192,7 +188,6 @@ let mapleader = ","
 " Colemak
   let g:NERDTreeMapJumpFirstChild = "ge"
   let g:NERDTreeMapJumpLastChild = "gn"
-" Keys
   let g:NERDTreeMapToggleHidden = "H"
   let g:NERDTreeMapOpenSplit = "S"
   let g:NERDTreeMapOpenExpl = ""
@@ -212,21 +207,6 @@ let mapleader = ","
   let g:gundo_map_move_newer="e"
   let g:gundo_width=45
   let g:gundo_preview_height=10
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tlist - taglist
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "noremap <Leader>t    :TlistToggle<cr>
-  "noremap <Leader>T    :TlistUpdate<cr>
-  " this is just to keep it from throwing an already mapped <Leader>t warning
-  noremap <Leader><c-t> <Plug>TaskList
-" Options
-  let g:Tlist_WinWidth = 30                      " Default width.
-  let g:Tlist_Inc_Winwidth = 0                   " Taglist doesn't make window wider.
-  let g:Tlist_GainFocus_On_ToggleOpen = 1        " Toggle gives focus to taglist.
-  let g:Tlist_Auto_Highlight_Tag = 0             " Don't auto-highlight current tag.
-  let g:Tlist_Enable_Fold_Column = 0             " Disabled folding.
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -254,7 +234,7 @@ let mapleader = ","
     \    'temp':                       0
     \    }]
   let g:vimwiki_camel_case = 0                   " Don't automatically make CamelCase words links.
-  noremap <c-s-m-q> @<Plug>VimwikiNextLink       " Avoid <Tab> jumping to next link.
+  noremap <C-S-M-q> @<Plug>VimwikiNextLink       " Avoid <Tab> jumping to next link.
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -270,7 +250,7 @@ let mapleader = ","
   " +2s: Indenting a continuing line by 2 * shiftwidth
   " l1: Align brackets with the case label
   au BufRead,BufNewFile *.java setl cinoptions=j1,+2s,l1
-  let g:SuperTabDefaultCompletionType = "<c-x><c-u>"       " Use 'user' completion as default.
+  let g:SuperTabDefaultCompletionType = "<C-x><C-u>"       " Use 'user' completion as default.
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
