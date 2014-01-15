@@ -1,7 +1,7 @@
 Dotfiles by Chloe Adeline
 =========================
-My personal setup! Probably not useful to most, but you might find some useful stuff in here,
-especially if you use Colemak and Vim!
+My personal setup and notes for myself! Probably not useful to most, but you might find some useful
+stuff in here, especially if you use Colemak and Vim!
 
 Colemak and Vim!
 ----------------
@@ -33,7 +33,9 @@ Includes customization for:
 
 Setup
 -----
+Again...notes for myself.
 - Clone into `~/dotfiles`
 - `./install_dotfiles.sh`
 - Vim `:BundleInstall` to install Vim plugins
+- Fill in .\<program>rc-local configs.
 ...and probably some other steps like installing Powerline-enabled fonts. But that's most of it.
