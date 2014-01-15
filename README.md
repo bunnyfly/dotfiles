@@ -38,4 +38,5 @@ Again...notes for myself.
 - `./install_dotfiles.sh`
 - Vim `:BundleInstall` to install Vim plugins
 - Fill in .\<program>rc-local configs.
+
 ...and probably some other steps like installing Powerline-enabled fonts. But that's most of it.
