@@ -57,7 +57,8 @@ source ~/.vimrc-local
   noremap <C-e> H|noremap <C-n> L|noremap <C-m> M
 " Scroll up/down.
   noremap zn <C-y>|noremap ze <C-e>
-
+" Back and forth in jump and changelist.
+  nnoremap gh <C-o>|nnoremap gi <C-i>|nnoremap gH g;|nnoremap gI g,
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General Mappings
@@ -75,10 +76,8 @@ source ~/.vimrc-local
   nnoremap <expr> zB 'zb' . winheight(0)/4 . '<C-e>'
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
-" Disable bad habits. Unfortunately, <C-m> == <CR>, so Mid is done with M.
+" Disable bad habits. Unfortunately, <C-m> == <CR>, so Mid is M until my fingers forget <CR>.
   nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <BS> <Nop>|nnoremap <Del> <Nop>
-" Back and forth in jump and changelist.
-  nnoremap gh <C-o>|nnoremap gi <C-i>|nnoremap gH g;|nnoremap gI g,
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
