@@ -13,8 +13,8 @@ set nocompatible
   Bundle 'vim-scripts/vimwiki'
   Bundle 'Lokaltog/powerline'
 
-" Machine specific settings.
-source ~/.vimrc-local
+" Machine specific settings if they exist.
+silent! source ~/.vimrc-local
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
