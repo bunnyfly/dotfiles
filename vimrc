@@ -12,6 +12,7 @@ set nocompatible
   Bundle 'tpope/vim-fugitive'
   Bundle 'vim-scripts/vimwiki'
   Bundle 'Lokaltog/powerline'
+  Bundle 'Shougo/unite.vim'
 
 " Machine specific settings if they exist.
 silent! source ~/.vimrc-local
@@ -86,11 +87,12 @@ silent! source ~/.vimrc-local
 " Plugin-specific mappings are set in the plugin's section.
 "
 " Leader Conventions:
-"   <Leader><Leader> (NERDTree)
-"   <Leader>d* (Diff Tools)
-"   <Leader>j* (Eclim Java)
-"   <Leader>p* (Eclim Project)
-"   <Leader>w* (VimWiki)
+"   <Leader> (NERDTree)
+"   <Space>, /, b, f, y (Unite)
+"   d (Diff Tools)
+"   j (Eclim Java)
+"   p (Eclim Project)
+"   w (VimWiki)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
@@ -155,6 +157,34 @@ let mapleader = ","
     set guioptions=egm
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Unite
+"
+" TODO: Install vimproc so files can be loaded /async
+" TODO: Get ack working!
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:unite_source_history_yank_enable = 1
+  call unite#filters#matcher_default#use(['matcher_glob'])
+  " NOTE: Potentially interesting options: -here -marked-icon=
+  nnoremap <Leader><Space> :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=files   -start-insert file<cr>
+  nnoremap <Leader>f       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=files   -start-insert file_rec:!<cr>
+  nnoremap <Leader>/       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=files   -start-insert line<cr>
+  nnoremap <Leader>b       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=buffer  -start-insert buffer<cr>
+  nnoremap <Leader>y       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=yank    history/yank<cr>
+
+  " Custom mappings for the Unite buffer.
+  autocmd FileType unite call s:unite_settings()
+  function! s:unite_settings()
+    " Play nice with SuperTab.
+    let b:SuperTabDisabled=1
+    " Enable navigation with control-j and control-k in insert mode
+    " TODO: Make these actually work!
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+    nnoremap <Esc>        <Plug>(unite_exit)
+  endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
