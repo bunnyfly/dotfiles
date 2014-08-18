@@ -100,6 +100,7 @@ let mapleader = ","
   nnoremap <silent> <Leader>dt :diffthis<CR>
   nnoremap <silent> <Leader>do :diffoff<CR>
   nnoremap <silent> <Leader>dd :call DiffToggle()<CR>
+  nnoremap <silent> <Leader>d/ /<<<<<<<\\|=======\\|>>>>>>><CR>
     function! DiffToggle()
       if &diff
         diffoff

@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2012  Eric Van Dewoestine
+" Copyright (C) 2005 - 2013  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -32,18 +32,20 @@ endif
 let s:command_validate = '-command xml_validate -p "<project>" -f "<file>"'
 " }}}
 
-" Validate(on_save, ...) {{{
-" Validate the current file.
-function! eclim#xml#validate#Validate(on_save, ...)
+function! eclim#xml#validate#Validate(on_save, ...) " {{{
+  " Optional args:
+  "   bang: '!' or '', where '!' indicates that we should not jump to the
+  "         first error.
   if a:on_save && (!g:EclimXmlValidate || eclim#util#WillWrittenBufferClose())
     return
   endif
 
-  if eclim#EclimAvailable()
-    let project = eclim#project#util#GetCurrentProjectName()
-    if project == ""
+  if eclim#EclimAvailable(0)
+    if !eclim#project#util#IsCurrentFileInProject()
       return
     endif
+
+    let project = eclim#project#util#GetCurrentProjectName()
     let file = eclim#project#util#GetProjectRelativeFilePath()
     let command = s:command_validate
     let command = substitute(command, '<project>', project, '')
@@ -52,7 +54,7 @@ function! eclim#xml#validate#Validate(on_save, ...)
       let command .= ' -s'
     endif
 
-    let result = eclim#ExecuteEclim(command)
+    let result = eclim#Execute(command)
     if type(result) == g:LIST_TYPE && len(result) > 0
       let errors = eclim#util#ParseLocationEntries(
         \ result, g:EclimValidateSortResults)
