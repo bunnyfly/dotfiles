@@ -31,6 +31,9 @@ map -builtin gd o drive.google.com<cr>
 map -builtin gD t drive.google.com<cr>
 
 " Pass Gmail Shortcut Keys
+" WORKING: set passkeys+=mail.google.com:c/uenxsyDpkrRIUdli{}[]m,gi,gs,gd,ga,zz,gp,gl
+"set passkeys+=mail.google.com:c/uenxsym!DrRfq{}[]U?dLli,ge,gn,gi,gs,gd,ga,gc,zz,gp,gl
+"set passkeys+=mail.google.com:c/uenxsym!DrRfq{}[]U?dLli,gi,gs,gd,ga,zz,gp,gl
 set passkeys+=mail.google.com:c/uenxsyDpkrRIUdli{}[]m,gi,gs,gd,ga,zz,gp,gl
 
 " Misc
