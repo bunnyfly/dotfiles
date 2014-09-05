@@ -212,9 +212,12 @@ let mapleader = ","
     nmap <buffer><expr> E unite#smart_map('E', unite#do_action('above'))
     nmap <buffer><expr> I unite#smart_map('I', unite#do_action('right'))
 
-    " Insert Mode Mappings
-    imap <buffer> <C-n> <Plug>(unite_select_next_line)
-    imap <buffer> <C-e> <Plug>(unite_select_previous_line)
+    " Insert mode up/down arrow mappings. Pulls out of insert mode so next
+    " command can open selected candidate.
+    imap <buffer> <C-n> <Plug>(unite_select_next_line)<Esc>
+    nmap <buffer> <C-n> <Plug>(unite_loop_cursor_down)
+    imap <buffer> <C-e> <Plug>(unite_select_previous_line)<Esc>
+    nmap <buffer> <C-e> <Plug>(unite_loop_cursor_up)
   endfunction
 
 
