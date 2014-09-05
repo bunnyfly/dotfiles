@@ -13,6 +13,10 @@ set nocompatible
   Bundle 'vim-scripts/vimwiki'
   Bundle 'Lokaltog/powerline'
   Bundle 'Shougo/unite.vim'
+  " Needed for Unite async.
+  Bundle 'Shougo/vimproc.vim'
+  set rtp+=~/.vim/bundle/vimproc/autoload
+  set rtp+=~/.vim/bundle/vimproc/plugin
 
 " Machine specific settings if they exist.
 silent! source ~/.vimrc-local
@@ -88,7 +92,6 @@ silent! source ~/.vimrc-local
 "
 " Leader Conventions:
 "   <Leader> (NERDTree)
-"   <Space>, /, b, f, y (Unite)
 "   d (Diff Tools)
 "   j (Eclim Java)
 "   p (Eclim Project)
@@ -162,29 +165,56 @@ let mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Unite
-"
-" TODO: Install vimproc so files can be loaded /async
-" TODO: Get ack working!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:unite_source_history_yank_enable = 1
+  let g:unite_source_grep_max_candidates = 200
+
+  if executable('ack-grep')
+    let g:unite_source_grep_command = 'ack-grep'
+    " --no-heading
+    let g:unite_source_grep_default_opts = '-i --no-color --no-group --with-filename --flush'
+    let g:unite_source_grep_recursive_opt = '-a'
+    " let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
+  endif
+
+  " Alt: matcher_fuzzy
   call unite#filters#matcher_default#use(['matcher_glob'])
   " NOTE: Potentially interesting options: -here -marked-icon=
-  nnoremap <Leader><Space> :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=files   -start-insert file<cr>
-  nnoremap <Leader>f       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=files   -start-insert file_rec:!<cr>
-  nnoremap <Leader>/       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=files   -start-insert line<cr>
-  nnoremap <Leader>b       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=buffer  -start-insert buffer<cr>
-  nnoremap <Leader>y       :<C-u>Unite -auto-resize -prompt=⮀\  -buffer-name=yank    history/yank<cr>
+  nnoremap <Space>f :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=files  -start-insert file_rec/async<CR>
+  nnoremap <Space>/ :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=files  -start-insert line<CR>
+  nnoremap <Space>b :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=buffer -start-insert buffer<CR>
+  nnoremap <Space>p :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=yank history/yank<CR>
+  nnoremap <Space>a :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=grep grep:.<CR>
+  nnoremap <Space>A :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=grep grep<CR>
 
   " Custom mappings for the Unite buffer.
   autocmd FileType unite call s:unite_settings()
   function! s:unite_settings()
     " Play nice with SuperTab.
     let b:SuperTabDisabled=1
-    " Enable navigation with control-j and control-k in insert mode
-    " TODO: Make these actually work!
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-    nnoremap <Esc>        <Plug>(unite_exit)
+    " Normal Mode Mappings
+    " NOTE: *noremap doesn't work with these.
+    "
+    " nunmap I, j, k
+    " n  e           *@unite#smart_map('e', unite#do_action('edit'))r-name=yank    history/yank<CR>
+    " n  o           *@unite#smart_map('o', unite#do_action('open'))
+    " n  p           *@unite#do_action('preview')
+    nmap <buffer> <Esc> <Plug>(unite_exit)
+
+    nmap <buffer> a <Plug>(unite_insert_enter)
+    nmap <buffer> n <Plug>(unite_loop_cursor_down)
+    nmap <buffer> e <Plug>(unite_loop_cursor_up)
+    nmap <buffer> K <Plug>(unite_new_candidate)
+    nmap <buffer><expr> o unite#smart_map('o', unite#do_action('open'))
+    nmap <buffer><expr> t unite#smart_map('t', unite#do_action('tabopen'))
+    nmap <buffer><expr> H unite#smart_map('H', unite#do_action('left'))
+    nmap <buffer><expr> N unite#smart_map('N', unite#do_action('below'))
+    nmap <buffer><expr> E unite#smart_map('E', unite#do_action('above'))
+    nmap <buffer><expr> I unite#smart_map('I', unite#do_action('right'))
+
+    " Insert Mode Mappings
+    imap <buffer> <C-n> <Plug>(unite_select_next_line)
+    imap <buffer> <C-e> <Plug>(unite_select_previous_line)
   endfunction
 
 
