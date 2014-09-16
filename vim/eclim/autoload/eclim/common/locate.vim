@@ -5,7 +5,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2012  Eric Van Dewoestine
+" Copyright (C) 2005 - 2013  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -96,17 +96,18 @@ function! eclim#common#locate#LocateFile(action, file, ...)
     return
   endif
 
-  if scope == 'project' && (project == '' || !eclim#EclimAvailable())
+  if scope == 'project' && (project == '' || !eclim#EclimAvailable(0))
     let scope = g:EclimLocateFileNonProjectScope
   endif
 
   let workspace = ''
   if scope == 'project' || scope == 'workspace'
-    let workspace = eclim#eclipse#ChooseWorkspace()
-    if workspace == '0'
+    let instance = eclim#client#nailgun#ChooseEclimdInstance()
+    if type(instance) != g:DICT_TYPE
       return
     endif
 
+    let workspace = instance.workspace
     if !eclim#PingEclim(0, workspace)
       call eclim#util#EchoError('Unable to connect to eclimd.')
       return
@@ -475,7 +476,11 @@ function! s:ChooseScope() " {{{
 
   elseif scope == 'workspace'
     let project = ''
-    let workspace = eclim#eclipse#ChooseWorkspace()
+    let instance = eclim#client#nailgun#ChooseEclimdInstance()
+    if type(instance) != g:DICT_TYPE
+      return
+    endif
+    let workspace = instance.workspace
   endif
 
   call s:CloseScopeChooser()
@@ -559,8 +564,7 @@ endfunction " }}}
 
 function! s:LocateFile_workspace(pattern) " {{{
   let command = substitute(s:LocateFileCommand(a:pattern), '<scope>', 'workspace', '')
-  let port = eclim#client#nailgun#GetNgPort(b:workspace)
-  let results = eclim#ExecuteEclim(command, port)
+  let results = eclim#Execute(command, {'workspace': b:workspace})
   if type(results) != g:LIST_TYPE
     return []
   endif
@@ -570,8 +574,7 @@ endfunction " }}}
 function! s:LocateFile_project(pattern) " {{{
   let command = substitute(s:LocateFileCommand(a:pattern), '<scope>', 'project', '')
   let command .= ' -n "' . b:project . '"'
-  let port = eclim#client#nailgun#GetNgPort(b:workspace)
-  let results = eclim#ExecuteEclim(command, port)
+  let results = eclim#Execute(command, {'workspace': b:workspace})
   if type(results) != g:LIST_TYPE
     return []
   endif
@@ -632,11 +635,10 @@ function! eclim#common#locate#LocateFileFromFileList(pattern, file) " {{{
   if has('win32unix')
     let file = eclim#cygwin#WindowsPath(file)
   endif
-  if eclim#EclimAvailable()
+  if eclim#EclimAvailable(0)
     let command = substitute(s:LocateFileCommand(a:pattern), '<scope>', 'list', '')
     let command .= ' -f "' . file . '"'
-    let port = eclim#client#nailgun#GetNgPort(b:workspace)
-    let results = eclim#ExecuteEclim(command, port)
+    let results = eclim#Execute(command, {'workspace': b:workspace})
     if type(results) != g:LIST_TYPE
       return []
     endif

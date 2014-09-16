@@ -1,0 +1,3 @@
+# This file exists even though .slate.js is used, so the default .slate isn't loaded as well.
+
+config keyboardLayout colemak

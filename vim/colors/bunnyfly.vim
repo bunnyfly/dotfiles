@@ -58,6 +58,10 @@ hi Comment      ctermfg=246     cterm=none      guifg=#99968b   gui=italic
 hi Todo         ctermfg=245     cterm=none      guifg=#8f8f8f   gui=italic
 hi Underlined   ctermfg=81                      guifg=#5fd7ff
 
+"hi Keyword      ctermfg=141     cterm=none
+"hi Statement    ctermfg=141     cterm=none
+"hi Keyword      ctermfg=81     cterm=none
+"hi Statement    ctermfg=81     cterm=none
 
 " Links
 hi! link FoldColumn     Folded

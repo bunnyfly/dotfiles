@@ -21,11 +21,10 @@ via vim's location list (:help location-list).
 The following is a list of commands that eclim provides while editing
 your .buildpath.
 
-*:NewSrcEntry*
+*:NewSrcEntry_dltk_php*
 
-- :NewSrcEntry <dir> [<dir> ...] - Adds one or more new entries which
-  reference source directories in your project.
-
+- :NewSrcEntry <dir> [<dir> ...] - Adds one or more new entries
+  which reference source directories in your project.
   >
      <buildpathentry external="true" kind="lib" path="src/php"/>
 
@@ -34,11 +33,10 @@ your .buildpath.
   This command supports command completion of project relative
   directories.
 
-*:NewLibEntry*
+*:NewLibEntry_dltk_php*
 
-- :NewLibEntry <dir> [<dir> ...] - Adds one or more new entries which
-  reference external source directories.
-
+- :NewLibEntry <dir> [<dir> ...] - Adds one or more new entries
+  which reference external source directories.
   >
      <buildpathentry external="true" kind="lib" path="/usr/local/php/cake_1.1.16.5421"/>
 
@@ -46,11 +44,10 @@ your .buildpath.
 
   This command supports command completion of directories.
 
-*:NewProjectEntry*
+*:NewProjectEntry_dltk_php*
 
 - :NewProjectEntry <project> [<project> ...] - Adds one or more new
   entries which reference other projects.
-
   >
      <buildpathentry combineaccessrules="false" kind="prj" path="/test_project"/>
 

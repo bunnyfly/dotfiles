@@ -9,7 +9,7 @@
 "
 " License:
 "
-" Copyright (C) 2005 - 2012  Eric Van Dewoestine
+" Copyright (C) 2005 - 2014  Eric Van Dewoestine
 "
 " This program is free software: you can redistribute it and/or modify
 " it under the terms of the GNU General Public License as published by
@@ -37,19 +37,19 @@
   let s:command_settings = '-command settings'
   let s:command_settings_update = '-command settings_update -s "<settings>"'
   let s:command_shutdown = "-command shutdown"
+  let s:command_jobs = '-command jobs'
   let s:connect= '^connect: .*$'
-
-  " list of commands that may fail using system() call, so using a temp file
-  " instead.
-  let s:exec_commands = ['java_complete']
-
-  let g:eclimd_running = 1
 " }}}
 
-function! eclim#ExecuteEclim(command, ...) " {{{
+function! eclim#Execute(command, ...) " {{{
   " Optional args:
-  "   port: the nailgun port to use.
   "   options {
+  "     One of the following to determine the eclimd instance to use, honored in
+  "     the order shown here:
+  "       instance: dictionary representing an eclimd instance.
+  "       project: project name
+  "       workspace: workspace path
+  "       dir: directory path to use as the current dir
   "     exec: 1 to execute the command using execute instead of system.
   "     raw: 1 to get the result without evaluating as json
   "   }
@@ -58,15 +58,9 @@ function! eclim#ExecuteEclim(command, ...) " {{{
     return
   endif
 
-  " eclimd appears to be down, so exit early if in an autocmd
-  if !g:eclimd_running && expand('<abuf>') != ''
-    " check for file created by eclimd to signal that it is running.
-    if !eclim#EclimAvailable()
-      return
-    endif
+  if !eclim#EclimAvailable()
+    return
   endif
-
-  let g:eclimd_running = 1
 
   let command = '-editor vim ' . a:command
 
@@ -77,11 +71,30 @@ function! eclim#ExecuteEclim(command, ...) " {{{
   let command = substitute(command, '<', '%3C', 'g')
   let command = substitute(command, '>', '%3E', 'g')
 
-  " execute the command.
-  let port = len(a:000) > 0 ? a:000[0] : eclim#client#nailgun#GetNgPort()
-  let options = len(a:000) > 1 ? a:000[1] : {}
+  " determine the eclimd instance to use
+  let options = a:0 ? a:1 : {}
+  let instance = get(options, 'instance', {})
+  if len(instance) == 0
+    let workspace = ''
+
+    let project = get(options, 'project', '')
+    if project != ''
+      let workspace = eclim#project#util#GetProjectWorkspace(project)
+    endif
+    if workspace == ''
+      let workspace = get(options, 'workspace', '')
+    endif
+
+    let dir = workspace != '' ? workspace : get(options, 'dir', '')
+    let chosen = eclim#client#nailgun#ChooseEclimdInstance(dir)
+    if type(chosen) != g:DICT_TYPE
+      return
+    endif
+    let instance = chosen
+  endif
+
   let exec = get(options, 'exec', 0)
-  let [retcode, result] = eclim#client#nailgun#Execute(port, command, exec)
+  let [retcode, result] = eclim#client#nailgun#Execute(instance, command, exec)
   let result = substitute(result, '\n$', '', '')
 
   " not sure this is the best place to handle this, but when using the python
@@ -110,18 +123,15 @@ function! eclim#ExecuteEclim(command, ...) " {{{
   if retcode || error != ''
     if g:EclimShowErrors
       if error =~ s:connect
-        " eclimd is not running, disable further eclimd calls
-        let g:eclimd_running = 0
-
         " if we are not in an autocmd or the autocmd is for an acwrite buffer,
         " alert the user that eclimd is not running.
         if expand('<abuf>') == '' || &buftype == 'acwrite'
           call eclim#util#EchoWarning(
-            \ "unable to connect to eclimd (port: " . port . ") - " . error)
+            \ "unable to connect to eclimd (port: " . instance.port . ") - " . error)
         endif
       else
         let error = error . "\n" .
-          \ 'while executing command (port: ' . port . '): ' . command
+          \ 'while executing command (port: ' . instance.port . '): ' . command
         " if we are not in an autocmd or in a autocmd for an acwrite buffer,
         " echo the error, otherwise just log it.
         if expand('<abuf>') == '' || &buftype == 'acwrite'
@@ -150,9 +160,19 @@ function! eclim#Enable() " {{{
   endif
 endfunction " }}}
 
-function! eclim#EclimAvailable() " {{{
+function! eclim#EclimAvailable(...) " {{{
+  " Optional args:
+  "   echo: Whether or not to echo an error if eclim is not available
+  "         (default: 1)
   let instances = eclim#UserHome() . '/.eclim/.eclimd_instances'
-  return filereadable(instances)
+  let available = filereadable(instances)
+  let echo = a:0 ? a:1 : 1
+  if echo && !available && expand('<abuf>') == ''
+    call eclim#util#EchoError(printf(
+      \ 'No eclimd instances found running (eclimd created file not found %s)',
+      \ eclim#UserHome() . '/.eclim/.eclimd_instances'))
+  endif
+  return available
 endfunction " }}}
 
 function! eclim#PingEclim(echo, ...) " {{{
@@ -160,42 +180,21 @@ function! eclim#PingEclim(echo, ...) " {{{
   " Optional args:
   "   workspace
 
-  let workspace_found = 1
-  if len(a:000) > 0 && a:1 != ''
-    let workspace = substitute(a:1, '\', '/', 'g')
-    let workspace .= workspace !~ '/$' ? '/' : ''
-    if !eclim#util#ListContains(eclim#eclipse#GetAllWorkspaceDirs(), workspace)
-      let workspace_found = 0
-    endif
-    let port = eclim#client#nailgun#GetNgPort(workspace)
-  else
-    let workspace = eclim#eclipse#ChooseWorkspace()
-    let port = eclim#client#nailgun#GetNgPort(workspace)
-  endif
-
+  let workspace = a:0 ? a:1 : ''
   if a:echo
-    if !workspace_found
-      call eclim#util#Echo('eclimd instance for workspace not found: ' . workspace)
-      return
-    endif
-
-    let result = eclim#ExecuteEclim(s:command_ping, port)
+    let result = eclim#Execute(s:command_ping, {'workspace': workspace})
     if type(result) == g:DICT_TYPE
       call eclim#util#Echo(
         \ 'eclim   ' . result.eclim . "\n" .
         \ 'eclipse ' . result.eclipse)
     endif
   else
-    if !workspace_found
-      return
-    endif
-
     let savedErr = g:EclimShowErrors
     let savedLog = g:EclimLogLevel
     let g:EclimShowErrors = 0
     let g:EclimLogLevel = 0
 
-    let result = eclim#ExecuteEclim(s:command_ping, port)
+    let result = eclim#Execute(s:command_ping, {'workspace': workspace})
 
     let g:EclimShowErrors = savedErr
     let g:EclimLogLevel = savedLog
@@ -207,23 +206,24 @@ endfunction " }}}
 function! eclim#ParseSettingErrors(errors) " {{{
   let errors = []
   for error in a:errors
-    let setting = substitute(error, '^\(.\{-}\): .*', '\1', '')
-    let message = substitute(error, '^.\{-}: \(.*\)', '\1', '')
-    let line = search('^\s*' . setting . '\s*=', 'cnw')
+    let message = error.message
+    let setting = substitute(message, '^\(.\{-}\): .*', '\1', '')
+    let message = substitute(message, '^.\{-}: \(.*\)', '\1', '')
+    if error.line == 1 && setting != error.message
+      let line = search('^\s*' . setting . '\s*=', 'cnw')
+      let error.line = line > 0 ? line : 1
+    endif
     call add(errors, {
         \ 'bufnr': bufnr('%'),
-        \ 'lnum': line > 0 ? line : 1,
+        \ 'lnum': error.line,
         \ 'text': message,
-        \ 'type': 'e'
+        \ 'type': error.warning == 1 ? 'w' : 'e',
       \ })
   endfor
   return errors
 endfunction " }}}
 
-function! eclim#SaveSettings(command, project, ...) " {{{
-  " Optional args:
-  "   port
-
+function! eclim#SaveSettings(command, project) " {{{
   " don't check modified since undo seems to not set the modified flag
   "if &modified
     let tempfile = substitute(tempname(), '\', '/', 'g')
@@ -258,17 +258,17 @@ function! eclim#SaveSettings(command, project, ...) " {{{
     let command = substitute(command, '<project>', a:project, '')
     let command = substitute(command, '<settings>', tempfile, '')
 
-    if len(a:000) > 0
-      let port = a:000[0]
-      let result = eclim#ExecuteEclim(command, port)
+    if exists('b:eclimd_instance')
+      let result = eclim#Execute(command, {'instance': b:eclimd_instance})
     else
-      let result = eclim#ExecuteEclim(command)
+      let result = eclim#Execute(command)
     endif
 
     if type(result) == g:LIST_TYPE
       call eclim#util#EchoError
         \ ("Operation contained errors.  See location list for details.")
-      call eclim#util#SetLocationList(eclim#ParseSettingErrors(result))
+      let errors = eclim#ParseSettingErrors(result)
+      call eclim#util#SetLocationList(errors)
     else
       call eclim#util#ClearLocationList()
       call eclim#util#Echo(result)
@@ -279,22 +279,17 @@ function! eclim#SaveSettings(command, project, ...) " {{{
 endfunction " }}}
 
 function! eclim#Settings(workspace) " {{{
-  let workspace = a:workspace
-  if workspace == ''
-    let workspace = eclim#eclipse#ChooseWorkspace()
-    if workspace == '0'
-      return
-    endif
+  let instance = eclim#client#nailgun#ChooseEclimdInstance(a:workspace)
+  if type(instance) != g:DICT_TYPE
+    return
   endif
 
-  let port = eclim#client#nailgun#GetNgPort(workspace)
-
-  let settings = eclim#ExecuteEclim(s:command_settings, port)
+  let settings = eclim#Execute(s:command_settings, {'instance': instance})
   if type(settings) != g:LIST_TYPE
     return
   endif
 
-  let content = ['# Global settings for workspace: ' . workspace, '']
+  let content = ['# Global settings for workspace: ' . instance.workspace, '']
   let path = ''
   for setting in settings
     if setting.path != path
@@ -319,20 +314,17 @@ function! eclim#Settings(workspace) " {{{
   setlocal modifiable
   setlocal foldmethod=marker
   setlocal foldmarker={,}
+  let b:eclimd_instance = instance
 
   augroup eclim_settings
     autocmd! BufWriteCmd <buffer>
     exec 'autocmd BufWriteCmd <buffer> ' .
-      \ 'call eclim#SaveSettings(s:command_settings_update, "", ' . port . ')'
+      \ 'call eclim#SaveSettings(s:command_settings_update, "")'
   augroup END
 endfunction " }}}
 
 function! eclim#ShutdownEclim() " {{{
-  let workspace = eclim#eclipse#ChooseWorkspace()
-  if workspace != '0'
-    let port = eclim#client#nailgun#GetNgPort()
-    call eclim#ExecuteEclim(s:command_shutdown, port)
-  endif
+  call eclim#Execute(s:command_shutdown)
 endfunction " }}}
 
 function! eclim#UserHome() " {{{
@@ -343,6 +335,31 @@ function! eclim#UserHome() " {{{
     let home = expand('$USERPROFILE')
   endif
   return substitute(home, '\', '/', 'g')
+endfunction " }}}
+
+function! eclim#WaitOnRunningJobs(timeout) " {{{
+  " Args:
+  "   timeout: max time to wait in milliseconds
+  let running = 1
+  let waited = 0
+  while running && waited < a:timeout
+    let jobs = eclim#Execute(s:command_jobs)
+    if type(jobs) == g:LIST_TYPE
+      let running = 0
+      for job in jobs
+        if job.status == 'running'
+          call eclim#util#EchoDebug('Wait on job: ' . job.job)
+          let running = 1
+          let waited += 300
+          sleep 300m
+          break
+        endif
+      endfor
+    endif
+  endwhile
+  if running
+    call eclim#util#EchoDebug('Timeout exceeded waiting on jobs')
+  endif
 endfunction " }}}
 
 " vim:ft=vim:fdm=marker

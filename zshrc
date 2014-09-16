@@ -38,9 +38,9 @@
 bindkey -v
 # Colemak.
   bindkey -M vicmd "h" backward-char
-  bindkey -M vicmd "i" forward-char
   bindkey -M vicmd "n" down-line-or-history
   bindkey -M vicmd "e" up-line-or-history
+  bindkey -M vicmd "i" forward-char
   bindkey -M vicmd "s" vi-insert
   bindkey -M vicmd "S" vi-insert-bol
   bindkey -M vicmd "k" vi-repeat-search
