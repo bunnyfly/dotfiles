@@ -1,8 +1,0 @@
-:BrowserOpen	index.txt	/*:BrowserOpen*
-:Validate_css	index.txt	/*:Validate_css*
-:Validate_html	index.txt	/*:Validate_html*
-css	index.txt	/*css*
-g:EclimCssValidate	index.txt	/*g:EclimCssValidate*
-g:EclimHtmlValidate	index.txt	/*g:EclimHtmlValidate*
-html	index.txt	/*html*
-vim-html-index	index.txt	/*vim-html-index*

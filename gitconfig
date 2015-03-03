@@ -15,8 +15,9 @@
   d = diff
   h = help
   s = status -s
-  tr = log --graph --decorate --pretty=oneline --abbrev-commit
-  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  tre = log --graph --decorate --pretty=oneline --abbrev-commit
+  tr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --abbrev-commit
+  l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
 
 [push]
 	default = simple

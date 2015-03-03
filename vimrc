@@ -173,7 +173,7 @@ let mapleader = ","
     let g:unite_source_grep_command = 'ack-grep'
     " --no-heading
     let g:unite_source_grep_default_opts = '-i --no-color --no-group --with-filename --flush'
-    let g:unite_source_grep_recursive_opt = '-a'
+    let g:unite_source_grep_recursive_opt = '-r'
     " let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
   endif
 
@@ -240,8 +240,6 @@ let mapleader = ","
   nnoremap <silent> <Leader>jf :JavaFormat<CR>
   nnoremap <silent> <Leader>ji :JavaImportOrganize<CR>
   nnoremap <Leader>jr :JavaRename 
-" Show signs for: 0: None. 1: Fatal errors. 2: Errors. 3: Warnings. 4: Info. 5: Debugs. 6: Traces.
-  let g:EclimSignLevel = 5
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
