@@ -18,14 +18,16 @@
     <autogen>__KeyOverlaidModifier__ KeyCode::X,
       KeyCode::COMMAND_L, KeyCode::DELETE</autogen>
     <autogen>__KeyOverlaidModifier__ KeyCode::C,
-      KeyCode::CONTROL_L, KeyCode::ESCAPE</autogen>
-    <autogen>__KeyToKey__ KeyCode::V, KeyCode::SHIFT_L</autogen>
+      KeyCode::CONTROL_L, KeyCode::DELETE</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::V,
+      KeyCode::SHIFT_L, KeyCode::ESCAPE</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::M, KeyCode::SPACE</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::M,
+      KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::SPACE</autogen>
     <autogen>__KeyOverlaidModifier__ KeyCode::COMMA,
-      KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::RETURN</autogen>
+      KeyCode::VK_MODIFIER_RED_SHIFT, KeyCode::RETURN</autogen>
     <autogen>__KeyOverlaidModifier__ KeyCode::DOT,
-      KeyCode::VK_MODIFIER_RED_SHIFT, KeyCode::TAB</autogen>
+      KeyCode::VK_MODIFIER_GREEN_SHIFT, KeyCode::TAB</autogen>
 
     <!-- BLUE TOP ROW -->
     <autogen>__KeyToKey__ KeyCode::KEY_1, ModifierFlag::BLUE_SHIFT,
