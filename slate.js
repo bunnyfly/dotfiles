@@ -7,6 +7,7 @@ slate.configAll({
   // Also show hints in bottom-right corner of windows.
   windowHintsTopLeftX: '(windowSizeX/2)-(windowHintsWidth/2);32;windowSizeX-windowHintsWidth-32',
   windowHintsTopLeftY: '(windowSizeY/2)-(windowHintsHeight/2);32;windowSizeY-windowHintsHeight-32',
+  orderScreensLeftToRight: true,
 });
 
 
@@ -26,6 +27,19 @@ var isCloseRect = function(rect0, rect1) {
       isClose(rect0.height, rect1.height));
 }
 
+/** Layout windows! 
+slate.bind('l:alt', function(win) {
+  var winRect = win.rect();
+  var screenRect = win.screen().visibleRect();
+  if (isCloseRect(winRect, {x: screenRect.x + screenRect.width / 2, y: screenRect.y, width: screenRect.width / 2, height: screenRect.height})) {
+    win.doOperation(slate.operation('push', {direction: 'right', style: 'bar-resize:screenSizeX/3'}));
+  } else if (isCloseRect(winRect, {x: screenRect.x + 2 * screenRect.width / 3, y: screenRect.y, width: screenRect.width / 3, height: screenRect.height})) {
+    win.doOperation(slate.operation('push', {direction: 'right', style: 'bar-resize:2*screenSizeX/3'}));
+  } else {
+    win.doOperation(slate.operation('push', {direction: 'right', style: 'bar-resize:screenSizeX/2'}));
+  }
+});
+*/
 
 /**
  * Push bindings!
