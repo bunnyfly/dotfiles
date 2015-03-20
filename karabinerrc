@@ -4,27 +4,31 @@
     <name>Row Up!</name>
     <appendix>Moves keyboard layout up one row.</appendix>
     <appendix>Bottom row becomes modifier keys.</appendix>
-    <appendix>Blue layer is active when space is held.</appendix>
-    <appendix>Red layer is active when return is held.</appendix>
     <identifier>private.rowup</identifier>
 
+    <!-- For punction, numbers, etc. -->
     <modifierdef>BLUE_SHIFT</modifierdef>
+    <!-- For arrows, functions, etc. -->
     <modifierdef>RED_SHIFT</modifierdef>
-    <modifierdef>GREEN_SHIFT</modifierdef>
 
     <!-- MOD ROW -->
-    <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
+    <autogen>           __KeyToKey__ KeyCode::X,
+      KeyCode::OPTION_L</autogen>
     <autogen>__KeyOverlaidModifier__ KeyCode::C,
-      KeyCode::CONTROL_L, KeyCode::DELETE</autogen>
-    <autogen>__KeyToKey__ KeyCode::V, KeyCode::SHIFT_L</autogen>
+      KeyCode::CONTROL_L, KeyCode::ESCAPE</autogen>
+    <autogen>           __KeyToKey__ KeyCode::V,
+      KeyCode::SHIFT_L</autogen>
     <autogen>__KeyOverlaidModifier__ KeyCode::B,
-      KeyCode::COMMAND_L, KeyCode::ESCAPE</autogen>
+      KeyCode::COMMAND_L, KeyCode::DELETE</autogen>
 
     <autogen>__KeyOverlaidModifier__ KeyCode::N,
       KeyCode::VK_MODIFIER_RED_SHIFT, KeyCode::TAB</autogen>
-    <autogen>__KeyToKey__ KeyCode::M, KeyCode::SPACE</autogen>
+    <autogen>           __KeyToKey__ KeyCode::M,
+      KeyCode::SPACE</autogen>
     <autogen>__KeyOverlaidModifier__ KeyCode::COMMA,
       KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::RETURN</autogen>
+    <autogen>           __KeyToKey__ KeyCode::DOT,
+      KeyCode::COMMAND_L, KeyCode::DELETE</autogen>
 
     <!-- BLUE TOP ROW -->
     <autogen>__KeyToKey__ KeyCode::KEY_1, ModifierFlag::BLUE_SHIFT,
@@ -55,18 +59,18 @@
 
     <!-- BLUE MIDDLE ROW -->
     <autogen>__KeyToKey__ KeyCode::Q, ModifierFlag::BLUE_SHIFT,
-      KeyCode::EQUAL, ModifierFlag::SHIFT_L</autogen>
+      KeyCode::BACKSLASH, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::W, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_8, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::E, ModifierFlag::BLUE_SHIFT,
-      KeyCode::MINUS</autogen>
-    <autogen>__KeyToKey__ KeyCode::R, ModifierFlag::BLUE_SHIFT,
       KeyCode::EQUAL</autogen>
+    <autogen>__KeyToKey__ KeyCode::E, ModifierFlag::BLUE_SHIFT,
+      KeyCode::KEY_7, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::R, ModifierFlag::BLUE_SHIFT,
+      KeyCode::KEY_8, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::T, ModifierFlag::BLUE_SHIFT,
       KeyCode::MINUS, ModifierFlag::SHIFT_L</autogen>
 
     <autogen>__KeyToKey__ KeyCode::I, ModifierFlag::BLUE_SHIFT,
-      KeyCode::BACKSLASH, ModifierFlag::SHIFT_L</autogen>
+      KeyCode::EQUAL, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::BLUE_SHIFT | ModifierFlag::SHIFT_L,
       KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::BLUE_SHIFT,
@@ -76,7 +80,7 @@
     <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::BLUE_SHIFT,
       KeyCode::KEY_0, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_7, ModifierFlag::SHIFT_L</autogen>
+      KeyCode::MINUS</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, ModifierFlag::BLUE_SHIFT,
       KeyCode::SLASH</autogen>
 
@@ -104,13 +108,13 @@
       KeyCode::KEY_0</autogen>
 
     <!-- RED TOP ROW -->
-    <autogen>__KeyToKey__ KeyCode::KEY_7, ModifierFlag::RED_SHIFT,
-      KeyCode::HOME, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::RED_SHIFT,
-      KeyCode::PAGEDOWN</autogen>
+      KeyCode::HOME, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::RED_SHIFT,
-      KeyCode::PAGEUP</autogen>
+      KeyCode::PAGEDOWN</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::RED_SHIFT,
+      KeyCode::PAGEUP</autogen>
+    <autogen>__KeyToKey__ KeyCode::MINUS, ModifierFlag::RED_SHIFT,
       KeyCode::END, ModifierFlag::SHIFT_L</autogen>
 
     <!-- RED MIDDLE ROW -->
