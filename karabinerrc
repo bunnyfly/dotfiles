@@ -1,10 +1,20 @@
 <?xml version="1.0"?>
 <root>
+  <devicevendordef>
+    <vendorname>KINESIS_CORPORATION</vendorname>
+    <vendorid>0x058f</vendorid>
+  </devicevendordef>
+
   <item>
     <name>Row Up!</name>
     <appendix>Moves keyboard layout up one row.</appendix>
     <appendix>Bottom row becomes modifier keys.</appendix>
     <identifier>private.rowup</identifier>
+
+    <device_only>
+      DeviceVendor::APPLE_INC,
+      DeviceVendor::KINESIS_CORPORATION,
+    </device_only>
 
     <!-- For punction, numbers, etc. -->
     <modifierdef>BLUE_SHIFT</modifierdef>
