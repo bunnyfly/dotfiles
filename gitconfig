@@ -12,6 +12,8 @@
   b = branch
   co = checkout
   ci = commit
+  cia = commit -a
+  ciam = commit -a -m
   d = diff
   h = help
   s = status -s

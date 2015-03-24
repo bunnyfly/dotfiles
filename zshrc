@@ -22,6 +22,8 @@
   alias g='git'
   alias t='tmux'
   alias v='vim'
+  alias l='less'
+  alias lf='less +F'
 
 # Verify overwrite/delete
   alias cp='nocorrect cp -i'
