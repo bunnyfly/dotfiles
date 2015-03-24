@@ -181,33 +181,84 @@
     <autogen>__KeyToKey__ KeyCode::RETURN, KeyCode::QUOTE</autogen>
 
 
-    <!-- UNUSED LEFT -->
+    <!-- Clear out the keyboard. Anything that hasn't been mapped above will be noop. -->
+    <!-- NUMBER ROW -->
     <autogen>__KeyToKey__ KeyCode::BACKQUOTE</autogen>
-    <autogen>__KeyToKey__ KeyCode::TAB</autogen>
-    <autogen>__KeyToKey__ KeyCode::CAPSLOCK</autogen>
-    <!-- UNUSED CENTER -->
+    <autogen>__KeyToKey__ KeyCode::KEY_0</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_1</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_2</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_3</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_4</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_5</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_6</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_7</autogen>
-    <autogen>__KeyToKey__ KeyCode::Y</autogen>
-    <autogen>__KeyToKey__ KeyCode::U</autogen>
-    <autogen>__KeyToKey__ KeyCode::H</autogen>
-    <autogen>__KeyToKey__ KeyCode::J</autogen>
-    <!-- UNUSED RIGHT -->
+    <autogen>__KeyToKey__ KeyCode::KEY_8</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_9</autogen>
+    <autogen>__KeyToKey__ KeyCode::MINUS</autogen>
+    <autogen>__KeyToKey__ KeyCode::EQUAL</autogen>
     <autogen>__KeyToKey__ KeyCode::DELETE</autogen>
-    <autogen>__KeyToKey__ KeyCode::BACKSLASH</autogen>
-    <!-- UNUSED BOTTOM -->
-    <autogen>__KeyToKey__ KeyCode::SHIFT_L</autogen>
+    <!-- LETTERS -->
+    <autogen>__KeyToKey__ KeyCode::A</autogen>
+    <autogen>__KeyToKey__ KeyCode::B</autogen>
+    <autogen>__KeyToKey__ KeyCode::C</autogen>
+    <autogen>__KeyToKey__ KeyCode::D</autogen>
+    <autogen>__KeyToKey__ KeyCode::E</autogen>
+    <autogen>__KeyToKey__ KeyCode::F</autogen>
+    <autogen>__KeyToKey__ KeyCode::G</autogen>
+    <autogen>__KeyToKey__ KeyCode::H</autogen>
+    <autogen>__KeyToKey__ KeyCode::I</autogen>
+    <autogen>__KeyToKey__ KeyCode::J</autogen>
+    <autogen>__KeyToKey__ KeyCode::K</autogen>
+    <autogen>__KeyToKey__ KeyCode::L</autogen>
+    <autogen>__KeyToKey__ KeyCode::M</autogen>
+    <autogen>__KeyToKey__ KeyCode::N</autogen>
+    <autogen>__KeyToKey__ KeyCode::O</autogen>
+    <autogen>__KeyToKey__ KeyCode::P</autogen>
+    <autogen>__KeyToKey__ KeyCode::Q</autogen>
+    <autogen>__KeyToKey__ KeyCode::R</autogen>
+    <autogen>__KeyToKey__ KeyCode::S</autogen>
+    <autogen>__KeyToKey__ KeyCode::T</autogen>
+    <autogen>__KeyToKey__ KeyCode::U</autogen>
+    <autogen>__KeyToKey__ KeyCode::V</autogen>
+    <autogen>__KeyToKey__ KeyCode::W</autogen>
+    <autogen>__KeyToKey__ KeyCode::X</autogen>
+    <autogen>__KeyToKey__ KeyCode::Y</autogen>
     <autogen>__KeyToKey__ KeyCode::Z</autogen>
+    <!-- LEFT SIDE -->
+    <autogen>__KeyToKey__ KeyCode::TAB</autogen>
+    <autogen>__KeyToKey__ KeyCode::CAPSLOCK</autogen>
+    <autogen>__KeyToKey__ KeyCode::SHIFT_L</autogen>
+    <!-- RIGHT SIDE -->
+    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT</autogen>
+    <autogen>__KeyToKey__ KeyCode::BACKSLASH</autogen>
+    <autogen>__KeyToKey__ KeyCode::SEMICOLON</autogen>
+    <autogen>__KeyToKey__ KeyCode::QUOTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::RETURN</autogen>
+    <autogen>__KeyToKey__ KeyCode::COMMA</autogen>
     <autogen>__KeyToKey__ KeyCode::DOT</autogen>
     <autogen>__KeyToKey__ KeyCode::SLASH</autogen>
     <autogen>__KeyToKey__ KeyCode::SHIFT_R</autogen>
-    <!-- UNUSED BOTTOM MODS -->
+    <!-- MODIFIER ROW -->
     <autogen>__KeyToKey__ KeyCode::CONTROL_L</autogen>
     <autogen>__KeyToKey__ KeyCode::OPTION_L</autogen>
     <autogen>__KeyToKey__ KeyCode::COMMAND_L</autogen>
     <autogen>__KeyToKey__ KeyCode::SPACE</autogen>
     <autogen>__KeyToKey__ KeyCode::COMMAND_R</autogen>
     <autogen>__KeyToKey__ KeyCode::OPTION_R</autogen>
+    <autogen>__KeyToKey__ KeyCode::CONTROL_R</autogen>
+    <!-- MISC KEYS -->
+    <!--
+      <autogen>__KeyToKey__ KeyCode::ESCAPE</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_LEFT</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_RIGHT</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_UP</autogen>
+      <autogen>__KeyToKey__ KeyCode::CURSOR_DOWN</autogen>
+      <autogen>__KeyToKey__ KeyCode::END</autogen>
+      <autogen>__KeyToKey__ KeyCode::HOME</autogen>
+      <autogen>__KeyToKey__ KeyCode::PAGEDOWN</autogen>
+      <autogen>__KeyToKey__ KeyCode::PAGEUP</autogen>
+    -->
 
   </item>
 </root>

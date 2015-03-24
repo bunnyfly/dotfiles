@@ -156,10 +156,10 @@ slate.bind('m:alt', function(win) {
   win.doOperation(slate.operation('move', {'x' : 'screenOriginX', 'y' : 'screenOriginY', 'width' : 'screenSizeX', 'height' : 'screenSizeY'}));
 });
 
-/** Select window! Left hand Alt-Tab; right hand selects hint. */
-slate.bind('tab:alt', function(win) {
+/** Select window! Cmd-Alt-Tab. */
+slate.bind('tab:cmd,alt', function(win) {
   win.doOperation(
       slate.operation('hint', {
-        characters: 'HNEIOLUYKMJ'
+        characters: 'HNEIOLUYARSTDPFW'
       }));
 });
