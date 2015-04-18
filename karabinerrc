@@ -22,23 +22,15 @@
     <modifierdef>RED_SHIFT</modifierdef>
 
     <!-- MOD ROW -->
-    <autogen>           __KeyToKey__ KeyCode::X,
-      KeyCode::OPTION_L</autogen>
-    <autogen>__KeyOverlaidModifier__ KeyCode::C,
-      KeyCode::CONTROL_L, KeyCode::ESCAPE</autogen>
-    <autogen>           __KeyToKey__ KeyCode::V,
-      KeyCode::SHIFT_L</autogen>
-    <autogen>__KeyOverlaidModifier__ KeyCode::B,
-      KeyCode::COMMAND_L, KeyCode::DELETE</autogen>
+    <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::C, KeyCode::CONTROL_L</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::V,
+      KeyCode::SHIFT_L, KeyCode::ESCAPE</autogen>
+    <autogen>__KeyToKey__ KeyCode::B, KeyCode::COMMAND_L</autogen>
 
-    <autogen>__KeyOverlaidModifier__ KeyCode::N,
-      KeyCode::VK_MODIFIER_RED_SHIFT, KeyCode::TAB</autogen>
-    <autogen>           __KeyToKey__ KeyCode::M,
-      KeyCode::SPACE</autogen>
-    <autogen>__KeyOverlaidModifier__ KeyCode::COMMA,
-      KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::RETURN</autogen>
-    <autogen>           __KeyToKey__ KeyCode::DOT,
-      KeyCode::COMMAND_L, KeyCode::DELETE</autogen>
+    <autogen>__KeyToKey__ KeyCode::N, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::M,
+      KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::SPACE</autogen>
 
     <!-- BLUE TOP ROW -->
     <autogen>__KeyToKey__ KeyCode::KEY_1, ModifierFlag::BLUE_SHIFT,
@@ -138,6 +130,7 @@
       KeyCode::CURSOR_RIGHT</autogen>
 
     <!-- TOP ROW -->
+    <autogen>__KeyToKey__ KeyCode::BACKQUOTE, KeyCode::TAB</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_1, KeyCode::Q</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_2, KeyCode::W</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_3, KeyCode::E</autogen>
@@ -149,6 +142,7 @@
     <autogen>__KeyToKey__ KeyCode::KEY_0, KeyCode::I</autogen>
     <autogen>__KeyToKey__ KeyCode::MINUS, KeyCode::O</autogen>
     <autogen>__KeyToKey__ KeyCode::EQUAL, KeyCode::P</autogen>
+    <autogen>__KeyToKey__ KeyCode::DELETE, KeyCode::DELETE</autogen>
 
     <!-- MIDDLE ROW -->
     <autogen>__KeyToKey__ KeyCode::Q, KeyCode::A</autogen>
@@ -162,6 +156,7 @@
     <autogen>__KeyToKey__ KeyCode::P, KeyCode::K</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, KeyCode::L</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, KeyCode::SEMICOLON</autogen>
+    <autogen>__KeyToKey__ KeyCode::BACKSLASH, KeyCode::RETURN</autogen>
 
     <!-- BOTTOM ROW -->
     <autogen>__KeyToKey__ KeyCode::A, KeyCode::Z</autogen>
