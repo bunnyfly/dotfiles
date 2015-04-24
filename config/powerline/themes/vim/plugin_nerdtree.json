@@ -1,13 +1,13 @@
 {
-	"default_module": "powerline.segments.plugin.nerdtree",
+	"default_module": "powerline.segments.vim.plugin.nerdtree",
 	"segments": {
 		"left": [
 			{
-				"name": "nerdtree"
+				"function": "nerdtree"
 			},
 			{
 				"type": "string",
-				"highlight_group": ["background"],
+				"highlight_groups": ["background"],
 				"draw_soft_divider": false,
 				"draw_hard_divider": false,
 				"width": "auto"
