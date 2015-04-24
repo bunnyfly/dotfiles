@@ -27,7 +27,7 @@
     <autogen>__KeyOverlaidModifier__ KeyCode::V, KeyCode::CONTROL_L, KeyCode::ESCAPE</autogen>
 
     <autogen>__KeyToKey__ KeyCode::N, KeyCode::SPACE</autogen>
-    <autogen>__KeyToKey__ KeyCode::N, KeyCode::SPACE</autogen>
+    <autogen>__KeyToKey__ KeyCode::M, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
 
 
     <!-- BLUE TOP ROW -->
