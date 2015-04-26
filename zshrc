@@ -17,7 +17,7 @@
   export TERM=screen-256color
 
 # Shortcuts
-  alias a='ack-grep'
+  alias a='ack'
   alias d='diff'
   alias g='git'
   alias t='tmux'
