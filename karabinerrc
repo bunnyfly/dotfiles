@@ -16,61 +16,57 @@
       DeviceVendor::KINESIS_CORPORATION,
     </device_only>
 
-    <!-- For punction, numbers, etc. -->
+    <!-- For punction, etc. -->
     <modifierdef>BLUE_SHIFT</modifierdef>
+    <!-- For numbers. -->
+    <modifierdef>NUM_SHIFT</modifierdef>
     <!-- For arrows, functions, etc. -->
     <modifierdef>RED_SHIFT</modifierdef>
 
     <!-- MOD ROW -->
-    <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::C, KeyCode::COMMAND_L</autogen>
-    <autogen>__KeyOverlaidModifier__ KeyCode::V, KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::ESCAPE</autogen>
+    <autogen>__KeyToKey__ KeyCode::Z, KeyCode::OPTION_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::X, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::C, KeyCode::CONTROL_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::V, KeyCode::SHIFT_L</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::N, KeyCode::SPACE</autogen>
-    <autogen>__KeyToKey__ KeyCode::M, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::B, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::N, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
+
+    <autogen>__KeyToKey__ KeyCode::M, KeyCode::SPACE</autogen>
+    <autogen>__KeyToKey__ KeyCode::COMMA, KeyCode::CONTROL_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::DOT, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::SLASH, KeyCode::OPTION_L</autogen>
 
 
     <!-- BLUE TOP ROW -->
-    <autogen>__KeyToKey__ KeyCode::KEY_1, ModifierFlag::BLUE_SHIFT,
-      KeyCode::BACKQUOTE, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_2, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_2, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_3, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_3, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_4, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_4, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_5, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_5, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_1, ModifierFlag::BLUE_SHIFT, KeyCode::BACKQUOTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_2, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_2, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_3, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_3, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_4, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_4, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_5, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_5, ModifierFlag::SHIFT_L</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::KEY_7, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_6, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::BLUE_SHIFT, KeyCode::BRACKET_LEFT</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::BLUE_SHIFT, KeyCode::BRACKET_RIGHT</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::BLUE_SHIFT,
-      KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::MINUS, ModifierFlag::BLUE_SHIFT,
-      KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_6, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::BLUE_SHIFT | ModifierFlag::SHIFT_L, KeyCode::COMMA, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::BLUE_SHIFT, KeyCode::BRACKET_LEFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::BLUE_SHIFT | ModifierFlag::SHIFT_L, KeyCode::DOT, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::BLUE_SHIFT, KeyCode::BRACKET_RIGHT</autogen>
+    <autogen>__KeyToKey__ KeyCode::MINUS, ModifierFlag::BLUE_SHIFT, KeyCode::BACKQUOTE, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::EQUAL, ModifierFlag::BLUE_SHIFT, KeyCode::BACKSLASH</autogen>
 
     <!-- BLUE MIDDLE ROW -->
-    <autogen>__KeyToKey__ KeyCode::W, ModifierFlag::BLUE_SHIFT,
-      KeyCode::EQUAL</autogen>
-    <autogen>__KeyToKey__ KeyCode::E, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_7, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::R, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_8, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::T, ModifierFlag::BLUE_SHIFT,
-      KeyCode::MINUS, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::Q, ModifierFlag::BLUE_SHIFT, KeyCode::BACKSLASH, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::W, ModifierFlag::BLUE_SHIFT, KeyCode::EQUAL</autogen>
+    <autogen>__KeyToKey__ KeyCode::E, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_7, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::R, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_8, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::T, ModifierFlag::BLUE_SHIFT, KeyCode::MINUS, ModifierFlag::SHIFT_L</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::U, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_1, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::I, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_9, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::BLUE_SHIFT,
-      KeyCode::KEY_0, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::BLUE_SHIFT, KeyCode::MINUS</autogen>
-    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, ModifierFlag::BLUE_SHIFT,
-      KeyCode::EQUAL, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, ModifierFlag::BLUE_SHIFT, KeyCode::BACKQUOTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::I, ModifierFlag::BLUE_SHIFT, KeyCode::EQUAL, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::BLUE_SHIFT | ModifierFlag::SHIFT_L, KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_9, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::BLUE_SHIFT | ModifierFlag::SHIFT_L, KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_0, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, ModifierFlag::BLUE_SHIFT, KeyCode::MINUS</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, ModifierFlag::BLUE_SHIFT, KeyCode::SLASH</autogen>
 
     <!-- BLUE BOTTOM ROW -->
     <autogen>__KeyToKey__ KeyCode::A, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_1</autogen>
@@ -79,31 +75,24 @@
     <autogen>__KeyToKey__ KeyCode::F, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_4</autogen>
     <autogen>__KeyToKey__ KeyCode::G, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_5</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::J, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_6</autogen>
-    <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_7</autogen>
-    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_8</autogen>
-    <autogen>__KeyToKey__ KeyCode::SEMICOLON, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_9</autogen>
-    <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_0</autogen>
+    <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_6</autogen>
+    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_7</autogen>
+    <autogen>__KeyToKey__ KeyCode::SEMICOLON, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_8</autogen>
+    <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_9</autogen>
+    <autogen>__KeyToKey__ KeyCode::RETURN, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_0</autogen>
 
     <!-- RED TOP ROW -->
-    <autogen>__KeyToKey__ KeyCode::KEY_7, ModifierFlag::RED_SHIFT,
-      KeyCode::HOME, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::RED_SHIFT,
-      KeyCode::PAGEDOWN</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::RED_SHIFT,
-      KeyCode::PAGEUP</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::RED_SHIFT,
-      KeyCode::END, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::RED_SHIFT, KeyCode::HOME, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::RED_SHIFT, KeyCode::PAGEDOWN</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::RED_SHIFT, KeyCode::PAGEUP</autogen>
+    <autogen>__KeyToKey__ KeyCode::MINUS, ModifierFlag::RED_SHIFT, KeyCode::END, ModifierFlag::SHIFT_L</autogen>
 
     <!-- RED MIDDLE ROW -->
-    <autogen>__KeyToKey__ KeyCode::U, ModifierFlag::RED_SHIFT,
-      KeyCode::CURSOR_LEFT</autogen>
-    <autogen>__KeyToKey__ KeyCode::I, ModifierFlag::RED_SHIFT,
-      KeyCode::CURSOR_DOWN</autogen>
-    <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::RED_SHIFT,
-      KeyCode::CURSOR_UP</autogen>
-    <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::RED_SHIFT,
-      KeyCode::CURSOR_RIGHT</autogen>
+    <autogen>__KeyToKey__ KeyCode::I, ModifierFlag::RED_SHIFT, KeyCode::CURSOR_LEFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::RED_SHIFT, KeyCode::CURSOR_DOWN</autogen>
+    <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::RED_SHIFT, KeyCode::CURSOR_UP</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, ModifierFlag::RED_SHIFT, KeyCode::CURSOR_RIGHT</autogen>
+
 
     <!-- TOP ROW -->
     <autogen>__KeyToKey__ KeyCode::BACKQUOTE, KeyCode::TAB</autogen>
@@ -113,48 +102,42 @@
     <autogen>__KeyToKey__ KeyCode::KEY_4, KeyCode::R</autogen>
     <autogen>__KeyToKey__ KeyCode::KEY_5, KeyCode::T</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::KEY_7, KeyCode::Y</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_8, KeyCode::U</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_9, KeyCode::I</autogen>
-    <autogen>__KeyToKey__ KeyCode::KEY_0, KeyCode::O</autogen>
-    <autogen>__KeyToKey__ KeyCode::MINUS, KeyCode::P</autogen>
-    <autogen>__KeyToKey__ KeyCode::EQUAL, KeyCode::BACKSLASH</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_8, KeyCode::Y</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_9, KeyCode::U</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_0, KeyCode::I</autogen>
+    <autogen>__KeyToKey__ KeyCode::MINUS, KeyCode::O</autogen>
+    <autogen>__KeyToKey__ KeyCode::EQUAL, KeyCode::P</autogen>
     <autogen>__KeyToKey__ KeyCode::DELETE, KeyCode::DELETE</autogen>
 
     <!-- MIDDLE ROW -->
-    <autogen>__KeyToKey__ KeyCode::TAB, KeyCode::CONTROL_L</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::TAB, KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::ESCAPE</autogen>
     <autogen>__KeyToKey__ KeyCode::Q, KeyCode::A</autogen>
     <autogen>__KeyToKey__ KeyCode::W, KeyCode::S</autogen>
     <autogen>__KeyToKey__ KeyCode::E, KeyCode::D</autogen>
     <autogen>__KeyToKey__ KeyCode::R, KeyCode::F</autogen>
     <autogen>__KeyToKey__ KeyCode::T, KeyCode::G</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::U, KeyCode::H</autogen>
-    <autogen>__KeyToKey__ KeyCode::I, KeyCode::J</autogen>
-    <autogen>__KeyToKey__ KeyCode::O, KeyCode::K</autogen>
-    <autogen>__KeyToKey__ KeyCode::P, KeyCode::L</autogen>
-    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, KeyCode::SEMICOLON</autogen>
-    <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, KeyCode::QUOTE</autogen>
-    <autogen>__KeyToKey__ KeyCode::BACKSLASH, KeyCode::RETURN</autogen>
+    <autogen>__KeyToKey__ KeyCode::I, KeyCode::H</autogen>
+    <autogen>__KeyToKey__ KeyCode::O, KeyCode::J</autogen>
+    <autogen>__KeyToKey__ KeyCode::P, KeyCode::K</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, KeyCode::L</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, KeyCode::SEMICOLON</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::BACKSLASH, KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::RETURN</autogen>
 
     <!-- BOTTOM ROW -->
-    <autogen>__KeyToKey__ KeyCode::CONTROL_L, KeyCode::SHIFT_L</autogen> -->
     <autogen>__KeyToKey__ KeyCode::A, KeyCode::Z</autogen>
     <autogen>__KeyToKey__ KeyCode::S, KeyCode::X</autogen>
     <autogen>__KeyToKey__ KeyCode::D, KeyCode::C</autogen>
     <autogen>__KeyToKey__ KeyCode::F, KeyCode::V</autogen>
     <autogen>__KeyToKey__ KeyCode::G, KeyCode::B</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::J, KeyCode::N</autogen>
-    <autogen>__KeyToKey__ KeyCode::K, KeyCode::M</autogen>
-    <autogen>__KeyToKey__ KeyCode::L, KeyCode::COMMA</autogen>
-    <autogen>__KeyToKey__ KeyCode::SEMICOLON, KeyCode::DOT</autogen>
-    <autogen>__KeyToKey__ KeyCode::QUOTE, KeyCode::SLASH</autogen>
-    <autogen>__KeyToKey__ KeyCode::RETURN, KeyCode::SHIFT_R</autogen>
-
-    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::SHIFT_L, KeyCode::KEY_1, ModifierFlag::SHIFT_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::SEMICOLON, ModifierFlag::SHIFT_L, KeyCode::SLASH, ModifierFlag::SHIFT_L</autogen>
-
+    <autogen>__KeyToKey__ KeyCode::K, KeyCode::N</autogen>
+    <autogen>__KeyToKey__ KeyCode::L, KeyCode::M</autogen>
+    <autogen>__KeyToKey__ KeyCode::SEMICOLON, ModifierFlag::SHIFT_L, KeyCode::KEY_1, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::SEMICOLON, KeyCode::COMMA</autogen>
+    <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::SHIFT_L, KeyCode::SLASH, ModifierFlag::SHIFT_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::QUOTE, KeyCode::DOT</autogen>
+    <autogen>__KeyToKey__ KeyCode::RETURN, KeyCode::QUOTE</autogen>
 
 
     <!-- Clear out the keyboard. Anything that hasn't been mapped above will be noop. -->
