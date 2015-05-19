@@ -8,8 +8,9 @@ set nocompatible
   call vundle#rc()
   Bundle 'gmarik/vundle'
   Bundle 'scrooloose/nerdtree'
-  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-abolish'
   Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-surround'
   Bundle 'vim-scripts/vimwiki'
   Bundle 'Lokaltog/powerline'
   Bundle 'Shougo/unite.vim'
@@ -72,6 +73,8 @@ silent! source ~/.vimrc-local
   noremap ; :
 " Sane redo.
   noremap U <C-r>
+" Y consistent with C and D
+  noremap Y y$
 " +/- increment and decrement.
   nnoremap + <C-a>|nnoremap - <C-x>
 " Jump to exact mark location with ' instead of line.
