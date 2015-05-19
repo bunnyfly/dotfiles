@@ -179,6 +179,12 @@ let mapleader = ","
     let g:unite_source_grep_recursive_opt = '-r'
     " let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
   endif
+  if executable('ack')
+    let g:unite_source_grep_command = 'ack'
+    " --no-heading
+    let g:unite_source_grep_default_opts = '-i --no-color --no-group --with-filename --flush'
+    let g:unite_source_grep_recursive_opt = '-r'
+  endif
 
   " Alt: matcher_fuzzy
   call unite#filters#matcher_default#use(['matcher_glob'])
