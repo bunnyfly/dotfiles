@@ -174,22 +174,19 @@ let mapleader = ","
 
   if executable('ag')
     " file_rec/async
-    let g:unite_source_rec_async_command = 'ag'
-    let g:unite_source_rec_find_args = ['--nocolor', '--nogroup', '--hidden', '-g ""']
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
     " grep
     let g:unite_source_grep_command='ag'
     let g:unite_source_grep_default_opts='-i --nocolor --nogroup --hidden'
     let g:unite_source_grep_recursive_opt=''
   elseif executable('ack') || executable('ack-grep')
     if executable('ack')
+      let g:unite_source_rec_async_command = 'ack --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
       let g:unite_source_grep_command = 'ack'
-      let g:unite_source_rec_async_command = 'ack'
     else
+      let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
       let g:unite_source_grep_command = 'ack-grep'
-      let g:unite_source_rec_async_command = 'ack-grep'
     endif
-    " file_rec/async
-    let g:unite_source_rec_find_args = '--nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
     " grep
     " --no-heading
     let g:unite_source_grep_default_opts = ' --nofilter -i --no-color --no-group --with-filename --flush'
