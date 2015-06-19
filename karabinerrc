@@ -24,12 +24,11 @@
     <modifierdef>RED_SHIFT</modifierdef>
 
     <!-- MOD ROW -->
-    <autogen>__KeyToKey__ KeyCode::Z, KeyCode::OPTION_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::X, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
     <autogen>__KeyToKey__ KeyCode::C, KeyCode::CONTROL_L</autogen>
     <autogen>__KeyToKey__ KeyCode::V, KeyCode::SHIFT_L</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::B, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::B, KeyCode::COMMAND_L</autogen>
     <autogen>__KeyToKey__ KeyCode::N, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
 
     <autogen>__KeyToKey__ KeyCode::M, KeyCode::SPACE</autogen>
