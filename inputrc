@@ -13,7 +13,7 @@ set editing-mode vi
 set show-all-if-ambiguous on
 set completion-ignore-case on
 # On menu-complete, display the common prefix, then cycle through the options with tab.
-menu-complete-display-prefix on
+set menu-complete-display-prefix on
 
 ####################################################################################################
 # Vi Command Mode Keymaps
