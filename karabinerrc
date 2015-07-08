@@ -18,24 +18,53 @@
 
     <!-- For punction, etc. -->
     <modifierdef>BLUE_SHIFT</modifierdef>
-    <!-- For numbers. -->
-    <modifierdef>NUM_SHIFT</modifierdef>
     <!-- For arrows, functions, etc. -->
     <modifierdef>RED_SHIFT</modifierdef>
+    <!-- For numpad. -->
+    <modifierdef>NUM_SHIFT</modifierdef>
+
+
+    <!-- NUM TOP ROW -->
+    <autogen>__KeyToKey__ KeyCode::KEY_1, ModifierFlag::NUM_SHIFT, KeyCode::KEY_1</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_2, ModifierFlag::NUM_SHIFT, KeyCode::KEY_2</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_3, ModifierFlag::NUM_SHIFT, KeyCode::KEY_3</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_4, ModifierFlag::NUM_SHIFT, KeyCode::KEY_4</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_5, ModifierFlag::NUM_SHIFT, KeyCode::KEY_5</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::NUM_SHIFT, KeyCode::KEY_6</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_9, ModifierFlag::NUM_SHIFT, KeyCode::KEY_7</autogen>
+    <autogen>__KeyToKey__ KeyCode::KEY_0, ModifierFlag::NUM_SHIFT, KeyCode::KEY_8</autogen>
+    <autogen>__KeyToKey__ KeyCode::MINUS, ModifierFlag::NUM_SHIFT, KeyCode::KEY_9</autogen>
+    <autogen>__KeyToKey__ KeyCode::EQUAL, ModifierFlag::NUM_SHIFT, KeyCode::KEY_0</autogen>
+    <!-- NUMPAD MIDDLE ROW -->
+    <autogen>__KeyToKey__ KeyCode::O, ModifierFlag::NUM_SHIFT, KeyCode::KEY_4</autogen>
+    <autogen>__KeyToKey__ KeyCode::P, ModifierFlag::NUM_SHIFT, KeyCode::KEY_5</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, ModifierFlag::NUM_SHIFT, KeyCode::KEY_6</autogen>
+    <!-- NUMPAD BOTTOM ROW -->
+    <autogen>__KeyToKey__ KeyCode::L, ModifierFlag::NUM_SHIFT, KeyCode::KEY_1</autogen>
+    <autogen>__KeyToKey__ KeyCode::SEMICOLON, ModifierFlag::NUM_SHIFT, KeyCode::KEY_2</autogen>
+    <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::NUM_SHIFT, KeyCode::KEY_3</autogen>
+    <autogen>__KeyToKey__ KeyCode::M, ModifierFlag::NUM_SHIFT, KeyCode::KEY_0</autogen>
+
+    <!-- Keeps modifier from being accidentally triggered when typing quickly. -->
+    <block>
+      <modifier_only>ModifierFlag::M</modifier_only>
+      <autogen>__BlockUntilKeyUp__ KeyCode::BACKSLASH</autogen>
+      <autogen>__BlockUntilKeyUp__ KeyCode::CONTROL_L</autogen>
+    </block>
 
     <!-- MOD ROW -->
-    <autogen>__KeyToKey__ KeyCode::Z, KeyCode::OPTION_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::X, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::CONTROL_L, KeyCode::VK_MODIFIER_NUM_SHIFT, ModifierFlag::M</autogen>
+
+    <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
     <autogen>__KeyToKey__ KeyCode::C, KeyCode::CONTROL_L</autogen>
     <autogen>__KeyToKey__ KeyCode::V, KeyCode::SHIFT_L</autogen>
 
-    <autogen>__KeyToKey__ KeyCode::B, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
-    <autogen>__KeyToKey__ KeyCode::N, KeyCode::VK_MODIFIER_RED_SHIFT</autogen>
+    <autogen>__KeyToKey__ KeyCode::B, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::N, KeyCode::VK_MODIFIER_RED_SHIFT, KeyCode::RETURN</autogen>
 
     <autogen>__KeyToKey__ KeyCode::M, KeyCode::SPACE</autogen>
-    <autogen>__KeyToKey__ KeyCode::COMMA, KeyCode::CONTROL_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::DOT, KeyCode::COMMAND_L</autogen>
-    <autogen>__KeyToKey__ KeyCode::SLASH, KeyCode::OPTION_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::COMMA, KeyCode::COMMAND_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::DOT, KeyCode::OPTION_L</autogen>
 
 
     <!-- BLUE TOP ROW -->
@@ -69,6 +98,7 @@
     <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, ModifierFlag::BLUE_SHIFT, KeyCode::SLASH</autogen>
 
     <!-- BLUE BOTTOM ROW -->
+    <!--
     <autogen>__KeyToKey__ KeyCode::A, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_1</autogen>
     <autogen>__KeyToKey__ KeyCode::S, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_2</autogen>
     <autogen>__KeyToKey__ KeyCode::D, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_3</autogen>
@@ -80,6 +110,8 @@
     <autogen>__KeyToKey__ KeyCode::SEMICOLON, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_8</autogen>
     <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_9</autogen>
     <autogen>__KeyToKey__ KeyCode::RETURN, ModifierFlag::BLUE_SHIFT, KeyCode::KEY_0</autogen>
+    -->
+
 
     <!-- RED TOP ROW -->
     <autogen>__KeyToKey__ KeyCode::KEY_8, ModifierFlag::RED_SHIFT, KeyCode::HOME, ModifierFlag::SHIFT_L</autogen>
@@ -122,7 +154,7 @@
     <autogen>__KeyToKey__ KeyCode::P, KeyCode::K</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, KeyCode::L</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, KeyCode::SEMICOLON</autogen>
-    <autogen>__KeyOverlaidModifier__ KeyCode::BACKSLASH, KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::RETURN</autogen>
+    <autogen>__KeyOverlaidModifierWithRepeat__ KeyCode::BACKSLASH, KeyCode::VK_MODIFIER_BLUE_SHIFT, ModifierFlag::M, KeyCode::QUOTE</autogen>
 
     <!-- BOTTOM ROW -->
     <autogen>__KeyToKey__ KeyCode::A, KeyCode::Z</autogen>
@@ -137,7 +169,7 @@
     <autogen>__KeyToKey__ KeyCode::SEMICOLON, KeyCode::COMMA</autogen>
     <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::SHIFT_L, KeyCode::SLASH, ModifierFlag::SHIFT_L</autogen>
     <autogen>__KeyToKey__ KeyCode::QUOTE, KeyCode::DOT</autogen>
-    <autogen>__KeyToKey__ KeyCode::RETURN, KeyCode::QUOTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::RETURN, KeyCode::VK_MODIFIER_NUM_SHIFT</autogen>
 
 
     <!-- Clear out the keyboard. Anything that hasn't been mapped above will be noop. -->
@@ -207,8 +239,8 @@
     <autogen>__KeyToKey__ KeyCode::OPTION_R</autogen>
     <autogen>__KeyToKey__ KeyCode::CONTROL_R</autogen>
     <!-- MISC KEYS -->
+    <autogen>__KeyToKey__ KeyCode::ESCAPE</autogen>
     <!--
-      <autogen>__KeyToKey__ KeyCode::ESCAPE</autogen>
       <autogen>__KeyToKey__ KeyCode::CURSOR_LEFT</autogen>
       <autogen>__KeyToKey__ KeyCode::CURSOR_RIGHT</autogen>
       <autogen>__KeyToKey__ KeyCode::CURSOR_UP</autogen>
