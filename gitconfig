@@ -22,4 +22,4 @@
   l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
 
 [push]
-	default = simple
+  default = simple

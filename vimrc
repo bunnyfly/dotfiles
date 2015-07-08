@@ -8,15 +8,16 @@ set nocompatible
   call vundle#rc()
   Bundle 'gmarik/vundle'
   Bundle 'scrooloose/nerdtree'
-  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-abolish'
   Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-surround'
   Bundle 'vim-scripts/vimwiki'
   Bundle 'Lokaltog/powerline'
   Bundle 'Shougo/unite.vim'
   " Needed for Unite async.
   Bundle 'Shougo/vimproc.vim'
-  set rtp+=~/.vim/bundle/vimproc/autoload
-  set rtp+=~/.vim/bundle/vimproc/plugin
+  set rtp+=~/.vim/bundle/vimproc.vim/autoload
+  set rtp+=~/.vim/bundle/vimproc.vim/plugin
 
 " Machine specific settings if they exist.
 silent! source ~/.vimrc-local
@@ -72,6 +73,8 @@ silent! source ~/.vimrc-local
   noremap ; :
 " Sane redo.
   noremap U <C-r>
+" Y consistent with C and D
+  noremap Y y$
 " +/- increment and decrement.
   nnoremap + <C-a>|nnoremap - <C-x>
 " Jump to exact mark location with ' instead of line.
@@ -169,17 +172,24 @@ let mapleader = ","
   let g:unite_source_history_yank_enable = 1
   let g:unite_source_grep_max_candidates = 200
 
-  if executable('ack-grep')
-    let g:unite_source_grep_command = 'ack-grep'
+  if executable('ag')
+    " file_rec/async
+    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
+    " grep
+    let g:unite_source_grep_command='ag'
+    let g:unite_source_grep_default_opts='-i --nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt=''
+  elseif executable('ack') || executable('ack-grep')
+    if executable('ack')
+      let g:unite_source_rec_async_command = 'ack --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
+      let g:unite_source_grep_command = 'ack'
+    else
+      let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
+      let g:unite_source_grep_command = 'ack-grep'
+    endif
+    " grep
     " --no-heading
-    let g:unite_source_grep_default_opts = '-i --no-color --no-group --with-filename --flush'
-    let g:unite_source_grep_recursive_opt = '-r'
-    " let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
-  endif
-  if executable('ack')
-    let g:unite_source_grep_command = 'ack'
-    " --no-heading
-    let g:unite_source_grep_default_opts = '-i --no-color --no-group --with-filename --flush'
+    let g:unite_source_grep_default_opts = ' --nofilter -i --no-color --no-group --with-filename --flush'
     let g:unite_source_grep_recursive_opt = '-r'
   endif
 
@@ -225,6 +235,12 @@ let mapleader = ","
     imap <buffer> <C-e> <Plug>(unite_select_previous_line)<Esc>
     nmap <buffer> <C-e> <Plug>(unite_loop_cursor_up)
   endfunction
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Abolish
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nmap <Leader>c <Plug>Coerce
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
