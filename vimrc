@@ -16,6 +16,7 @@ set nocompatible
   Bundle 'Shougo/unite.vim'
   " Needed for Unite async.
   Bundle 'Shougo/vimproc.vim'
+  Bundle 'fatih/vim-go'
   set rtp+=~/.vim/bundle/vimproc.vim/autoload
   set rtp+=~/.vim/bundle/vimproc.vim/plugin
 

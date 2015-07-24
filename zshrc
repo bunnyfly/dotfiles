@@ -16,6 +16,10 @@
   export KEYTIMEOUT=1        # Eliminates <Esc> delay for Vi mode.
   export TERM=screen-256color
 
+# Go
+  export GOPATH=$HOME/go
+  PATH=$PATH:$GOPATH/bin
+
 # Shortcuts
   alias a='ack'
   alias d='diff'
