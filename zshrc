@@ -18,7 +18,8 @@
 
 # Go
   export GOPATH=$HOME/go
-  PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # Shortcuts
   alias a='ack'
