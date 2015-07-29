@@ -16,6 +16,11 @@
   export KEYTIMEOUT=1        # Eliminates <Esc> delay for Vi mode.
   export TERM=screen-256color
 
+# Go
+  export GOPATH=$HOME/go
+  export PATH=$PATH:$GOPATH/bin
+  export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
 # Shortcuts
   alias a='ack'
   alias d='diff'
@@ -66,6 +71,9 @@ bindkey -v
 ####################################################################################################
 # Source local zshrc
 ####################################################################################################
+if [ -f ~/.zsh-plugin-golang ]; then
+  source ~/.zsh-plugin-golang
+fi
 if [ -f ~/.zshrc-local ]; then
   source ~/.zshrc-local
 fi
