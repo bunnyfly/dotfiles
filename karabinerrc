@@ -49,11 +49,10 @@
     <block>
       <modifier_only>ModifierFlag::M</modifier_only>
       <autogen>__BlockUntilKeyUp__ KeyCode::BACKSLASH</autogen>
-      <autogen>__BlockUntilKeyUp__ KeyCode::CONTROL_L</autogen>
     </block>
 
     <!-- MOD ROW -->
-    <autogen>__KeyToKey__ KeyCode::CONTROL_L, KeyCode::VK_MODIFIER_NUM_SHIFT, ModifierFlag::M</autogen>
+    <autogen>__KeyToKey__ KeyCode::CONTROL_L, KeyCode::VK_MODIFIER_NUM_SHIFT</autogen>
 
     <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
     <autogen>__KeyToKey__ KeyCode::C, KeyCode::CONTROL_L</autogen>
