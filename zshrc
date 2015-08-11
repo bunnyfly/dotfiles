@@ -17,7 +17,7 @@
   export TERM=screen-256color
 
 # Go
-  export GOPATH=$HOME/go
+  export GOPATH=$HOME
   export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
