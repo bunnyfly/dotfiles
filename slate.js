@@ -156,6 +156,16 @@ slate.bind('m:alt', function(win) {
   win.doOperation(slate.operation('move', {'x' : 'screenOriginX', 'y' : 'screenOriginY', 'width' : 'screenSizeX', 'height' : 'screenSizeY'}));
 });
 
+/** Throw to next screen! */
+slate.bind('h:alt,ctrl', function(win) {
+  win.doOperation(slate.operation('throw', {screen: 'next'}));
+});
+
+/** Throw to previous screen! */
+slate.bind('i:alt,ctrl', function(win) {
+  win.doOperation(slate.operation('throw', {screen: 'prev'}));
+});
+
 /** Select window! Cmd-Alt-Tab. */
 slate.bind('tab:cmd,alt', function(win) {
   win.doOperation(

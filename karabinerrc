@@ -45,22 +45,27 @@
     <autogen>__KeyToKey__ KeyCode::QUOTE, ModifierFlag::NUM_SHIFT, KeyCode::KEY_3</autogen>
     <autogen>__KeyToKey__ KeyCode::M, ModifierFlag::NUM_SHIFT, KeyCode::KEY_0</autogen>
 
-    <!-- Keeps modifier from being accidentally triggered when typing quickly. -->
+    <!--
+      Keeps modifier from being accidentally triggered when typing quickly.
+      Based on: https://github.com/tekezo/Files/blob/master/Karabiner/private.space_to_control_v2/private.xml
+    -->
+    <modifierdef>BLOCK_UNTIL_KEY_UP</modifierdef>
     <block>
-      <modifier_only>ModifierFlag::M</modifier_only>
-      <autogen>__BlockUntilKeyUp__ KeyCode::BACKSLASH</autogen>
-      <autogen>__BlockUntilKeyUp__ KeyCode::CONTROL_L</autogen>
+      <modifier_only>ModifierFlag::BLOCK_UNTIL_KEY_UP</modifier_only>
+      <autogen>__BlockUntilKeyUp__ KeyCode::E</autogen>
+      <autogen>__BlockUntilKeyUp__ KeyCode::O</autogen>
+      <autogen>__BlockUntilKeyUp__ KeyCode::R</autogen>
     </block>
 
     <!-- MOD ROW -->
-    <autogen>__KeyToKey__ KeyCode::CONTROL_L, KeyCode::VK_MODIFIER_NUM_SHIFT, ModifierFlag::M</autogen>
+    <autogen>__KeyToKey__ KeyCode::CONTROL_L, KeyCode::VK_MODIFIER_NUM_SHIFT</autogen>
 
     <autogen>__KeyToKey__ KeyCode::X, KeyCode::OPTION_L</autogen>
     <autogen>__KeyToKey__ KeyCode::C, KeyCode::CONTROL_L</autogen>
     <autogen>__KeyToKey__ KeyCode::V, KeyCode::SHIFT_L</autogen>
 
     <autogen>__KeyToKey__ KeyCode::B, KeyCode::COMMAND_L</autogen>
-    <autogen>__KeyOverlaidModifier__ KeyCode::N, KeyCode::VK_MODIFIER_RED_SHIFT, KeyCode::RETURN</autogen>
+    <autogen>__KeyToKey__ KeyCode::N, KeyCode::RETURN</autogen>
 
     <autogen>__KeyToKey__ KeyCode::M, KeyCode::SPACE</autogen>
     <autogen>__KeyToKey__ KeyCode::COMMA, KeyCode::COMMAND_L</autogen>
@@ -145,16 +150,16 @@
     <autogen>__KeyOverlaidModifier__ KeyCode::TAB, KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::ESCAPE</autogen>
     <autogen>__KeyToKey__ KeyCode::Q, KeyCode::A</autogen>
     <autogen>__KeyToKey__ KeyCode::W, KeyCode::S</autogen>
-    <autogen>__KeyToKey__ KeyCode::E, KeyCode::D</autogen>
-    <autogen>__KeyToKey__ KeyCode::R, KeyCode::F</autogen>
+    <autogen>__KeyOverlaidModifierWithRepeat__ KeyCode::E, KeyCode::VK_MODIFIER_RED_SHIFT, ModifierFlag::BLOCK_UNTIL_KEY_UP, KeyCode::D</autogen>
+    <autogen>__KeyOverlaidModifierWithRepeat__ KeyCode::R, KeyCode::VK_MODIFIER_BLUE_SHIFT, ModifierFlag::BLOCK_UNTIL_KEY_UP, KeyCode::F</autogen>
     <autogen>__KeyToKey__ KeyCode::T, KeyCode::G</autogen>
 
     <autogen>__KeyToKey__ KeyCode::I, KeyCode::H</autogen>
-    <autogen>__KeyToKey__ KeyCode::O, KeyCode::J</autogen>
+    <autogen>__KeyOverlaidModifierWithRepeat__ KeyCode::O, KeyCode::VK_MODIFIER_BLUE_SHIFT, ModifierFlag::BLOCK_UNTIL_KEY_UP, KeyCode::J</autogen>
     <autogen>__KeyToKey__ KeyCode::P, KeyCode::K</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, KeyCode::L</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, KeyCode::SEMICOLON</autogen>
-    <autogen>__KeyOverlaidModifierWithRepeat__ KeyCode::BACKSLASH, KeyCode::VK_MODIFIER_BLUE_SHIFT, ModifierFlag::M, KeyCode::QUOTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::BACKSLASH, KeyCode::QUOTE</autogen>
 
     <!-- BOTTOM ROW -->
     <autogen>__KeyToKey__ KeyCode::A, KeyCode::Z</autogen>
