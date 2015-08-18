@@ -52,9 +52,10 @@
     <modifierdef>BLOCK_UNTIL_KEY_UP</modifierdef>
     <block>
       <modifier_only>ModifierFlag::BLOCK_UNTIL_KEY_UP</modifier_only>
-      <autogen>__BlockUntilKeyUp__ KeyCode::E</autogen>
-      <autogen>__BlockUntilKeyUp__ KeyCode::O</autogen>
-      <autogen>__BlockUntilKeyUp__ KeyCode::R</autogen>
+      <autogen>__BlockUntilKeyUp__ KeyCode::E</autogen> <!-- Colemak S -->
+      <autogen>__BlockUntilKeyUp__ KeyCode::R</autogen> <!-- Colemak T -->
+      <autogen>__BlockUntilKeyUp__ KeyCode::O</autogen> <!-- Colemak N -->
+      <autogen>__BlockUntilKeyUp__ KeyCode::BACKSLASH</autogen> <!-- Colemak ' -->
     </block>
 
     <!-- MOD ROW -->
@@ -159,7 +160,7 @@
     <autogen>__KeyToKey__ KeyCode::P, KeyCode::K</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_LEFT, KeyCode::L</autogen>
     <autogen>__KeyToKey__ KeyCode::BRACKET_RIGHT, KeyCode::SEMICOLON</autogen>
-    <autogen>__KeyToKey__ KeyCode::BACKSLASH, KeyCode::QUOTE</autogen>
+    <autogen>__KeyOverlaidModifier__ KeyCode::BACKSLASH, KeyCode::VK_MODIFIER_BLUE_SHIFT, KeyCode::QUOTE</autogen>
 
     <!-- BOTTOM ROW -->
     <autogen>__KeyToKey__ KeyCode::A, KeyCode::Z</autogen>
