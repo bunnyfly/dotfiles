@@ -117,6 +117,17 @@ let mapleader = ","
         diffthis
       endif
     :endfunction
+" Text width
+  nnoremap <silent> <Leader>tw :call TextwidthToggle()<CR>
+    function! TextwidthToggle()
+      if &textwidth == 80
+        set textwidth=100
+      elseif &textwidth == 100
+        set textwidth=0
+      else
+        set textwidth=80
+      endif
+    :endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

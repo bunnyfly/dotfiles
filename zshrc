@@ -22,7 +22,11 @@
   export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # Shortcuts
-  alias a='ack'
+  if hash ack 2>/dev/null; then
+    alias a='ack'
+  elif hash ack-grep 2>/dev/null; then
+    alias a='ack-grep'
+  fi
   alias d='diff'
   alias g='git'
   alias t='tmux'
