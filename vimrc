@@ -4,16 +4,18 @@
 set nocompatible
 " Vundle plugin manager.
   filetype off
+  " set the runtime path to include Vundle and initialize
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
-  Plugin 'gmarik/vundle'
+  Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdtree'
   Plugin 'tpope/vim-abolish'
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-surround'
   Plugin 'vim-scripts/vimwiki'
-  Plugin 'Lokaltog/powerline'
   Plugin 'Shougo/unite.vim'
+  Plugin 'vim-airline/vim-airline'
+  Plugin 'vim-airline/vim-airline-themes'
   " Needed for Unite async.
   Plugin 'Shougo/vimproc.vim'
   Plugin 'fatih/vim-go'
@@ -24,7 +26,6 @@ set nocompatible
 
 " Machine specific settings if they exist.
 silent! source ~/.vimrc-local
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colemak-Vim Mappings
@@ -258,13 +259,6 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Powerline
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  "set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
-  "set noshowmode                       " Hide the default mode text in the ex line.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Eclim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nnoremap <silent> <Leader>pe :PingEclim<CR>
@@ -361,3 +355,12 @@ let mapleader = ","
     colorscheme bunnyfly
     "colorscheme molokai
   endif
+
+  let g:airline_powerline_fonts = 1
+  " Nice Airline themes:
+  " let g:airline_theme="bubblegum"
+  " let g:airline_theme="distinguished"
+  let g:airline_theme="hybridline"
+  " let g:airline_theme="powerlineish"
+  " let g:airline_theme="raven"
+  " let g:airline_theme="serene"
