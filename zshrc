@@ -1,9 +1,9 @@
 # Executes at the start of every zsh session.
 
 # Source Prezto.
-  if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-    source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-  fi
+  #if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+    #source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+  #fi
 
   PATH=/usr/local/bin:$HOME/.local/bin:/usr/local/homebrew/share/python/:$PATH
 
@@ -80,4 +80,12 @@ if [ -f ~/.zsh-plugin-golang ]; then
 fi
 if [ -f ~/.zshrc-local ]; then
   source ~/.zshrc-local
+fi
+
+
+####################################################################################################
+# zim
+####################################################################################################
+if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
+  source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 fi

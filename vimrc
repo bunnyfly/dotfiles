@@ -4,21 +4,23 @@
 set nocompatible
 " Vundle plugin manager.
   filetype off
-  set rtp+=~/.vim/bundle/vundle/
-  call vundle#rc()
-  Bundle 'gmarik/vundle'
-  Bundle 'scrooloose/nerdtree'
-  Bundle 'tpope/vim-abolish'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-surround'
-  Bundle 'vim-scripts/vimwiki'
-  Bundle 'Lokaltog/powerline'
-  Bundle 'Shougo/unite.vim'
+  set rtp+=~/.vim/bundle/Vundle.vim
+  call vundle#begin()
+  Plugin 'gmarik/vundle'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'tpope/vim-abolish'
+  Plugin 'tpope/vim-fugitive'
+  Plugin 'tpope/vim-surround'
+  Plugin 'vim-scripts/vimwiki'
+  Plugin 'Lokaltog/powerline'
+  Plugin 'Shougo/unite.vim'
   " Needed for Unite async.
-  Bundle 'Shougo/vimproc.vim'
-  Bundle 'fatih/vim-go'
+  Plugin 'Shougo/vimproc.vim'
+  Plugin 'fatih/vim-go'
   set rtp+=~/.vim/bundle/vimproc.vim/autoload
   set rtp+=~/.vim/bundle/vimproc.vim/plugin
+  call vundle#end()
+  filetype plugin indent on
 
 " Machine specific settings if they exist.
 silent! source ~/.vimrc-local
