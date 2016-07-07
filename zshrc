@@ -89,5 +89,12 @@ fi
 if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 fi
+autoload -Uz promptinit
+promptinit
+prompt eriner
 
+
+####################################################################################################
+# iTerm2
+####################################################################################################
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
