@@ -10,6 +10,7 @@ set nocompatible
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdtree'
   Plugin 'jistr/vim-nerdtree-tabs'
+  Plugin 'majutsushi/tagbar'
   Plugin 'tpope/vim-abolish'
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-surround'
@@ -100,6 +101,7 @@ silent! source ~/.vimrc-local
 "
 " Leader Conventions:
 "   <Leader> (NERDTree)
+"   t (Tagbar)
 "   d (Diff Tools)
 "   j (Eclim Java)
 "   p (Eclim Project)
@@ -286,6 +288,16 @@ let mapleader = ","
   let g:NERDTreeWinSize = 50           " Default width.
   let g:NERDTreeQuitOnOpen = 0         " Stay open.
   let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
+  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
+" Options
+  let g:tagbar_show_linenumbers = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
