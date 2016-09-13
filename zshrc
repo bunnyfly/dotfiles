@@ -6,6 +6,8 @@
   #fi
 
   PATH=/usr/local/bin:$HOME/.local/bin:/usr/local/homebrew/share/python/:$PATH
+  PATH=~/Library/Android/sdk/tools:$PATH
+  PATH=~/Library/Android/sdk/platform-tools:$PATH
 
 
 ####################################################################################################
