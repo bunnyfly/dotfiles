@@ -9,6 +9,8 @@ set nocompatible
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
   Plugin 'scrooloose/nerdtree'
+  Plugin 'jistr/vim-nerdtree-tabs'
+  Plugin 'majutsushi/tagbar'
   Plugin 'tpope/vim-abolish'
   Plugin 'tpope/vim-fugitive'
   Plugin 'tpope/vim-surround'
@@ -99,6 +101,7 @@ silent! source ~/.vimrc-local
 "
 " Leader Conventions:
 "   <Leader> (NERDTree)
+"   t (Tagbar)
 "   d (Diff Tools)
 "   j (Eclim Java)
 "   p (Eclim Project)
@@ -189,21 +192,18 @@ let mapleader = ","
 
   if executable('ag')
     " file_rec/async
-    let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
-    " grep
-    let g:unite_source_grep_command='ag'
-    let g:unite_source_grep_default_opts='-i --nocolor --nogroup --hidden'
-    let g:unite_source_grep_recursive_opt=''
+    let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '-i --nocolor --nogroup --hidden'
+    let g:unite_source_grep_recursive_opt = ''
   elseif executable('ack') || executable('ack-grep')
     if executable('ack')
-      let g:unite_source_rec_async_command = 'ack --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
+      let g:unite_source_rec_async_command = ['ack', '-f', '--nofilter']
       let g:unite_source_grep_command = 'ack'
     else
-      let g:unite_source_rec_async_command = 'ack-grep --nogroup --nocolor --ignore-case -H --ignore-dir=.git -g ""'
+      let g:unite_source_rec_async_command = ['ack-grep', '-f', '--nofilter']
       let g:unite_source_grep_command = 'ack-grep'
     endif
-    " grep
-    " --no-heading
     let g:unite_source_grep_default_opts = ' --nofilter -i --no-color --no-group --with-filename --flush'
     let g:unite_source_grep_recursive_opt = '-r'
   endif
@@ -275,7 +275,9 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
+  " Use NERDTreeTabs instead of native NERDTree!
+  " nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
+  nnoremap <silent> <Leader><Leader> :NERDTreeTabsToggle<CR>
 " Colemak
   let g:NERDTreeMapJumpFirstChild = "ge"
   let g:NERDTreeMapJumpLastChild = "gn"
@@ -286,6 +288,16 @@ let mapleader = ","
   let g:NERDTreeWinSize = 50           " Default width.
   let g:NERDTreeQuitOnOpen = 0         " Stay open.
   let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
+  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
+" Options
+  let g:tagbar_show_linenumbers = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
