@@ -40,3 +40,17 @@ Again...notes for myself.
 - Fill in .\<program>rc-local configs.
 
 ...and probably some other steps like installing Powerline-enabled fonts. But that's most of it.
+
+Lesskey with OSX
+----------------
+OSX's default `less` install comes with `lesskey` disabled. Solution is to build your own! Verify the most recent version of less's URL and do something like:
+
+```shell
+wget http://www.greenwoodsoftware.com/less/less-481.zip
+unzip less-481.zip
+cd less-481
+./configure && make install
+```
+
+This installs it to `/usr/local/bin`; you may need to change your `PATH` order or replace `/usr/bin/less`
+with `/usr/local/bin/less` or a link to it.
