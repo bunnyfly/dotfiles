@@ -8,8 +8,8 @@ set nocompatible
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
+  Plugin 'leafgarland/typescript-vim'
   Plugin 'scrooloose/nerdtree'
-  Plugin 'jistr/vim-nerdtree-tabs'
   Plugin 'majutsushi/tagbar'
   Plugin 'tpope/vim-abolish'
   Plugin 'tpope/vim-fugitive'
@@ -276,8 +276,7 @@ let mapleader = ","
 " NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Use NERDTreeTabs instead of native NERDTree!
-  " nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
-  nnoremap <silent> <Leader><Leader> :NERDTreeTabsToggle<CR>
+  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
 " Colemak
   let g:NERDTreeMapJumpFirstChild = "ge"
   let g:NERDTreeMapJumpLastChild = "gn"
