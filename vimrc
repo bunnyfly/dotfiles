@@ -8,19 +8,17 @@ set nocompatible
   set rtp+=~/.vim/bundle/Vundle.vim
   call vundle#begin()
   Plugin 'VundleVim/Vundle.vim'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'jistr/vim-nerdtree-tabs'
-  Plugin 'majutsushi/tagbar'
   Plugin 'tpope/vim-abolish'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'tpope/vim-surround'
-  Plugin 'vim-scripts/vimwiki'
-  Plugin 'Shougo/unite.vim'
   Plugin 'vim-airline/vim-airline'
   Plugin 'vim-airline/vim-airline-themes'
-  " Needed for Unite async.
-  Plugin 'Shougo/vimproc.vim'
+  Plugin 'tpope/vim-fugitive'
   Plugin 'fatih/vim-go'
+  Plugin 'scrooloose/nerdtree'
+  Plugin 'tpope/vim-surround'
+  Plugin 'majutsushi/tagbar'
+  Plugin 'Shougo/unite.vim'
+  Plugin 'Shougo/vimproc.vim' " Needed for Unite async.
+  Plugin 'vim-scripts/vimwiki'
   set rtp+=~/.vim/bundle/vimproc.vim/autoload
   set rtp+=~/.vim/bundle/vimproc.vim/plugin
   call vundle#end()
@@ -185,6 +183,64 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Abolish
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nmap <Leader>c <Plug>Coerce
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Eclim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>pe :PingEclim<CR>
+  nnoremap <silent> <Leader>pi :ProjectInfo<CR>
+  nnoremap <silent> <Leader>pl :ProjectList<CR>
+  nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
+  nnoremap <silent> <Leader>jc :JavaCorrect<CR>
+  nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
+  nnoremap <silent> <Leader>jf :JavaFormat<CR>
+  nnoremap <silent> <Leader>ji :JavaImportOrganize<CR>
+  nnoremap <Leader>jr :JavaRename 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUndo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:gundo_right=1
+  let g:gundo_preview_bottom=0
+  let g:gundo_close_on_revert=1
+  let g:gundo_map_move_older="n"
+  let g:gundo_map_move_newer="e"
+  let g:gundo_width=45
+  let g:gundo_preview_height=10
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
+" Colemak
+  let g:NERDTreeMapJumpFirstChild = "ge"
+  let g:NERDTreeMapJumpLastChild = "gn"
+  let g:NERDTreeMapToggleHidden = "H"
+  let g:NERDTreeMapOpenSplit = "S"
+  let g:NERDTreeMapOpenExpl = ""
+" Options
+  let g:NERDTreeWinSize = 50           " Default width.
+  let g:NERDTreeQuitOnOpen = 0         " Stay open.
+  let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
+  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
+" Options
+  let g:tagbar_show_linenumbers = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Unite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:unite_source_history_yank_enable = 1
@@ -253,66 +309,6 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Abolish
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nmap <Leader>c <Plug>Coerce
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Eclim
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>pe :PingEclim<CR>
-  nnoremap <silent> <Leader>pi :ProjectInfo<CR>
-  nnoremap <silent> <Leader>pl :ProjectList<CR>
-  nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
-  nnoremap <silent> <Leader>jc :JavaCorrect<CR>
-  nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
-  nnoremap <silent> <Leader>jf :JavaFormat<CR>
-  nnoremap <silent> <Leader>ji :JavaImportOrganize<CR>
-  nnoremap <Leader>jr :JavaRename 
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Use NERDTreeTabs instead of native NERDTree!
-  " nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
-  nnoremap <silent> <Leader><Leader> :NERDTreeTabsToggle<CR>
-" Colemak
-  let g:NERDTreeMapJumpFirstChild = "ge"
-  let g:NERDTreeMapJumpLastChild = "gn"
-  let g:NERDTreeMapToggleHidden = "H"
-  let g:NERDTreeMapOpenSplit = "S"
-  let g:NERDTreeMapOpenExpl = ""
-" Options
-  let g:NERDTreeWinSize = 50           " Default width.
-  let g:NERDTreeQuitOnOpen = 0         " Stay open.
-  let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
-  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
-  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
-" Options
-  let g:tagbar_show_linenumbers = 1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GUndo
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:gundo_right=1
-  let g:gundo_preview_bottom=0
-  let g:gundo_close_on_revert=1
-  let g:gundo_map_move_older="n"
-  let g:gundo_map_move_newer="e"
-  let g:gundo_width=45
-  let g:gundo_preview_height=10
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VikWiki
 "
 " To mirror VimWiki from Dropbox folder: ln -s ~/Dropbox/vimwiki ~/.vimwiki
@@ -338,12 +334,6 @@ let mapleader = ","
     \    }]
   let g:vimwiki_camel_case = 0                   " Don't automatically make CamelCase words links.
   noremap <C-S-M-q> @<Plug>VimwikiNextLink       " Avoid <Tab> jumping to next link.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PyDict Autocompletion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
