@@ -2,28 +2,26 @@
 " Initialization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-" Vundle plugin manager.
+
+" Plugins!
   filetype off
-  " set the runtime path to include Vundle and initialize
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'leafgarland/typescript-vim'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'majutsushi/tagbar'
-  Plugin 'tpope/vim-abolish'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'tpope/vim-surround'
-  Plugin 'vim-scripts/vimwiki'
-  Plugin 'Shougo/unite.vim'
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
+  call plug#begin('~/.vim/plugged')
+  Plug 'leafgarland/typescript-vim'
+  Plug 'scrooloose/nerdtree'
+  Plug 'majutsushi/tagbar'
+  Plug 'fatih/vim-go'
+  Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-surround'
+  Plug 'vim-scripts/vimwiki'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'Shougo/unite.vim'
   " Needed for Unite async.
-  Plugin 'Shougo/vimproc.vim'
-  Plugin 'fatih/vim-go'
+  Plug 'Shougo/vimproc.vim'
   set rtp+=~/.vim/bundle/vimproc.vim/autoload
   set rtp+=~/.vim/bundle/vimproc.vim/plugin
-  call vundle#end()
+  call plug#end()
   filetype plugin indent on
 
 " Machine specific settings if they exist.
@@ -357,6 +355,8 @@ let mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors (Always at bottom of .vimrc)
+"
+" Good ones: bunnyfly, molokai, and pyte!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   if has("gui_macvim")
     set background=light
@@ -364,8 +364,11 @@ let mapleader = ","
   else
     set background=dark
     colorscheme bunnyfly
-    "colorscheme molokai
   endif
+
+  " TODO: Fix. gui_macvim is triggering in console...
+  set background=dark
+  colorscheme bunnyfly
 
   let g:airline_powerline_fonts = 1
   " Nice Airline themes:
