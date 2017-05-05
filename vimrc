@@ -16,6 +16,7 @@ set nocompatible
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'vim-scripts/vimwiki' " Personal Wiki for Vim.
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plugins - Languages
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
   Plug 'fatih/vim-go' " Go development plugin for Vim.
@@ -23,7 +24,7 @@ set nocompatible
 " TODO: Find a better alternative.
   Plug 'Shougo/unite.vim'
   " Needed for Unite async.
-  Plug 'Shougo/vimproc.vim'
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
   set rtp+=~/.vim/bundle/vimproc.vim/autoload
   set rtp+=~/.vim/bundle/vimproc.vim/plugin
 " Wrap up plugins!
