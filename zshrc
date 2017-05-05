@@ -97,6 +97,5 @@ prompt eriner
 ####################################################################################################
 # iTerm2
 ####################################################################################################
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  export FZF_DEFAULT_OPTS='--exact'

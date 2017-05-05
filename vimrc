@@ -16,11 +16,14 @@ set nocompatible
   Plugin 'scrooloose/nerdtree'
   Plugin 'tpope/vim-surround'
   Plugin 'majutsushi/tagbar'
-  Plugin 'Shougo/unite.vim'
-  Plugin 'Shougo/vimproc.vim' " Needed for Unite async.
   Plugin 'vim-scripts/vimwiki'
-  set rtp+=~/.vim/bundle/vimproc.vim/autoload
-  set rtp+=~/.vim/bundle/vimproc.vim/plugin
+  Plugin 'Shougo/unite.vim'
+    " Needed for Unite async:
+    Plugin 'Shougo/vimproc.vim'
+    " RTPs for vimproc:
+    set rtp+=~/.vim/bundle/vimproc.vim/autoload
+    set rtp+=~/.vim/bundle/vimproc.vim/lib
+    set rtp+=~/.vim/bundle/vimproc.vim/plugin
   call vundle#end()
   filetype plugin indent on
 
@@ -247,8 +250,9 @@ let mapleader = ","
   let g:unite_source_grep_max_candidates = 200
 
   if executable('ag')
-    " file_rec/async
+    " Filelist (file_rec/async)
     let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+    " Grep command.
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts = '-i --nocolor --nogroup --hidden'
     let g:unite_source_grep_recursive_opt = ''
