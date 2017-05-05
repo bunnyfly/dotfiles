@@ -2,29 +2,33 @@
 " Initialization
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
-" Vundle plugin manager.
+
+" Plugins!
   filetype off
-  " set the runtime path to include Vundle and initialize
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-  Plugin 'VundleVim/Vundle.vim'
-  Plugin 'tpope/vim-abolish'
-  Plugin 'vim-airline/vim-airline'
-  Plugin 'vim-airline/vim-airline-themes'
-  Plugin 'tpope/vim-fugitive'
-  Plugin 'fatih/vim-go'
-  Plugin 'scrooloose/nerdtree'
-  Plugin 'tpope/vim-surround'
-  Plugin 'majutsushi/tagbar'
-  Plugin 'vim-scripts/vimwiki'
-  Plugin 'Shougo/unite.vim'
-    " Needed for Unite async:
-    Plugin 'Shougo/vimproc.vim'
-    " RTPs for vimproc:
-    set rtp+=~/.vim/bundle/vimproc.vim/autoload
-    set rtp+=~/.vim/bundle/vimproc.vim/lib
-    set rtp+=~/.vim/bundle/vimproc.vim/plugin
-  call vundle#end()
+  call plug#begin('~/.vim/plugged')
+" Plugins - UI
+  Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
+  Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
+  Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
+  Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
+" Plugins - Editing
+  Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
+  Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
+  Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
+  Plug 'vim-scripts/vimwiki' " Personal Wiki for Vim.
+  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+" Plugins - Languages
+  Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
+  Plug 'fatih/vim-go' " Go development plugin for Vim.
+" Plugins - Unite
+" TODO: Find a better alternative.
+  Plug 'Shougo/unite.vim'
+  " Needed for Unite async.
+  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+  set rtp+=~/.vim/bundle/vimproc.vim/autoload
+  set rtp+=~/.vim/bundle/vimproc.vim/plugin
+" Wrap up plugins!
+  call plug#end()
   filetype plugin indent on
 
 " Machine specific settings if they exist.
@@ -46,23 +50,23 @@ silent! source ~/.vimrc-local
   noremap n gj|noremap e gk|noremap i l|noremap gn j|noremap ge k
 " In(s)ert. The default s/S is synonymous with cl/cc and is not very useful.
   noremap s i|noremap S I
-" Last search.
+" Repeat search.
   noremap k n|noremap K N
-" BOL/EOL/Join Lines.
+" BOL/EOL/Join.
   noremap l ^|noremap L $|noremap <C-l> J
 " _r_ = inneR text objects.
   onoremap r i
 " EOW.
-" TODO: I never use this. Use for something else?
+" TODO: I almost never use this. Use for something else?
   noremap j e|noremap J E
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other Colemak Arrow-Based Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Switch tabs.
+" Switch tabs with Ctrl.
   nnoremap <C-i> <C-PageDown>|nnoremap <C-h> <C-PageUp>
-" Switch panes.
+" Switch panes with Shift.
   noremap H <C-w>h|noremap I <C-w>l|noremap N <C-w>j|noremap E <C-w>k
 " Moving windows around.
   noremap <C-w>N <C-w>J|noremap <C-w>E <C-w>K|noremap <C-w>I <C-w>L
@@ -94,29 +98,24 @@ silent! source ~/.vimrc-local
 " Disable bad habits. Unfortunately, <C-m> == <CR>, so Mid is M until my fingers forget <CR>.
   nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <BS> <Nop>|nnoremap <Del> <Nop>
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General Leader Mappings
+" Leader Mappings
 "
 " Plugin-specific mappings are set in the plugin's section.
 "
-" Leader Conventions:
-"   <Leader> (NERDTree)
-"   t (Tagbar)
-"   d (Diff Tools)
-"   j (Eclim Java)
-"   p (Eclim Project)
-"   w (VimWiki)
+" Reserved leader prefix conventions:
+"   <Leader><Leader> (NERDTree)
+"   <Leader>t_ (Tagbar)
+"   <Leader>d_ (Diff Tools)
+"   <Leader>j_ (Eclim Java)
+"   <Leader>p_ (Eclim Project)
+"   <Leader>w_ (VimWiki)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
-" Toggle paste mode.
-  nnoremap <Leader>v :set invpaste<CR>:set paste?<CR>
 " Diff
-  nnoremap <silent> <Leader>dt :diffthis<CR>
-  nnoremap <silent> <Leader>do :diffoff<CR>
+  " Toggle diff on current window
   nnoremap <silent> <Leader>dd :call DiffToggle()<CR>
-  nnoremap <silent> <Leader>d/ /<<<<<<<\\|=======\\|>>>>>>><CR>
     function! DiffToggle()
       if &diff
         diffoff
@@ -124,7 +123,10 @@ let mapleader = ","
         diffthis
       endif
     :endfunction
+  " Search for merge-conflicts
+  nnoremap <silent> <Leader>d/ /<<<<<<<\\|=======\\|>>>>>>><CR>
 " Text width
+  " Toggle textwidth between 80, 100, and off.
   nnoremap <silent> <Leader>tw :call TextwidthToggle()<CR>
     function! TextwidthToggle()
       if &textwidth == 80
@@ -135,6 +137,8 @@ let mapleader = ","
         set textwidth=80
       endif
     :endfunction
+" Toggle paste mode.
+  nnoremap <Leader>v :set invpaste<CR>:set paste?<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -352,6 +356,8 @@ let mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors (Always at bottom of .vimrc)
+"
+" Good ones: bunnyfly, molokai, and pyte!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   if has("gui_macvim")
     set background=light
@@ -359,8 +365,11 @@ let mapleader = ","
   else
     set background=dark
     colorscheme bunnyfly
-    "colorscheme molokai
   endif
+
+  " TODO: Fix. gui_macvim is triggering in console...
+  set background=dark
+  colorscheme bunnyfly
 
   let g:airline_powerline_fonts = 1
   " Nice Airline themes:
