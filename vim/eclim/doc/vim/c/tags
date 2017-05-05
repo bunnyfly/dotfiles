@@ -1,0 +1,14 @@
+:CCallHierarchy	inspection.txt	/*:CCallHierarchy*
+:CProjectConfigs	project.txt	/*:CProjectConfigs*
+:CSearch	search.txt	/*:CSearch*
+:CSearchContext	search.txt	/*:CSearchContext*
+:Validate_c	validate.txt	/*:Validate_c*
+g:EclimCCallHierarchyDefaultAction	inspection.txt	/*g:EclimCCallHierarchyDefaultAction*
+g:EclimCSearchSingleResult	search.txt	/*g:EclimCSearchSingleResult*
+g:EclimCValidate	validate.txt	/*g:EclimCValidate*
+vim-c-complete.html	complete.txt	/*vim-c-complete.html*
+vim-c-index.html	index.txt	/*vim-c-index.html*
+vim-c-inspection.html	inspection.txt	/*vim-c-inspection.html*
+vim-c-project.html	project.txt	/*vim-c-project.html*
+vim-c-search.html	search.txt	/*vim-c-search.html*
+vim-c-validate.html	validate.txt	/*vim-c-validate.html*

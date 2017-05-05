@@ -1,0 +1,14 @@
+:DtdDefinition	index.txt	/*:DtdDefinition*
+:Validate_dtd	index.txt	/*:Validate_dtd*
+:Validate_xml	index.txt	/*:Validate_xml*
+:Validate_xsd	index.txt	/*:Validate_xsd*
+:XmlFormat	index.txt	/*:XmlFormat*
+:XsdDefinition	index.txt	/*:XsdDefinition*
+dtd	index.txt	/*dtd*
+g:EclimDtdValidate	index.txt	/*g:EclimDtdValidate*
+g:EclimXmlValidate	index.txt	/*g:EclimXmlValidate*
+g:EclimXsdValidate	index.txt	/*g:EclimXsdValidate*
+vim-xml-index.html	index.txt	/*vim-xml-index.html*
+xml	index.txt	/*xml*
+xml-validation	index.txt	/*xml-validation*
+xsd	index.txt	/*xsd*

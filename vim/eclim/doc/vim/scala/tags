@@ -1,0 +1,10 @@
+:ScalaImport	import.txt	/*:ScalaImport*
+:ScalaSearch	search.txt	/*:ScalaSearch*
+:Validate_scala	validate.txt	/*:Validate_scala*
+g:EclimScalaSearchSingleResult	search.txt	/*g:EclimScalaSearchSingleResult*
+g:EclimScalaValidate	validate.txt	/*g:EclimScalaValidate*
+vim-scala-complete.html	complete.txt	/*vim-scala-complete.html*
+vim-scala-import.html	import.txt	/*vim-scala-import.html*
+vim-scala-index.html	index.txt	/*vim-scala-index.html*
+vim-scala-search.html	search.txt	/*vim-scala-search.html*
+vim-scala-validate.html	validate.txt	/*vim-scala-validate.html*
