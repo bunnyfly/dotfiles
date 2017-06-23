@@ -302,7 +302,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "right_control+U to {",
+                                "description": "right_control+U to <",
                                 "from": {
                                     "key_code": "u",
                                     "modifiers": {
@@ -314,7 +314,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "open_bracket",
+                                        "key_code": "comma",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -340,7 +340,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "right_control+I to }",
+                                "description": "right_control+I to >",
                                 "from": {
                                     "key_code": "i",
                                     "modifiers": {
@@ -352,7 +352,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "close_bracket",
+                                        "key_code": "period",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -547,7 +547,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "comma",
+                                        "key_code": "open_bracket",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -588,7 +588,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "period",
+                                        "key_code": "close_bracket",
                                         "modifiers": [
                                             "left_shift"
                                         ]
