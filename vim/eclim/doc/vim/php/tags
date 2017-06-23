@@ -1,0 +1,13 @@
+:NewLibEntry_dltk_php	buildpath.txt	/*:NewLibEntry_dltk_php*
+:NewProjectEntry_dltk_php	buildpath.txt	/*:NewProjectEntry_dltk_php*
+:NewSrcEntry_dltk_php	buildpath.txt	/*:NewSrcEntry_dltk_php*
+:PhpSearch	search.txt	/*:PhpSearch*
+:PhpSearchContext	search.txt	/*:PhpSearchContext*
+:Validate_php	validate.txt	/*:Validate_php*
+g:EclimPhpSearchSingleResult	search.txt	/*g:EclimPhpSearchSingleResult*
+g:EclimPhpValidate	validate.txt	/*g:EclimPhpValidate*
+vim-php-buildpath.html	buildpath.txt	/*vim-php-buildpath.html*
+vim-php-complete.html	complete.txt	/*vim-php-complete.html*
+vim-php-index.html	index.txt	/*vim-php-index.html*
+vim-php-search.html	search.txt	/*vim-php-search.html*
+vim-php-validate.html	validate.txt	/*vim-php-validate.html*
