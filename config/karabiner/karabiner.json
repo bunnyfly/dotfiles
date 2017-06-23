@@ -45,6 +45,7 @@
                 "equal_sign": "p",
                 "f": "v",
                 "g": "b",
+                "grave_accent_and_tilde": "tab",
                 "h": "vk_none",
                 "hyphen": "o",
                 "i": "h",
@@ -65,6 +66,7 @@
                 "semicolon": "comma",
                 "slash": "vk_none",
                 "t": "g",
+                "tab": "escape",
                 "u": "vk_none",
                 "v": "left_shift",
                 "w": "s",
@@ -77,9 +79,9 @@
                     {
                         "manipulators": [
                             {
-                                "description": "grave_accent_and_tilde -> right_control+right_option",
+                                "description": "tab -> right_control+right_option",
                                 "from": {
-                                    "key_code": "grave_accent_and_tilde",
+                                    "key_code": "tab",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -94,12 +96,17 @@
                                         ]
                                     }
                                 ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "tab"
+                                    }
+                                ],
                                 "type": "basic"
                             },
                             {
-                                "description": "tab -> esc/right_control",
+                                "description": "esc -> esc/right_control",
                                 "from": {
-                                    "key_code": "tab",
+                                    "key_code": "escape",
                                     "modifiers": {
                                         "optional": [
                                             "any"
