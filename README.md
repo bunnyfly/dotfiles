@@ -1,5 +1,5 @@
-Dotfiles by Chloe Adeline
-=========================
+Dotfiles by Chloe Moon
+======================
 My personal setup and notes for myself! Probably not useful to most, but you might find some useful
 stuff in here, especially if you use Colemak and Vim!
 
@@ -34,16 +34,21 @@ Includes customization for:
 Setup
 -----
 Again...notes for myself.
-- Clone into `~/dotfiles`
-- `./install_dotfiles.sh`
-- Vim `:BundleInstall` to install Vim plugins
+- Clone dotfiles: `git clone https://github.com/bunnyfly/dotfiles.git ~/dotfiles`
+- Install dotfiles: `cd ~/dotfiles && ./install_dotfiles.sh`
+- Install Vim plugins: `:PlugClean` and `:PlugUpgrade` and `:PlugUpdate`
+- Install Zim: `git clone --recursive https://github.com/zimfw/zimfw.git ~/.zim`
 - Fill in .\<program>rc-local configs.
+- `sudo apt-get install python-pip`
+- `pip install powerline-status`
+- `lesskey ~/.lesskey`
 
 ...and probably some other steps like installing Powerline-enabled fonts. But that's most of it.
 
 Lesskey with OSX
 ----------------
-OSX's default `less` install comes with `lesskey` disabled. Solution is to build your own! Verify the most recent version of less's URL and do something like:
+OSX's default `less` install comes with `lesskey` disabled. Solution is to build your own! Verify
+the most recent version of less's URL and do something like:
 
 ```shell
 wget http://www.greenwoodsoftware.com/less/less-481.zip
@@ -52,5 +57,5 @@ cd less-481
 ./configure && make install
 ```
 
-This installs it to `/usr/local/bin`; you may need to change your `PATH` order or replace `/usr/bin/less`
-with `/usr/local/bin/less` or a link to it.
+This installs it to `/usr/local/bin`; you may need to change your `PATH` order or replace
+`/usr/bin/less` with `/usr/local/bin/less` or a link to it.

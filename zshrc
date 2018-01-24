@@ -1,4 +1,12 @@
-# Executes at the start of every zsh session.
+#
+# User configuration sourced by interactive shells
+#
+
+# Change default zim location
+export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+
+# Start zim
+[[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
 
 # Source Prezto.
   #if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
