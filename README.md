@@ -41,7 +41,11 @@ Again...notes for myself.
 - Fill in .\<program>rc-local configs.
 - `sudo apt-get install python-pip`
 - `pip install powerline-status`
+- `pip install --user neovim`
 - `lesskey ~/.lesskey`
+- `sudo apt-get install exuberant-ctags`
+- `sudo apt-get install silversearcher-ag`
+- `sudo apt-get install ack-grep`
 
 ...and probably some other steps like installing Powerline-enabled fonts. But that's most of it.
 
