@@ -12,16 +12,15 @@ set nocompatible
   Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
   Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
 " Plugins - Editing
-  Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
-  Plug 'vim-scripts/vimwiki' " Personal Wiki for Vim.
+  Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plugins - Languages
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
   Plug 'fatih/vim-go' " Go development plugin for Vim.
 " Plugins - Unite
-" TODO: Find a better alternative.
+" TODO: Find a better alternative for unite :-/
   Plug 'Shougo/unite.vim'
   " Needed for Unite async.
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -109,7 +108,6 @@ silent! source ~/.vimrc-local
 "   <Leader>d_ (Diff Tools)
 "   <Leader>j_ (Eclim Java)
 "   <Leader>p_ (Eclim Project)
-"   <Leader>w_ (VimWiki)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
@@ -317,34 +315,6 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VikWiki
-"
-" To mirror VimWiki from Dropbox folder: ln -s ~/Dropbox/vimwiki ~/.vimwiki
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:vimwiki_list = [{
-    \    'path':                       '~/.vimwiki/',
-    \    'path_html':                  '~/.vimwikihtml/',
-    \    'maxhi':                      1,
-    \    'css_name':                   'style.css',
-    \    'auto_export':                0,
-    \    'diary_index':                'diary',
-    \    'diary_link_fmt':             '%Y-%m-%d',
-    \    'diary_link_count':           4,
-    \    'diary_header':               'Diary',
-    \    'diary_rel_path':             'diary/',
-    \    'nested_syntaxes':            {},
-    \    'html_header':                '',
-    \    'html_footer':                '',
-    \    'syntax':                     'default',
-    \    'index':                      'index',
-    \    'ext':                        '.wiki',
-    \    'temp':                       0
-    \    }]
-  let g:vimwiki_camel_case = 0                   " Don't automatically make CamelCase words links.
-  noremap <C-S-M-q> @<Plug>VimwikiNextLink       " Avoid <Tab> jumping to next link.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " To Remove?
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " j1: Set java-indenting
@@ -373,9 +343,5 @@ let mapleader = ","
 
   let g:airline_powerline_fonts = 1
   " Nice Airline themes:
-  " let g:airline_theme="bubblegum"
-  " let g:airline_theme="distinguished"
+  "   bubblegum, distinguished, powerlineish, raven, serene, hybridline
   let g:airline_theme="hybridline"
-  " let g:airline_theme="powerlineish"
-  " let g:airline_theme="raven"
-  " let g:airline_theme="serene"
