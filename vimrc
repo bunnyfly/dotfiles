@@ -16,6 +16,8 @@ set nocompatible
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
+  Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
 " Plugins - Languages
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
   Plug 'fatih/vim-go' " Go development plugin for Vim.
@@ -246,6 +248,16 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Note: Needs to play nicely with YCM
+  let g:UltiSnipsExpandTrigger = "<Tab>"
+  let g:UltiSnipsListSnippets = "<S-tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<C-i>"
+  let g:UltiSnipsJumpBackwardTrigger = "<C-h>"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Unite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:unite_source_history_yank_enable = 1
@@ -315,13 +327,12 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" To Remove?
+" YCM - YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " j1: Set java-indenting
-  " +2s: Indenting a continuing line by 2 * shiftwidth
-  " l1: Align brackets with the case label
-  au BufRead,BufNewFile *.java setl cinoptions=j1,+2s,l1
-  let g:SuperTabDefaultCompletionType = "<C-x><C-u>"       " Use 'user' completion as default.
+  " Note: Needs to play nicely with UltiSnips
+  let g:ycm_key_list_select_completion = ['<C-n>']
+  let g:ycm_key_list_previous_completion = ['<C-e>']
+  let g:ycm_key_invoke_completion = "<C-i>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
