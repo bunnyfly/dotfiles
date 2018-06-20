@@ -23,3 +23,6 @@
 
 [push]
   default = simple
+[user]
+	name = Chloe Moon
+	email = bunnyfly@gmail.com
