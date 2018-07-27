@@ -31,11 +31,12 @@
   fi
   alias d='diff'
   alias g='git'
-  alias t='tmux'
-  alias vim='nvim'
-  alias v='vim'
+  alias he='heroku'
   alias l='less'
   alias lf='less +F'
+  alias t='tmux'
+  alias v='vim'
+  alias vim='nvim'
 
 # Verify overwrite/delete
   alias cp='nocorrect cp -i'

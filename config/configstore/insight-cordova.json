@@ -1,9 +1,3 @@
 {
-	"clientId": 62536951368,
-	"queue": {
-		"1520659047697 3ab6068f-1cc4-4dd9-86a8-584a2dda3fb2": {
-			"path": "/telemetry/off/via-cli-prompt-choice/successful",
-			"type": "pageview"
-		}
-	}
+	"clientId": 62536951368
 }
