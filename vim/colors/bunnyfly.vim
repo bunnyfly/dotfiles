@@ -8,7 +8,7 @@ let colors_name = "bunnyfly"
 
 
 " General colors
-hi Normal       ctermfg=254     ctermbg=232     cterm=none      guifg=#f6f3e8   guibg=#080808   gui=none
+hi Normal       ctermfg=231     ctermbg=232     cterm=none      guifg=#ffffff   guibg=#080808   gui=none
 hi Cursor       ctermfg=none    ctermbg=241     cterm=none      guifg=NONE      guibg=#656565   gui=none
 hi Visual       ctermfg=7       ctermbg=238     cterm=none      guifg=#f6f3e8   guibg=#444444   gui=none
 " hi VisualNOS
@@ -16,10 +16,10 @@ hi Search       ctermfg=231     ctermbg=125     cterm=none      guifg=#ffffff   
 hi Folded       ctermfg=103     ctermbg=238     cterm=none      guifg=#a0a8b0   guibg=#384048   gui=none
 hi Title        ctermfg=7       ctermbg=none    cterm=bold      guifg=#f6f3e8   guibg=NONE      gui=bold
 hi StatusLine   ctermfg=016     ctermbg=238     cterm=bold      guifg=#000000   guibg=#444444   gui=bold
-hi StatusLineNC ctermfg=234     ctermbg=238     cterm=none      guifg=#181818   guibg=#444444   gui=none
-hi VertSplit    ctermfg=236     ctermbg=236     cterm=none      guifg=#333333   guibg=#333333   gui=none
-hi LineNr       ctermfg=236     ctermbg=232     cterm=none      guifg=#444444   guibg=#080808   gui=none
-hi SpecialKey   ctermfg=244     ctermbg=236     cterm=none      guifg=#808080   guibg=#343434   gui=none
+hi StatusLineNC ctermfg=236     ctermbg=238     cterm=none      guifg=#303030   guibg=#444444   gui=none
+hi VertSplit    ctermfg=236     ctermbg=236     cterm=none      guifg=#303030   guibg=#303030   gui=none
+hi LineNr       ctermfg=238     ctermbg=232     cterm=none      guifg=#444444   guibg=#080808   gui=none
+hi SpecialKey   ctermfg=244     ctermbg=236     cterm=none      guifg=#808080   guibg=#303030   gui=none
 hi WarningMsg   ctermfg=203                                     guifg=#ff5f55
 hi ErrorMsg     ctermfg=196     ctermbg=236     cterm=bold      guifg=#ff2026   guibg=#3a3a3a   gui=bold
 hi NonText      ctermfg=235     ctermbg=232     cterm=none      guifg=#222222   guibg=#080808   gui=none
@@ -38,7 +38,7 @@ endif
 " Diff highlighting
 " Potential Good Diff Colors: ctermbg=24 ctermbg=58 ctermbg=61 ctermbg=125 ctermbg=133
 hi DiffAdd                      ctermbg=24                                      guibg=#2a0d6a
-hi DiffDelete   ctermfg=234     ctermbg=60      cterm=none      guifg=#242424   guibg=#3e3969   gui=none
+hi DiffDelete   ctermfg=236     ctermbg=60      cterm=none      guifg=#242424   guibg=#3e3969   gui=none
 hi DiffText     ctermfg=255     ctermbg=58      cterm=none                      guibg=#73186e   gui=none
 hi DiffChange                   ctermbg=237                                     guibg=#382a37
 

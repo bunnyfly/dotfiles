@@ -1,0 +1,5 @@
+:Validate_groovy	validate.txt	/*:Validate_groovy*
+g:EclimGroovyValidate	validate.txt	/*g:EclimGroovyValidate*
+vim-groovy-complete.html	complete.txt	/*vim-groovy-complete.html*
+vim-groovy-index.html	index.txt	/*vim-groovy-index.html*
+vim-groovy-validate.html	validate.txt	/*vim-groovy-validate.html*

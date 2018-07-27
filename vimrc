@@ -12,16 +12,17 @@ set nocompatible
   Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
   Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
 " Plugins - Editing
-  Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
-  Plug 'vim-scripts/vimwiki' " Personal Wiki for Vim.
+  Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
+  Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
 " Plugins - Languages
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
   Plug 'fatih/vim-go' " Go development plugin for Vim.
 " Plugins - Unite
-" TODO: Find a better alternative.
+" TODO: Find a better alternative for unite :-/
   Plug 'Shougo/unite.vim'
   " Needed for Unite async.
   Plug 'Shougo/vimproc.vim', { 'do': 'make' }
@@ -109,7 +110,6 @@ silent! source ~/.vimrc-local
 "   <Leader>d_ (Diff Tools)
 "   <Leader>j_ (Eclim Java)
 "   <Leader>p_ (Eclim Project)
-"   <Leader>w_ (VimWiki)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
@@ -190,14 +190,83 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Abolish
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nmap <Leader>c <Plug>Coerce
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Eclim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>pe :PingEclim<CR>
+  nnoremap <silent> <Leader>pi :ProjectInfo<CR>
+  nnoremap <silent> <Leader>pl :ProjectList<CR>
+  nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
+  nnoremap <silent> <Leader>jc :JavaCorrect<CR>
+  nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
+  nnoremap <silent> <Leader>jf :JavaFormat<CR>
+  nnoremap <silent> <Leader>ji :JavaImportOrganize<CR>
+  nnoremap <Leader>jr :JavaRename 
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GUndo
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:gundo_right=1
+  let g:gundo_preview_bottom=0
+  let g:gundo_close_on_revert=1
+  let g:gundo_map_move_older="n"
+  let g:gundo_map_move_newer="e"
+  let g:gundo_width=45
+  let g:gundo_preview_height=10
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NERDTree
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
+" Colemak
+  let g:NERDTreeMapJumpFirstChild = "ge"
+  let g:NERDTreeMapJumpLastChild = "gn"
+  let g:NERDTreeMapToggleHidden = "H"
+  let g:NERDTreeMapOpenSplit = "S"
+  let g:NERDTreeMapOpenExpl = ""
+" Options
+  let g:NERDTreeWinSize = 50           " Default width.
+  let g:NERDTreeQuitOnOpen = 0         " Stay open.
+  let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Tagbar
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
+  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
+  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
+" Options
+  let g:tagbar_show_linenumbers = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UltiSnips
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Note: Needs to play nicely with YCM
+  let g:UltiSnipsExpandTrigger = "<Tab>"
+  let g:UltiSnipsListSnippets = "<S-tab>"
+  let g:UltiSnipsJumpForwardTrigger = "<C-i>"
+  let g:UltiSnipsJumpBackwardTrigger = "<C-h>"
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Unite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:unite_source_history_yank_enable = 1
   let g:unite_source_grep_max_candidates = 200
 
   if executable('ag')
-    " file_rec/async
+    " Filelist (file_rec/async)
     let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
+    " Grep command.
     let g:unite_source_grep_command = 'ag'
     let g:unite_source_grep_default_opts = '-i --nocolor --nogroup --hidden'
     let g:unite_source_grep_recursive_opt = ''
@@ -258,106 +327,12 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Abolish
+" YCM - YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nmap <Leader>c <Plug>Coerce
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Eclim
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>pe :PingEclim<CR>
-  nnoremap <silent> <Leader>pi :ProjectInfo<CR>
-  nnoremap <silent> <Leader>pl :ProjectList<CR>
-  nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
-  nnoremap <silent> <Leader>jc :JavaCorrect<CR>
-  nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
-  nnoremap <silent> <Leader>jf :JavaFormat<CR>
-  nnoremap <silent> <Leader>ji :JavaImportOrganize<CR>
-  nnoremap <Leader>jr :JavaRename 
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Use NERDTreeTabs instead of native NERDTree!
-  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
-" Colemak
-  let g:NERDTreeMapJumpFirstChild = "ge"
-  let g:NERDTreeMapJumpLastChild = "gn"
-  let g:NERDTreeMapToggleHidden = "H"
-  let g:NERDTreeMapOpenSplit = "S"
-  let g:NERDTreeMapOpenExpl = ""
-" Options
-  let g:NERDTreeWinSize = 50           " Default width.
-  let g:NERDTreeQuitOnOpen = 0         " Stay open.
-  let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
-  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
-  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
-" Options
-  let g:tagbar_show_linenumbers = 1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GUndo
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:gundo_right=1
-  let g:gundo_preview_bottom=0
-  let g:gundo_close_on_revert=1
-  let g:gundo_map_move_older="n"
-  let g:gundo_map_move_newer="e"
-  let g:gundo_width=45
-  let g:gundo_preview_height=10
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VikWiki
-"
-" To mirror VimWiki from Dropbox folder: ln -s ~/Dropbox/vimwiki ~/.vimwiki
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:vimwiki_list = [{
-    \    'path':                       '~/.vimwiki/',
-    \    'path_html':                  '~/.vimwikihtml/',
-    \    'maxhi':                      1,
-    \    'css_name':                   'style.css',
-    \    'auto_export':                0,
-    \    'diary_index':                'diary',
-    \    'diary_link_fmt':             '%Y-%m-%d',
-    \    'diary_link_count':           4,
-    \    'diary_header':               'Diary',
-    \    'diary_rel_path':             'diary/',
-    \    'nested_syntaxes':            {},
-    \    'html_header':                '',
-    \    'html_footer':                '',
-    \    'syntax':                     'default',
-    \    'index':                      'index',
-    \    'ext':                        '.wiki',
-    \    'temp':                       0
-    \    }]
-  let g:vimwiki_camel_case = 0                   " Don't automatically make CamelCase words links.
-  noremap <C-S-M-q> @<Plug>VimwikiNextLink       " Avoid <Tab> jumping to next link.
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PyDict Autocompletion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" To Remove?
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " j1: Set java-indenting
-  " +2s: Indenting a continuing line by 2 * shiftwidth
-  " l1: Align brackets with the case label
-  au BufRead,BufNewFile *.java setl cinoptions=j1,+2s,l1
-  let g:SuperTabDefaultCompletionType = "<C-x><C-u>"       " Use 'user' completion as default.
+  " Note: Needs to play nicely with UltiSnips
+  let g:ycm_key_list_select_completion = ['<C-n>']
+  let g:ycm_key_list_previous_completion = ['<C-e>']
+  let g:ycm_key_invoke_completion = "<C-i>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -379,9 +354,5 @@ let mapleader = ","
 
   let g:airline_powerline_fonts = 1
   " Nice Airline themes:
-  " let g:airline_theme="bubblegum"
-  " let g:airline_theme="distinguished"
+  "   bubblegum, distinguished, powerlineish, raven, serene, hybridline
   let g:airline_theme="hybridline"
-  " let g:airline_theme="powerlineish"
-  " let g:airline_theme="raven"
-  " let g:airline_theme="serene"
