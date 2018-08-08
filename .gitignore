@@ -1,2 +1,7 @@
 vim/cache
 vim/plugged
+
+# Ignore configs except those listed
+config/*
+!config/karabiner
+!config/nvim
