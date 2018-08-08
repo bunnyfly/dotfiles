@@ -108,8 +108,6 @@ silent! source ~/.vimrc-local
 "   <Leader><Leader> (NERDTree)
 "   <Leader>t_ (Tagbar)
 "   <Leader>d_ (Diff Tools)
-"   <Leader>j_ (Eclim Java)
-"   <Leader>p_ (Eclim Project)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
 
@@ -188,25 +186,10 @@ let mapleader = ","
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Abolish
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nmap <Leader>c <Plug>Coerce
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Eclim
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>pe :PingEclim<CR>
-  nnoremap <silent> <Leader>pi :ProjectInfo<CR>
-  nnoremap <silent> <Leader>pl :ProjectList<CR>
-  nnoremap <silent> <Leader>pr :ProjectRefresh<CR>
-  nnoremap <silent> <Leader>jc :JavaCorrect<CR>
-  nnoremap <silent> <Leader>jd :JavaDocPreview<CR>
-  nnoremap <silent> <Leader>jf :JavaFormat<CR>
-  nnoremap <silent> <Leader>ji :JavaImportOrganize<CR>
-  nnoremap <Leader>jr :JavaRename 
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -32,7 +32,9 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
   export PATH=$PATH:/usr/local/opt/go/libexec/bin
 
 # Shortcuts
-  if hash ack 2>/dev/null; then
+  if hash ag 2>/dev/null; then
+    alias a='ag'
+  elif hash ack 2>/dev/null; then
     alias a='ack'
   elif hash ack-grep 2>/dev/null; then
     alias a='ack-grep'
@@ -107,10 +109,22 @@ prompt eriner
 
 
 ####################################################################################################
-# iTerm2
+# fzf
 ####################################################################################################
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  export FZF_DEFAULT_OPTS='--exact'
+  export FZF_DEFAULT_OPTS=''
+  # Match exact words (don't fuzzy match foo to fzozo)
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --exact'
+  # Up/down wraps to top/bottom of results
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --cycle'
+  # Input on top, results below
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --reverse'
+  # Some margin to differentiate fzf appearance
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --margin=0,4'
+  # Custom key bindings
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --bind=ctrl-n:down,ctrl-e:up,ctrl-f:page-down,ctrl-b:page-up'
+  # Use tmux panes for fzf to avoid the shell output getting pushed around.
+  export FZF_TMUX=1
 
 
 ####################################################################################################

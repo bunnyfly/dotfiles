@@ -1,5 +1,6 @@
 vim/cache
 vim/plugged
+vim/netrwhist
 
 # Ignore configs except those listed
 config/*
