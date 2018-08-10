@@ -53,7 +53,6 @@ silent! source ~/.vimrc-local
 " _r_ = inneR text objects.
   onoremap r i
 " EOW.
-" TODO: I almost never use this. Use for something else?
   noremap j e|noremap J E
 
 
@@ -240,31 +239,9 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Denite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
   call denite#custom#option('default', 'prompt', '⮀')
 
-  " Potentially interesting commands to try in the future:
-  "   directory_rec, file, file/old
-  nnoremap <silent> <Space>a
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=200 -auto-resize
-        \ grep<cr>
-  " TODO: Change cmd
-  nnoremap <silent> <Space>f
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=200 -auto-resize
-        \ file_rec<cr>
-  nnoremap <silent> <Space>;
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=200 -auto-resize
-        \ command_history<cr>
-  nnoremap <silent> <Space>:
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=200 -auto-resize
-        \ command_history<cr>
-  nnoremap <silent> <Space>/
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=200 -auto-resize
-        \ line<cr>
-  nnoremap <silent> <Space>*
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=200 -auto-resize
-        \ line<cr>
-
+  " Use ag - the silver surfer!
   call denite#custom#var('grep', 'command', ['ag'])
   call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
   call denite#custom#var('grep', 'recursive_opts', [])
@@ -272,10 +249,36 @@ let mapleader = ","
   call denite#custom#var('grep', 'separator', ['--'])
   call denite#custom#var('grep', 'final_opts', [])
 
-  " Insert mode mappings.
+  " Commands.
+  " Some to try later: directory_rec, file, file/old
+  nnoremap <silent> <Space>a
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
+        \ grep<cr>
+  " TODO: Change cmd
+  nnoremap <silent> <Space>f
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
+        \ file_rec<cr>
+  nnoremap <silent> <Space>;
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
+        \ command_history<cr>
+  nnoremap <silent> <Space>:
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
+        \ command_history<cr>
+  nnoremap <silent> <Space>/
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
+        \ line<cr>
+  nnoremap <silent> <Space>*
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
+        \ line<cr>
+
+  " Mappings - all mode.
+  " Disable global Esc so insert and normal can override.
+  call denite#custom#map('_', '<Esc>', '<denite:nop>', 'noremap')
+
+  " Mappings - insert mode.
+  call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>', 'noremap')
   call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
   call denite#custom#map('insert', '<C-e>', '<denite:move_to_previous_line>', 'noremap')
-  call denite#custom#map('insert', '<C-m>', '<denite::move_to_middle>', 'noremap')
   call denite#custom#map(
         \ 'insert',
         \ '<C-f>',
@@ -286,6 +289,55 @@ let mapleader = ","
         \ '<C-b>',
         \ '<denite:multiple_mappings:denite:scroll_page_backwards,denite:move_to_top>',
         \ 'noremap')
+
+  " Mappings - normal mode.
+  call denite#custom#map('normal', '<Esc>', '<denite:quit>', 'noremap')
+  " Open mappings
+  call denite#custom#map('normal', 'o', '<denite:do_action:switch>', 'noremap')
+  call denite#custom#map('normal', 't', '<denite:do_action:tabopen>', 'noremap')
+  call denite#custom#map('normal', 'N', '<denite:do_action:split>', 'noremap')
+  call denite#custom#map('normal', 'E', '<denite:do_action:split>', 'noremap')
+  call denite#custom#map('normal', 'H', '<denite:do_action:vsplit>', 'noremap')
+  call denite#custom#map('normal', 'I', '<denite:do_action:vsplit>', 'noremap')
+  " m prefix is to mirror NERDTree menu commands
+  call denite#custom#map('normal', 'ma', '<denite:do_action:new>', 'noremap')
+  call denite#custom#map('normal', 'md', '<denite:do_action:delete>', 'noremap')
+  " Scrolling
+  call denite#custom#map(
+        \ 'normal',
+        \ '<C-f>',
+        \ '<denite:multiple_mappings:denite:scroll_page_forwards,denite:move_to_bottom>',
+        \ 'noremap')
+  call denite#custom#map(
+        \ 'normal',
+        \ '<C-b>',
+        \ '<denite:multiple_mappings:denite:scroll_page_backwards,denite:move_to_top>',
+        \ 'noremap')
+  call denite#custom#map('normal', 'X', '<denite:delete_char_before_caret>', 'noremap')
+
+  " Mappings - normal mode to roughly mirror Colemak mappings at top of vimrc.
+  " HNEI arrows.
+  call denite#custom#map('normal', 'h', '<denite:move_caret_to_left>', 'noremap')
+  call denite#custom#map('normal', 'n', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('normal', 'e', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map('normal', 'i', '<denite:move_caret_to_right>', 'noremap')
+  " In(sert).
+  call denite#custom#map('normal', 's', '<denite:enter_mode:insert>', 'noremap')
+  call denite#custom#map('normal', 'S', '<denite:insert_to_head>', 'noremap')
+  " TODO: Repeat search
+  " BOL/EOL/Join.
+  call denite#custom#map('normal', 'l', '<denite:move_caret_to_head>', 'noremap')
+  call denite#custom#map('normal', 'L', '<denite:move_caret_to_tail>', 'noremap')
+  " EOW.
+  call denite#custom#map('normal', 'j', '<denite:move_caret_to_end_of_word>', 'noremap')
+  " High/Low/Mid
+  call denite#custom#map('normal', '<C-n>', '<denite:move_to_bottom>', 'noremap')
+  call denite#custom#map('normal', '<C-e>', '<denite:move_to_top>', 'noremap')
+  call denite#custom#map('normal', 'M', '<denite:move_to_middle>', 'noremap')
+  call denite#custom#map('normal', '<C-m>', '<denite:move_to_next_line>', 'noremap')
+  " Scroll up/down.
+  call denite#custom#map('normal', 'ze', '<denite:scroll_window_up_one_line>', 'noremap')
+  call denite#custom#map('normal', 'zn', '<denite:scroll_window_down_one_line>', 'noremap')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
