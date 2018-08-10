@@ -21,13 +21,8 @@ set nocompatible
 " Plugins - Languages
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
   Plug 'fatih/vim-go' " Go development plugin for Vim.
-" Plugins - Unite
-" TODO: Find a better alternative for unite :-/
-  Plug 'Shougo/unite.vim'
-  " Needed for Unite async.
-  Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-  set rtp+=~/.vim/bundle/vimproc.vim/autoload
-  set rtp+=~/.vim/bundle/vimproc.vim/plugin
+" Plugins - Denite
+  Plug 'Shougo/denite.nvim'
 " Wrap up plugins!
   call plug#end()
   filetype plugin indent on
@@ -58,7 +53,6 @@ silent! source ~/.vimrc-local
 " _r_ = inneR text objects.
   onoremap r i
 " EOW.
-" TODO: I almost never use this. Use for something else?
   noremap j e|noremap J E
 
 
@@ -96,8 +90,10 @@ silent! source ~/.vimrc-local
   nnoremap <expr> zB 'zb' . winheight(0)/4 . '<C-e>'
 " Auto-bracket.
   inoremap {<CR> {<CR>}<Esc>O
+" Switch between most recent buffer with backspace
+  nnoremap <BS> <C-^>
 " Disable bad habits. Unfortunately, <C-m> == <CR>, so Mid is M until my fingers forget <CR>.
-  nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <BS> <Nop>|nnoremap <Del> <Nop>
+  "nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <Del> <Nop>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader Mappings
@@ -241,72 +237,101 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Unite
+" Denite
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:unite_source_history_yank_enable = 1
-  let g:unite_source_grep_max_candidates = 200
+  call denite#custom#option('default', 'prompt', '⮀')
 
-  if executable('ag')
-    " Filelist (file_rec/async)
-    let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', '']
-    " Grep command.
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '-i --nocolor --nogroup --hidden'
-    let g:unite_source_grep_recursive_opt = ''
-  elseif executable('ack') || executable('ack-grep')
-    if executable('ack')
-      let g:unite_source_rec_async_command = ['ack', '-f', '--nofilter']
-      let g:unite_source_grep_command = 'ack'
-    else
-      let g:unite_source_rec_async_command = ['ack-grep', '-f', '--nofilter']
-      let g:unite_source_grep_command = 'ack-grep'
-    endif
-    let g:unite_source_grep_default_opts = ' --nofilter -i --no-color --no-group --with-filename --flush'
-    let g:unite_source_grep_recursive_opt = '-r'
-  endif
+  " Custom matchers/sorters.
+  " These seem to work well. The defaults seemed a bit broken. E.g.: searching
+  " 'vimrc' doesn't show my 'vimrc' file, but does show 'zshrc'...weird.
+  call denite#custom#source('_', 'matchers', ['matcher/substring', 'matcher/hide_hidden_files'])
+  call denite#custom#source('_', 'sorters', ['sorter/rank'])
 
-  " Alt: matcher_fuzzy
-  call unite#filters#matcher_default#use(['matcher_glob'])
-  " NOTE: Potentially interesting options: -here -marked-icon=
-  nnoremap <Space>f :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=files  -start-insert file_rec/async<CR>
-  nnoremap <Space>/ :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=files  -start-insert line<CR>
-  nnoremap <Space>b :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=buffer -start-insert buffer<CR>
-  nnoremap <Space>p :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=yank history/yank<CR>
-  nnoremap <Space>a :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=grep grep:.<CR>
-  nnoremap <Space>A :<C-u>Unite -auto-resize -winheight=100 -prompt=⮀\  -buffer-name=grep grep<CR>
+  " Use ag - the silver surfer!
+  call denite#custom#var('grep', 'command', ['ag'])
+  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+  call denite#custom#var('grep', 'recursive_opts', [])
+  call denite#custom#var('grep', 'pattern_opt', [])
+  call denite#custom#var('grep', 'separator', ['--'])
+  call denite#custom#var('grep', 'final_opts', [])
 
-  " Custom mappings for the Unite buffer.
-  autocmd FileType unite call s:unite_settings()
-  function! s:unite_settings()
-    " Play nice with SuperTab.
-    let b:SuperTabDisabled=1
-    " Normal Mode Mappings
-    " NOTE: *noremap doesn't work with these.
-    "
-    " nunmap I, j, k
-    " n  e           *@unite#smart_map('e', unite#do_action('edit'))r-name=yank    history/yank<CR>
-    " n  o           *@unite#smart_map('o', unite#do_action('open'))
-    " n  p           *@unite#do_action('preview')
-    nmap <buffer> <Esc> <Plug>(unite_exit)
+  " Commands.
+  " Some to try later: directory_rec, file, file/old
+  nnoremap <silent> <Space>a
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 grep<cr>
+  nnoremap <silent> <Space>f
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 file_rec<cr>
+  nnoremap <silent> <Space>/
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 -auto-preview line<cr>
+  nnoremap <silent> <Space>*
+        \ :<C-u>DeniteCursorWord -cursor-wrap -vertical-preview -winheight=60 line<cr>
 
-    nmap <buffer> a <Plug>(unite_insert_enter)
-    nmap <buffer> n <Plug>(unite_loop_cursor_down)
-    nmap <buffer> e <Plug>(unite_loop_cursor_up)
-    nmap <buffer> K <Plug>(unite_new_candidate)
-    nmap <buffer><expr> o unite#smart_map('o', unite#do_action('open'))
-    nmap <buffer><expr> t unite#smart_map('t', unite#do_action('tabopen'))
-    nmap <buffer><expr> H unite#smart_map('H', unite#do_action('left'))
-    nmap <buffer><expr> N unite#smart_map('N', unite#do_action('below'))
-    nmap <buffer><expr> E unite#smart_map('E', unite#do_action('above'))
-    nmap <buffer><expr> I unite#smart_map('I', unite#do_action('right'))
+  " Mappings - all mode.
+  " Disable global Esc so insert and normal can override.
+  call denite#custom#map('_', '<Esc>', '<denite:nop>', 'noremap')
 
-    " Insert mode up/down arrow mappings. Pulls out of insert mode so next
-    " command can open selected candidate.
-    imap <buffer> <C-n> <Plug>(unite_select_next_line)<Esc>
-    nmap <buffer> <C-n> <Plug>(unite_loop_cursor_down)
-    imap <buffer> <C-e> <Plug>(unite_select_previous_line)<Esc>
-    nmap <buffer> <C-e> <Plug>(unite_loop_cursor_up)
-  endfunction
+  " Mappings - insert mode.
+  call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>', 'noremap')
+  call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('insert', '<C-e>', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map(
+        \ 'insert',
+        \ '<C-f>',
+        \ '<denite:multiple_mappings:denite:scroll_page_forwards,denite:move_to_bottom>',
+        \ 'noremap')
+  call denite#custom#map(
+        \ 'insert',
+        \ '<C-b>',
+        \ '<denite:multiple_mappings:denite:scroll_page_backwards,denite:move_to_top>',
+        \ 'noremap')
+
+  " Mappings - normal mode.
+  call denite#custom#map('normal', '<Esc>', '<denite:quit>', 'noremap')
+  " Open mappings
+  call denite#custom#map('normal', 'o', '<denite:do_action:switch>', 'noremap')
+  call denite#custom#map('normal', 't', '<denite:do_action:tabopen>', 'noremap')
+  call denite#custom#map('normal', 'N', '<denite:do_action:split>', 'noremap')
+  call denite#custom#map('normal', 'E', '<denite:do_action:split>', 'noremap')
+  call denite#custom#map('normal', 'H', '<denite:do_action:vsplit>', 'noremap')
+  call denite#custom#map('normal', 'I', '<denite:do_action:vsplit>', 'noremap')
+  " m prefix is to mirror NERDTree menu commands
+  call denite#custom#map('normal', 'ma', '<denite:do_action:new>', 'noremap')
+  call denite#custom#map('normal', 'md', '<denite:do_action:delete>', 'noremap')
+  " Scrolling
+  call denite#custom#map(
+        \ 'normal',
+        \ '<C-f>',
+        \ '<denite:multiple_mappings:denite:scroll_page_forwards,denite:move_to_bottom>',
+        \ 'noremap')
+  call denite#custom#map(
+        \ 'normal',
+        \ '<C-b>',
+        \ '<denite:multiple_mappings:denite:scroll_page_backwards,denite:move_to_top>',
+        \ 'noremap')
+  call denite#custom#map('normal', 'X', '<denite:delete_char_before_caret>', 'noremap')
+
+  " Mappings - normal mode to roughly mirror Colemak mappings at top of vimrc.
+  " HNEI arrows.
+  call denite#custom#map('normal', 'h', '<denite:move_caret_to_left>', 'noremap')
+  call denite#custom#map('normal', 'n', '<denite:move_to_next_line>', 'noremap')
+  call denite#custom#map('normal', 'e', '<denite:move_to_previous_line>', 'noremap')
+  call denite#custom#map('normal', 'i', '<denite:move_caret_to_right>', 'noremap')
+  " In(sert).
+  call denite#custom#map('normal', 's', '<denite:enter_mode:insert>', 'noremap')
+  call denite#custom#map('normal', 'S', '<denite:insert_to_head>', 'noremap')
+  " TODO: Repeat search
+  " BOL/EOL/Join.
+  call denite#custom#map('normal', 'l', '<denite:move_caret_to_head>', 'noremap')
+  call denite#custom#map('normal', 'L', '<denite:move_caret_to_tail>', 'noremap')
+  " EOW.
+  call denite#custom#map('normal', 'j', '<denite:move_caret_to_end_of_word>', 'noremap')
+  " High/Low/Mid
+  call denite#custom#map('normal', '<C-n>', '<denite:move_to_bottom>', 'noremap')
+  call denite#custom#map('normal', '<C-e>', '<denite:move_to_top>', 'noremap')
+  call denite#custom#map('normal', 'M', '<denite:move_to_middle>', 'noremap')
+  " Scroll up/down.
+  call denite#custom#map('normal', 'ze', '<denite:scroll_window_up_one_line>', 'noremap')
+  call denite#custom#map('normal', 'zn', '<denite:scroll_window_down_one_line>', 'noremap')
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
