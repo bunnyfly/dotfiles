@@ -241,6 +241,12 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   call denite#custom#option('default', 'prompt', '⮀')
 
+  " Custom matchers/sorters.
+  " These seem to work well. The defaults seemed a bit broken. E.g.: searching
+  " 'vimrc' doesn't show my 'vimrc' file, but does show 'zshrc'...weird.
+  call denite#custom#source('_', 'matchers', ['matcher/substring', 'matcher/hide_hidden_files'])
+  call denite#custom#source('_', 'sorters', ['sorter/rank'])
+
   " Use ag - the silver surfer!
   call denite#custom#var('grep', 'command', ['ag'])
   call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
@@ -252,24 +258,13 @@ let mapleader = ","
   " Commands.
   " Some to try later: directory_rec, file, file/old
   nnoremap <silent> <Space>a
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
-        \ grep<cr>
-  " TODO: Change cmd
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 grep<cr>
   nnoremap <silent> <Space>f
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
-        \ file_rec<cr>
-  nnoremap <silent> <Space>;
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
-        \ command_history<cr>
-  nnoremap <silent> <Space>:
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
-        \ command_history<cr>
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 file_rec<cr>
   nnoremap <silent> <Space>/
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
-        \ line<cr>
+        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 -auto-preview line<cr>
   nnoremap <silent> <Space>*
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -auto-preview -winheight=60 -auto-resize
-        \ line<cr>
+        \ :<C-u>DeniteCursorWord -cursor-wrap -vertical-preview -winheight=60 line<cr>
 
   " Mappings - all mode.
   " Disable global Esc so insert and normal can override.
@@ -334,7 +329,6 @@ let mapleader = ","
   call denite#custom#map('normal', '<C-n>', '<denite:move_to_bottom>', 'noremap')
   call denite#custom#map('normal', '<C-e>', '<denite:move_to_top>', 'noremap')
   call denite#custom#map('normal', 'M', '<denite:move_to_middle>', 'noremap')
-  call denite#custom#map('normal', '<C-m>', '<denite:move_to_next_line>', 'noremap')
   " Scroll up/down.
   call denite#custom#map('normal', 'ze', '<denite:scroll_window_up_one_line>', 'noremap')
   call denite#custom#map('normal', 'zn', '<denite:scroll_window_down_one_line>', 'noremap')
