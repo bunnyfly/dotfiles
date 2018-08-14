@@ -41,7 +41,7 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
   fi
   alias d='diff'
   alias g='git'
-  alias he='heroku'
+  alias h='heroku'
   alias l='less'
   alias lf='less +F'
   alias t='tmux'
