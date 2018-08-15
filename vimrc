@@ -21,6 +21,7 @@ set nocompatible
   Plug 'tpope/vim-commentary' " comment stuff out
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
+  Plug 'easymotion/vim-easymotion' " Vim motion on speed!
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
   Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
@@ -195,6 +196,22 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-easymotion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Disable default mappings.
+  " let g:EasyMotion_do_mapping = 0
+  " Sane casing.
+  let g:EasyMotion_smartcase = 1
+  " Show jump keys in uppercase for legibility. (Can still type lower.)
+  " let g:EasyMotion_use_upper = 1
+  " Use Colemak homerow for jumps.
+  let g:EasyMotion_keys = 'tsradeiohngpfwqjluy'
+  map <Space> <Plug>(easymotion-prefix)
+  " map j <Plug>(easymotion-t2)
+  " map J <Plug>(easymotion-F2)
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-gitgutter
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Don't add vim-gitgutter key mappings.
@@ -254,12 +271,12 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " FZF commands
   let g:fzf_command_prefix = 'Fzf'
-  nnoremap <silent> <Space>a :FzfAg<cr>
-  nnoremap <silent> <Space>f :FzfFiles<cr>
-  nnoremap <silent> <Space>h :FzfHelptags<cr>
-  nnoremap <silent> <Space>/ :FzfBLines<cr>
-  nnoremap <silent> <Space>: :FzfHistory:<cr>
-  nnoremap <silent> <Space>; :FzfHistory:<cr>
+  nnoremap <silent> <Leader>a :FzfAg<cr>
+  nnoremap <silent> <Leader>f :FzfFiles<cr>
+  nnoremap <silent> <Leader>h :FzfHelptags<cr>
+  nnoremap <silent> <Leader>/ :FzfBLines<cr>
+  nnoremap <silent> <Leader>: :FzfHistory:<cr>
+  nnoremap <silent> <Leader>; :FzfHistory:<cr>
 
   " Extra key bindings
   " <C-n> (down), <C-e> (up), etc are mapped via $FZF_DEFAULT_OPTS.
