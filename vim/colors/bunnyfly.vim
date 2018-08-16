@@ -25,7 +25,6 @@ hi ErrorMsg     ctermfg=196     ctermbg=236     cterm=bold      guifg=#ff2026   
 hi NonText      ctermfg=235     ctermbg=232     cterm=none      guifg=#222222   guibg=#080808   gui=none
 hi ColorColumn                  ctermbg=233                                     guibg=#121212
 
-
 " Vim >= 7.0 specific colors
 if version >= 700
 hi CursorLine                   ctermbg=236     cterm=none                      guibg=#2d2d2d
@@ -63,9 +62,20 @@ hi Underlined   ctermfg=81                      guifg=#5fd7ff
 "hi Keyword      ctermfg=81     cterm=none
 "hi Statement    ctermfg=81     cterm=none
 
+
 " Links
 hi! link FoldColumn     Folded
 hi! link CursorColumn   CursorLine
+
+
+" EasyMotion
+hi EasyMotionTarget cterm=bold ctermfg=1 ctermbg=15
+hi link EasyMotionTarget2First EasyMotionTarget
+hi link EasyMotionTarget2Second EasyMotionTarget
+
+hi EasyMotionShade cterm=none ctermfg=242 ctermbg=0
+hi link EasyMotionMoveHL Search
+hi link EasyMotionIncSearch Search
 
 
 " Unset
@@ -91,6 +101,5 @@ hi! link CursorColumn   CursorLine
 "hi User1
 "hi User9
 "hi WildMenu
-
 
 " vim:set ts=4 sw=4 noet:

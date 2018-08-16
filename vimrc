@@ -7,22 +7,28 @@ set nocompatible
   filetype off
   call plug#begin('~/.vim/plugged')
 " Plugins - UI
-  Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
-  Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
   Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
   Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
+  Plug 'airblade/vim-gitgutter' " git diff in the gutter (sign column) and stages/undoes hunks
+" Plugins - Navigation
+  Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
+  " Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
+  " Install FZF via vim (vs referencing existing install) to avoid out of sync version issues.
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
 " Plugins - Editing
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
+  Plug 'tpope/vim-commentary' " comment stuff out
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
+  Plug 'easymotion/vim-easymotion' " Vim motion on speed!
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
   Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
 " Plugins - Languages
+  Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
-  Plug 'fatih/vim-go' " Go development plugin for Vim.
-" Plugins - Denite
-  Plug 'Shougo/denite.nvim'
+  " Plug 'fatih/vim-go' " Go development plugin for Vim.
 " Wrap up plugins!
   call plug#end()
   filetype plugin indent on
@@ -144,7 +150,8 @@ let mapleader = ","
   set display+=lastline                " Show partial lines.
   set showtabline=1                    " Show tabs only when multiple tabs are open.
   set laststatus=2                     " Always show status bar.
-  set statusline=%<%t%h%m%r%h%w%y\ %{fugitive#statusline()}%=\ Ln\ %l\/%L\,\ Col\ %-3v\ %P
+  set statusline=%<%t%h%m%r%h%w%y\ %L\,\ Col\ %-3v\ %P
+  set updatetime=100                   " Reduce swap-writing update time (better for vim-gitgutter)
 " Text Display.
   syntax on                            " Syntax highlighting.
   set number                           " Show line numbers.
@@ -186,6 +193,29 @@ let mapleader = ","
 " Abolish
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nmap <Leader>c <Plug>Coerce
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-easymotion
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Disable default mappings.
+  " let g:EasyMotion_do_mapping = 0
+  " Sane casing.
+  let g:EasyMotion_smartcase = 1
+  " Show jump keys in uppercase for legibility. (Can still type lower.)
+  " let g:EasyMotion_use_upper = 1
+  " Use Colemak homerow for jumps.
+  let g:EasyMotion_keys = 'tsradeiohngpfwqjluy'
+  map <Space> <Plug>(easymotion-prefix)
+  " map j <Plug>(easymotion-t2)
+  " map J <Plug>(easymotion-F2)
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-gitgutter
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Don't add vim-gitgutter key mappings.
+  let g:gitgutter_map_keys = 0
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -237,101 +267,42 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Denite
+" FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  call denite#custom#option('default', 'prompt', '⮀')
+  " FZF commands
+  let g:fzf_command_prefix = 'Fzf'
+  nnoremap <silent> <Leader>a :FzfAg<cr>
+  nnoremap <silent> <Leader>f :FzfFiles<cr>
+  nnoremap <silent> <Leader>h :FzfHelptags<cr>
+  nnoremap <silent> <Leader>/ :FzfBLines<cr>
+  nnoremap <silent> <Leader>: :FzfHistory:<cr>
+  nnoremap <silent> <Leader>; :FzfHistory:<cr>
 
-  " Custom matchers/sorters.
-  " These seem to work well. The defaults seemed a bit broken. E.g.: searching
-  " 'vimrc' doesn't show my 'vimrc' file, but does show 'zshrc'...weird.
-  call denite#custom#source('_', 'matchers', ['matcher/substring', 'matcher/hide_hidden_files'])
-  call denite#custom#source('_', 'sorters', ['sorter/rank'])
+  " Extra key bindings
+  " <C-n> (down), <C-e> (up), etc are mapped via $FZF_DEFAULT_OPTS.
+  let g:fzf_action = {
+    \ 'ctrl-h': 'topleft vsplit',
+    \ 'ctrl-i': 'botright vsplit',
+    \ 'H': 'aboveleft vsplit',
+    \ 'N': 'belowright split',
+    \ 'E': 'aboveleft split',
+    \ 'I': 'belowright vsplit',
+    \ 'T': 'tab split',
+    \ }
+  " Open FZF in tmux at bottom of screen.
+  let g:fzf_layout = { 'down': '~50%' }
+  " Disable statusline overwriting.
+  let g:fzf_nvim_statusline = 0
+  " [Buffers] Jump to the existing window if possible
+  let g:fzf_buffers_jump = 1
 
-  " Use ag - the silver surfer!
-  call denite#custom#var('grep', 'command', ['ag'])
-  call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
-  call denite#custom#var('grep', 'recursive_opts', [])
-  call denite#custom#var('grep', 'pattern_opt', [])
-  call denite#custom#var('grep', 'separator', ['--'])
-  call denite#custom#var('grep', 'final_opts', [])
-
-  " Commands.
-  " Some to try later: directory_rec, file, file/old
-  nnoremap <silent> <Space>a
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 grep<cr>
-  nnoremap <silent> <Space>f
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 file_rec<cr>
-  nnoremap <silent> <Space>/
-        \ :<C-u>Denite -cursor-wrap -vertical-preview -winheight=60 -auto-preview line<cr>
-  nnoremap <silent> <Space>*
-        \ :<C-u>DeniteCursorWord -cursor-wrap -vertical-preview -winheight=60 line<cr>
-
-  " Mappings - all mode.
-  " Disable global Esc so insert and normal can override.
-  call denite#custom#map('_', '<Esc>', '<denite:nop>', 'noremap')
-
-  " Mappings - insert mode.
-  call denite#custom#map('insert', '<Esc>', '<denite:enter_mode:normal>', 'noremap')
-  call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('insert', '<C-e>', '<denite:move_to_previous_line>', 'noremap')
-  call denite#custom#map(
-        \ 'insert',
-        \ '<C-f>',
-        \ '<denite:multiple_mappings:denite:scroll_page_forwards,denite:move_to_bottom>',
-        \ 'noremap')
-  call denite#custom#map(
-        \ 'insert',
-        \ '<C-b>',
-        \ '<denite:multiple_mappings:denite:scroll_page_backwards,denite:move_to_top>',
-        \ 'noremap')
-
-  " Mappings - normal mode.
-  call denite#custom#map('normal', '<Esc>', '<denite:quit>', 'noremap')
-  " Open mappings
-  call denite#custom#map('normal', 'o', '<denite:do_action:switch>', 'noremap')
-  call denite#custom#map('normal', 't', '<denite:do_action:tabopen>', 'noremap')
-  call denite#custom#map('normal', 'N', '<denite:do_action:split>', 'noremap')
-  call denite#custom#map('normal', 'E', '<denite:do_action:split>', 'noremap')
-  call denite#custom#map('normal', 'H', '<denite:do_action:vsplit>', 'noremap')
-  call denite#custom#map('normal', 'I', '<denite:do_action:vsplit>', 'noremap')
-  " m prefix is to mirror NERDTree menu commands
-  call denite#custom#map('normal', 'ma', '<denite:do_action:new>', 'noremap')
-  call denite#custom#map('normal', 'md', '<denite:do_action:delete>', 'noremap')
-  " Scrolling
-  call denite#custom#map(
-        \ 'normal',
-        \ '<C-f>',
-        \ '<denite:multiple_mappings:denite:scroll_page_forwards,denite:move_to_bottom>',
-        \ 'noremap')
-  call denite#custom#map(
-        \ 'normal',
-        \ '<C-b>',
-        \ '<denite:multiple_mappings:denite:scroll_page_backwards,denite:move_to_top>',
-        \ 'noremap')
-  call denite#custom#map('normal', 'X', '<denite:delete_char_before_caret>', 'noremap')
-
-  " Mappings - normal mode to roughly mirror Colemak mappings at top of vimrc.
-  " HNEI arrows.
-  call denite#custom#map('normal', 'h', '<denite:move_caret_to_left>', 'noremap')
-  call denite#custom#map('normal', 'n', '<denite:move_to_next_line>', 'noremap')
-  call denite#custom#map('normal', 'e', '<denite:move_to_previous_line>', 'noremap')
-  call denite#custom#map('normal', 'i', '<denite:move_caret_to_right>', 'noremap')
-  " In(sert).
-  call denite#custom#map('normal', 's', '<denite:enter_mode:insert>', 'noremap')
-  call denite#custom#map('normal', 'S', '<denite:insert_to_head>', 'noremap')
-  " TODO: Repeat search
-  " BOL/EOL/Join.
-  call denite#custom#map('normal', 'l', '<denite:move_caret_to_head>', 'noremap')
-  call denite#custom#map('normal', 'L', '<denite:move_caret_to_tail>', 'noremap')
-  " EOW.
-  call denite#custom#map('normal', 'j', '<denite:move_caret_to_end_of_word>', 'noremap')
-  " High/Low/Mid
-  call denite#custom#map('normal', '<C-n>', '<denite:move_to_bottom>', 'noremap')
-  call denite#custom#map('normal', '<C-e>', '<denite:move_to_top>', 'noremap')
-  call denite#custom#map('normal', 'M', '<denite:move_to_middle>', 'noremap')
-  " Scroll up/down.
-  call denite#custom#map('normal', 'ze', '<denite:scroll_window_up_one_line>', 'noremap')
-  call denite#custom#map('normal', 'zn', '<denite:scroll_window_down_one_line>', 'noremap')
+  " Hide the statusbar in the FZF pane.
+  augroup fzf
+    autocmd!
+    autocmd! FileType fzf
+    autocmd  FileType fzf set laststatus=0 noshowmode noruler
+        \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
+  augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
