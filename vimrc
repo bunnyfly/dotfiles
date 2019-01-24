@@ -9,7 +9,7 @@ set nocompatible
 " Plugins - UI
   Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
   Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
-  Plug 'airblade/vim-gitgutter' " git diff in the gutter (sign column) and stages/undoes hunks
+  " Plug 'airblade/vim-gitgutter' " git diff in the gutter (sign column) and stages/undoes hunks
 " Plugins - Navigation
   Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
   " Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
@@ -23,8 +23,8 @@ set nocompatible
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'easymotion/vim-easymotion' " Vim motion on speed!
   Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-  Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
-  Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
+  " Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
+  " Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
 " Plugins - Languages
   Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
@@ -199,16 +199,15 @@ let mapleader = ","
 " vim-easymotion
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Disable default mappings.
-  " let g:EasyMotion_do_mapping = 0
+  let g:EasyMotion_do_mapping = 0
   " Sane casing.
   let g:EasyMotion_smartcase = 1
   " Show jump keys in uppercase for legibility. (Can still type lower.)
   " let g:EasyMotion_use_upper = 1
   " Use Colemak homerow for jumps.
   let g:EasyMotion_keys = 'tsradeiohngpfwqjluy'
-  map <Space> <Plug>(easymotion-prefix)
-  " map j <Plug>(easymotion-t2)
-  " map J <Plug>(easymotion-F2)
+  nnoremap <Space> <Plug>(easymotion-t2)
+  nnoremap <S-Space> <Plug>(easymotion-F2)
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -260,10 +259,10 @@ let mapleader = ","
 " UltiSnips
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Note: Needs to play nicely with YCM
-  let g:UltiSnipsExpandTrigger = "<Tab>"
-  let g:UltiSnipsListSnippets = "<S-tab>"
-  let g:UltiSnipsJumpForwardTrigger = "<C-i>"
-  let g:UltiSnipsJumpBackwardTrigger = "<C-h>"
+  "let g:UltiSnipsExpandTrigger = "<Tab>"
+  "let g:UltiSnipsListSnippets = "<S-tab>"
+  "let g:UltiSnipsJumpForwardTrigger = "<C-i>"
+  "let g:UltiSnipsJumpBackwardTrigger = "<C-h>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -309,9 +308,9 @@ let mapleader = ","
 " YCM - YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Note: Needs to play nicely with UltiSnips
-  let g:ycm_key_list_select_completion = ['<C-n>']
-  let g:ycm_key_list_previous_completion = ['<C-e>']
-  let g:ycm_key_invoke_completion = "<C-i>"
+  " let g:ycm_key_list_select_completion = ['<C-n>']
+  " let g:ycm_key_list_previous_completion = ['<C-e>']
+  " let g:ycm_key_invoke_completion = "<C-i>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

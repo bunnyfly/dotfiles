@@ -109,30 +109,11 @@ prompt eriner
 
 
 ####################################################################################################
-# pipenv
-####################################################################################################
-
-# Automatically load pipenv if Pipfile exists
-function auto_pipenv_shell {
-    if [ ! -n "${PIPENV_ACTIVE+1}" ]; then
-        if [ -f "Pipfile" ] ; then
-            pipenv shell
-        fi
-    fi
-}
-
-function cd {
-    builtin cd "$@"
-    auto_pipenv_shell
-}
-
-auto_pipenv_shell
-
-
-####################################################################################################
 # fzf
 ####################################################################################################
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  # Make sure FZF uses ag (which respects .gitignore files) and ignores .git dirs itself.
+  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
   export FZF_DEFAULT_OPTS=''
   # Match exact words (don't fuzzy match foo to fzozo)
   export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --exact'
