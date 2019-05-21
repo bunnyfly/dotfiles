@@ -22,12 +22,13 @@ set nocompatible
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
   Plug 'easymotion/vim-easymotion' " Vim motion on speed!
-  Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   " Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
   " Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
 " Plugins - Languages
   Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
+  Plug 'python/black' " The uncompromising Python code formatter. “Any color you like.”
   " Plug 'fatih/vim-go' " Go development plugin for Vim.
 " Wrap up plugins!
   call plug#end()
@@ -193,6 +194,12 @@ let mapleader = ","
 " Abolish
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nmap <Leader>c <Plug>Coerce
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Black
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  autocmd BufWritePre *.py execute ':Black'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

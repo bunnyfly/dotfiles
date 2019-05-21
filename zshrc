@@ -17,6 +17,9 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
   PATH=~/Library/Android/sdk/tools:$PATH
   PATH=~/Library/Android/sdk/platform-tools:$PATH
 
+# macOS is stupid and needs this to run async Python RQ tasks.
+  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 
 ####################################################################################################
 # General
