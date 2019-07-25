@@ -9,19 +9,22 @@ set nocompatible
 " Plugins - UI
   Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
   Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
-  " Plug 'airblade/vim-gitgutter' " git diff in the gutter (sign column) and stages/undoes hunks
+  Plug 'mhinz/vim-signify' " Show a diff using Vim's sign column.
 " Plugins - Navigation
   Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
   " Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
   " Install FZF via vim (vs referencing existing install) to avoid out of sync version issues.
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  " Plug 'easymotion/vim-easymotion' " Vim motion on speed!
 " Plugins - Editing
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
   Plug 'tpope/vim-commentary' " comment stuff out
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
-  Plug 'easymotion/vim-easymotion' " Vim motion on speed!
+" Plugins - Autocomplete
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
   " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
   " Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
   " Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
@@ -29,6 +32,7 @@ set nocompatible
   Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
   Plug 'python/black' " The uncompromising Python code formatter. “Any color you like.”
+  Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
   " Plug 'fatih/vim-go' " Go development plugin for Vim.
 " Wrap up plugins!
   call plug#end()
@@ -200,6 +204,52 @@ let mapleader = ","
 " Black
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   autocmd BufWritePre *.py execute ':Black'
+  let g:black_linelength = 100
+  let g:black_skip_string_normalization = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-prettier
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:prettier#autoformat = 0
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.json,*.md,*.yaml,*.scss,*.css,*.less PrettierAsync
+
+  " max line length that prettier will wrap on
+  " Prettier default: 80
+  let g:prettier#config#print_width = 100
+  " number of spaces per indentation level
+  " Prettier default: 2
+  let g:prettier#config#tab_width = 2
+  " use tabs over spaces
+  " Prettier default: false
+  let g:prettier#config#use_tabs = 'false'
+  " print semicolons
+  " Prettier default: true
+  let g:prettier#config#semi = 'true'
+  " single quotes over double quotes
+  " Prettier default: false
+  let g:prettier#config#single_quote = 'true'
+  " print spaces between brackets
+  " Prettier default: true
+  let g:prettier#config#bracket_spacing = 'true'
+  " put > on the last line instead of new line
+  " Prettier default: false
+  let g:prettier#config#jsx_bracket_same_line = 'true'
+  " avoid|always
+  " Prettier default: avoid
+  let g:prettier#config#arrow_parens = 'always'
+  " none|es5|all
+  " Prettier default: none
+  let g:prettier#config#trailing_comma = 'all'
+  " flow|babylon|typescript|css|less|scss|json|graphql|markdown
+  " Prettier default: babylon
+  let g:prettier#config#parser = 'babylon'
+  " cli-override|file-override|prefer-file
+  let g:prettier#config#config_precedence = 'prefer-file'
+  " always|never|preserve
+  let g:prettier#config#prose_wrap = 'preserve'
+  " css|strict|ignore
+  let g:prettier#config#html_whitespace_sensitivity = 'css'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -215,13 +265,6 @@ let mapleader = ","
   let g:EasyMotion_keys = 'tsradeiohngpfwqjluy'
   nnoremap <Space> <Plug>(easymotion-t2)
   nnoremap <S-Space> <Plug>(easymotion-F2)
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-gitgutter
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Don't add vim-gitgutter key mappings.
-  let g:gitgutter_map_keys = 0
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -253,6 +296,17 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Signify
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:signify_vcs_list = ['git']
+  let g:signify_realtime = 0
+  let g:signify_sign_add = '+'
+  let g:signify_sign_change = '~'
+  let g:signify_sign_delete = '_'
+  let g:signify_sign_delete_first_line = '‾'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Tagbar
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nnoremap <silent> <Leader>tt :TagbarToggle<CR>
@@ -260,16 +314,6 @@ let mapleader = ","
   nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
 " Options
   let g:tagbar_show_linenumbers = 1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnips
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Note: Needs to play nicely with YCM
-  "let g:UltiSnipsExpandTrigger = "<Tab>"
-  "let g:UltiSnipsListSnippets = "<S-tab>"
-  "let g:UltiSnipsJumpForwardTrigger = "<C-i>"
-  "let g:UltiSnipsJumpBackwardTrigger = "<C-h>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -318,6 +362,14 @@ let mapleader = ","
   " let g:ycm_key_list_select_completion = ['<C-n>']
   " let g:ycm_key_list_previous_completion = ['<C-e>']
   " let g:ycm_key_invoke_completion = "<C-i>"
+  " let g:ycm_add_preview_to_completeopt = 0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Coc
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <C-e> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

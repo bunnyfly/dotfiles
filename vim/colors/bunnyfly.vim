@@ -19,6 +19,7 @@ hi StatusLine   ctermfg=016     ctermbg=238     cterm=bold      guifg=#000000   
 hi StatusLineNC ctermfg=236     ctermbg=238     cterm=none      guifg=#303030   guibg=#444444   gui=none
 hi VertSplit    ctermfg=236     ctermbg=236     cterm=none      guifg=#303030   guibg=#303030   gui=none
 hi LineNr       ctermfg=238     ctermbg=232     cterm=none      guifg=#444444   guibg=#080808   gui=none
+hi SignColumn   ctermfg=238     ctermbg=232     cterm=none      guifg=#444444   guibg=#080808   gui=none
 hi SpecialKey   ctermfg=244     ctermbg=236     cterm=none      guifg=#808080   guibg=#303030   gui=none
 hi WarningMsg   ctermfg=203                                     guifg=#ff5f55
 hi ErrorMsg     ctermfg=196     ctermbg=236     cterm=bold      guifg=#ff2026   guibg=#3a3a3a   gui=bold
@@ -76,6 +77,14 @@ hi link EasyMotionTarget2Second EasyMotionTarget
 hi EasyMotionShade cterm=none ctermfg=242 ctermbg=0
 hi link EasyMotionMoveHL Search
 hi link EasyMotionIncSearch Search
+
+
+" vim-signify
+hi SignifySignAdd    ctermfg=113 ctermbg=232 cterm=none guifg=#95e454 guibg=#080808 gui=none
+hi SignifySignDelete ctermfg=196 ctermbg=232 cterm=none guifg=#ff2026 guibg=#080808 gui=none
+hi SignifySignText   ctermfg=111 ctermbg=232 cterm=none guifg=#8ac6f2 guibg=#080808 gui=none
+hi SignifySignChange ctermfg=111 ctermbg=232 cterm=none guifg=#8ac6f2 guibg=#080808 gui=none
+
 
 
 " Unset
