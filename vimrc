@@ -11,7 +11,15 @@ set nocompatible
   Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
   Plug 'mhinz/vim-signify' " Show a diff using Vim's sign column.
 " Plugins - Navigation
-  Plug 'scrooloose/nerdtree' " A tree explorer plugin for vim.
+  " defx - The dark powered file explorer implementation
+  if has('nvim')
+    Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/defx.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+  Plug 'kristijanhusak/defx-git' " Git status column for defx
   " Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
   " Install FZF via vim (vs referencing existing install) to avoid out of sync version issues.
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -112,7 +120,7 @@ silent! source ~/.vimrc-local
 " Plugin-specific mappings are set in the plugin's section.
 "
 " Reserved leader prefix conventions:
-"   <Leader><Leader> (NERDTree)
+"   <Leader><Leader> (defx)
 "   <Leader>t_ (Tagbar)
 "   <Leader>d_ (Diff Tools)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -280,19 +288,61 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NERDTree
+" Defx
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader><Leader> :NERDTreeToggle<CR>
-" Colemak
-  let g:NERDTreeMapJumpFirstChild = "ge"
-  let g:NERDTreeMapJumpLastChild = "gn"
-  let g:NERDTreeMapToggleHidden = "H"
-  let g:NERDTreeMapOpenSplit = "S"
-  let g:NERDTreeMapOpenExpl = ""
-" Options
-  let g:NERDTreeWinSize = 50           " Default width.
-  let g:NERDTreeQuitOnOpen = 0         " Stay open.
-  let g:NERDTreeChDirMode = 2          " Vim's cwd follows NERDTree's cwd.
+  nnoremap <silent> <Leader><Leader> :Defx<CR>
+
+  call defx#custom#option('_', {
+      \ 'columns': 'git:indent:icon:filename:type',
+      \ 'winwidth': 50,
+      \ 'split': 'vertical',
+      \ 'direction': 'topleft',
+      \ 'show_ignored_files': 0,
+      \ 'buffer_name': '',
+      \ 'toggle': 1,
+      \ 'resume': 1,
+      \ 'root_marker': '[in]: ',
+      \ })
+  call defx#custom#column('indent', { 'indent': '  ' })
+  call defx#custom#column('git', 'indicators', {
+      \ 'Modified'  : '✹',
+      \ 'Staged'    : '✚',
+      \ 'Untracked' : '✭',
+      \ 'Renamed'   : '➜',
+      \ 'Unmerged'  : '═',
+      \ 'Ignored'   : '☒',
+      \ 'Deleted'   : '✖',
+      \ 'Unknown'   : '?'
+      \ })
+
+  autocmd FileType defx call s:defx_my_settings()
+	function! s:defx_my_settings() abort
+	  " Define mappings
+    nnoremap <silent><buffer><expr> <CR> defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
+    nnoremap <silent><buffer><expr> o defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
+	  nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd p \| hsplit')
+	  nnoremap <silent><buffer><expr> v defx#do_action('open', 'wincmd p \| vsplit')
+	  nnoremap <silent><buffer><expr> t defx#do_action('open', 'tabnew')
+	  nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+	  nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
+	  " nnoremap <silent><buffer><expr> go defx#do_action('open', 'pedit')
+
+	  nnoremap <silent><buffer><expr> a defx#do_action('new_file')
+	  nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
+	  nnoremap <silent><buffer><expr> c defx#do_action('copy')
+	  nnoremap <silent><buffer><expr> p defx#do_action('paste')
+	  nnoremap <silent><buffer><expr> m defx#do_action('move')
+	  nnoremap <silent><buffer><expr> r defx#do_action('rename')
+	  nnoremap <silent><buffer><expr> dd defx#do_action('remove')
+
+	  nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+
+	  nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
+	  nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
+	  nnoremap <silent><buffer><expr> R defx#do_action('redraw')
+	  " nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
+	  nnoremap <silent><buffer><expr> q defx#do_action('quit')
+	endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
