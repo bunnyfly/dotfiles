@@ -7,8 +7,7 @@ set nocompatible
   filetype off
   call plug#begin('~/.vim/plugged')
 " Plugins - UI
-  Plug 'vim-airline/vim-airline' " lean & mean status/tabline for vim that's light as air.
-  Plug 'vim-airline/vim-airline-themes' " A collection of themes for vim-airline.
+  Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim
   Plug 'mhinz/vim-signify' " Show a diff using Vim's sign column.
 " Plugins - Navigation
   " defx - The dark powered file explorer implementation
@@ -423,6 +422,14 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" lightline
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Hide ex-line mode since it's displayed in lightline.
+  set noshowmode
+  let g:lightline = { 'colorscheme': 'wombat' }
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors (Always at bottom of .vimrc)
 "
 " Good ones: bunnyfly, molokai, and pyte!
@@ -438,8 +445,3 @@ let mapleader = ","
   " TODO: Fix. gui_macvim is triggering in console...
   set background=dark
   colorscheme bunnyfly
-
-  let g:airline_powerline_fonts = 1
-  " Nice Airline themes:
-  "   bubblegum, distinguished, powerlineish, raven, serene, hybridline
-  let g:airline_theme="hybridline"
