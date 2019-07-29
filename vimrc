@@ -287,7 +287,7 @@ let mapleader = ","
 	  " Define mappings
     nnoremap <silent><buffer><expr> <CR> defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
     nnoremap <silent><buffer><expr> o defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
-	  nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd p \| hsplit')
+	  nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd p \| split')
 	  nnoremap <silent><buffer><expr> v defx#do_action('open', 'wincmd p \| vsplit')
 	  nnoremap <silent><buffer><expr> t defx#do_action('open', 'tabnew')
 	  nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
@@ -304,7 +304,6 @@ let mapleader = ","
 
 	  nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
 
-	  nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
 	  nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
 	  nnoremap <silent><buffer><expr> R defx#do_action('redraw')
 	  " nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
