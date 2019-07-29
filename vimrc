@@ -19,11 +19,9 @@ set nocompatible
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'kristijanhusak/defx-git' " Git status column for defx
-  " Plug 'majutsushi/tagbar' " Displays tags in a window, ordered by scope.
   " Install FZF via vim (vs referencing existing install) to avoid out of sync version issues.
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  " Plug 'easymotion/vim-easymotion' " Vim motion on speed!
 " Plugins - Editing
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
   Plug 'tpope/vim-commentary' " comment stuff out
@@ -32,9 +30,6 @@ set nocompatible
 " Plugins - Autocomplete
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-  " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
-  " Plug 'SirVer/ultisnips' " UltiSnips - The ultimate snippet solution for Vim
-  " Plug 'honza/vim-snippets' " UltiSnips snippets (originally vim-snipmate)
 " Plugins - Languages
   Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
@@ -120,7 +115,6 @@ silent! source ~/.vimrc-local
 "
 " Reserved leader prefix conventions:
 "   <Leader><Leader> (defx)
-"   <Leader>t_ (Tagbar)
 "   <Leader>d_ (Diff Tools)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader = ","
@@ -201,6 +195,7 @@ let mapleader = ","
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
 
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Abolish
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -257,33 +252,6 @@ let mapleader = ","
   let g:prettier#config#prose_wrap = 'preserve'
   " css|strict|ignore
   let g:prettier#config#html_whitespace_sensitivity = 'css'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-easymotion
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Disable default mappings.
-  let g:EasyMotion_do_mapping = 0
-  " Sane casing.
-  let g:EasyMotion_smartcase = 1
-  " Show jump keys in uppercase for legibility. (Can still type lower.)
-  " let g:EasyMotion_use_upper = 1
-  " Use Colemak homerow for jumps.
-  let g:EasyMotion_keys = 'tsradeiohngpfwqjluy'
-  nnoremap <Space> <Plug>(easymotion-t2)
-  nnoremap <S-Space> <Plug>(easymotion-F2)
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GUndo
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:gundo_right=1
-  let g:gundo_preview_bottom=0
-  let g:gundo_close_on_revert=1
-  let g:gundo_map_move_older="n"
-  let g:gundo_map_move_newer="e"
-  let g:gundo_width=45
-  let g:gundo_preview_height=10
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -356,16 +324,6 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Tagbar
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader>tt :TagbarToggle<CR>
-  nnoremap <silent> <Leader>tT :TagbarOpenAutoClose<CR>
-  nnoremap <silent> <Leader>t<Space> :TagbarShowTag<CR>
-" Options
-  let g:tagbar_show_linenumbers = 1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " FZF commands
@@ -405,16 +363,6 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YCM - YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  " Note: Needs to play nicely with UltiSnips
-  " let g:ycm_key_list_select_completion = ['<C-n>']
-  " let g:ycm_key_list_previous_completion = ['<C-e>']
-  " let g:ycm_key_invoke_completion = "<C-i>"
-  " let g:ycm_add_preview_to_completeopt = 0
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Coc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -434,14 +382,5 @@ let mapleader = ","
 "
 " Good ones: bunnyfly, molokai, and pyte!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  if has("gui_macvim")
-    set background=light
-    colorscheme pyte
-  else
-    set background=dark
-    colorscheme bunnyfly
-  endif
-
-  " TODO: Fix. gui_macvim is triggering in console...
   set background=dark
   colorscheme bunnyfly
