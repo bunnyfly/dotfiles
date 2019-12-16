@@ -9,6 +9,8 @@ set nocompatible
 " Plugins - UI
   Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim
   Plug 'mhinz/vim-signify' " Show a diff using Vim's sign column.
+  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'sonph/onehalf', {'rtp': 'vim/'}
 " Plugins - Navigation
   " defx - The dark powered file explorer implementation
   if has('nvim')
@@ -182,7 +184,7 @@ let mapleader = ","
   set ignorecase|set smartcase         " Ignore case when only lowercase letters are used.
                                        " Force matching with \c (ignore) or \C (match).
   set gdefault                         " Substitute all matches in a line (i.e. :s///g) by default.
-  set showmatch                        " When a bracket is interted, flash the matching one.
+  set showmatch                        " When a bracket is inserted, flash the matching one.
 " System.
   filetype plugin indent on            " Load filetype plugin and indent files.
   set mouse=a                          " Enable the mouse in all possible modes.
@@ -260,7 +262,7 @@ let mapleader = ","
   nnoremap <silent> <Leader><Leader> :Defx<CR>
 
   call defx#custom#option('_', {
-      \ 'columns': 'git:indent:icon:filename:type',
+      \ 'columns': 'git:indent:icon:filename',
       \ 'winwidth': 50,
       \ 'split': 'vertical',
       \ 'direction': 'topleft',
@@ -268,20 +270,24 @@ let mapleader = ","
       \ 'buffer_name': '',
       \ 'toggle': 1,
       \ 'resume': 1,
-      \ 'root_marker': '[in]: ',
+      \ 'root_marker': '‣‣‣ ',
       \ })
   call defx#custom#column('indent', { 'indent': '  ' })
   call defx#custom#column('git', 'indicators', {
-      \ 'Modified'  : '✹',
+      \ 'Modified'  : '‣',
       \ 'Staged'    : '✚',
       \ 'Untracked' : '✭',
       \ 'Renamed'   : '➜',
       \ 'Unmerged'  : '═',
       \ 'Ignored'   : '☒',
       \ 'Deleted'   : '✖',
-      \ 'Unknown'   : '?'
+      \ 'Unknown'   : '?',
       \ })
 
+  " Quit if defx is the last window.
+  autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
+
+  " defx mappings.
   autocmd FileType defx call s:defx_my_settings()
 	function! s:defx_my_settings() abort
 	  " Define mappings
@@ -293,6 +299,8 @@ let mapleader = ","
 	  nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
 	  nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
 	  " nnoremap <silent><buffer><expr> go defx#do_action('open', 'pedit')
+    nnoremap <silent><buffer><expr> C defx#do_action('cd', defx#get_candidate().action__path)
+	  nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
 
 	  nnoremap <silent><buffer><expr> a defx#do_action('new_file')
 	  nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
@@ -315,7 +323,9 @@ let mapleader = ","
 " Signify
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:signify_vcs_list = ['git']
+  " No realtime. Signify auto-saves modified buffers with realtime enabled. wtf.
   let g:signify_realtime = 0
+
   let g:signify_sign_add = '+'
   let g:signify_sign_change = '~'
   let g:signify_sign_delete = '_'
@@ -373,7 +383,20 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Hide ex-line mode since it's displayed in lightline.
   set noshowmode
-  let g:lightline = { 'colorscheme': 'wombat' }
+  let g:lightline = {}
+  let g:lightline.colorscheme = 'wombat'
+  let g:lightline.active = {
+			\ 'left': [ ['mode'], ['filename', 'readonly', 'modified'] ],
+			\ 'right': [ ['lineinfo'], ['percent'] ],
+      \ }
+	let g:lightline.inactive = {
+			\ 'left': [ ['filename', 'readonly', 'modified'] ],
+			\ 'right': [ ['lineinfo'], [ 'percent'] ],
+      \ }
+	let g:lightline.tabline = {
+			\ 'left': [ ['tabs'] ],
+			\ 'right': [ ],
+      \ }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

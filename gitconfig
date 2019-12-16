@@ -26,3 +26,5 @@
 [user]
 	name = Chloe Moon
 	email = bunnyfly@gmail.com
+[credential]
+	helper = osxkeychain
