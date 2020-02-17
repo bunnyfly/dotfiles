@@ -197,7 +197,6 @@ let mapleader = ","
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Abolish
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -385,18 +384,40 @@ let mapleader = ","
   set noshowmode
   let g:lightline = {}
   let g:lightline.colorscheme = 'wombat'
+  let g:lightline.component_function = {
+        \ 'filename': 'LightlineFilename'
+      \ }
   let g:lightline.active = {
-			\ 'left': [ ['mode'], ['filename', 'readonly', 'modified'] ],
-			\ 'right': [ ['lineinfo'], ['percent'] ],
+        \ 'left': [ ['mode'], ['filename', 'readonly', 'modified'] ],
+        \ 'right': [ ['lineinfo'], ['percent'] ],
       \ }
 	let g:lightline.inactive = {
-			\ 'left': [ ['filename', 'readonly', 'modified'] ],
-			\ 'right': [ ['lineinfo'], [ 'percent'] ],
+        \ 'left': [ ['filename', 'readonly', 'modified'] ],
+        \ 'right': [ ['lineinfo'], [ 'percent'] ],
       \ }
 	let g:lightline.tabline = {
-			\ 'left': [ ['tabs'] ],
-			\ 'right': [ ],
+        \ 'left': [ ['tabs'] ],
+        \ 'right': [ ],
       \ }
+  " Abbreviated mode strings
+  let g:lightline.mode_map = {
+        \ 'n' : 'N',
+        \ 'i' : 'I',
+        \ 'R' : 'R',
+        \ 'v' : 'V',
+        \ 'V' : 'VL',
+        \ "\<C-v>": 'VB',
+        \ 'c' : 'C',
+        \ 's' : 'S',
+        \ 'S' : 'SL',
+        \ "\<C-s>": 'SB',
+        \ 't': 'T',
+      \ }
+
+  " A custom Lightline filename that includes the file's parent directory.
+  function! LightlineFilename()
+      return expand('%:p:h:t') . '/' . expand('%:t')
+  endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
