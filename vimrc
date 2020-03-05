@@ -9,8 +9,8 @@ set nocompatible
 " Plugins - UI
   Plug 'itchyny/lightline.vim' " A light and configurable statusline/tabline plugin for Vim
   Plug 'mhinz/vim-signify' " Show a diff using Vim's sign column.
-  Plug 'dracula/vim', { 'as': 'dracula' }
-  Plug 'sonph/onehalf', {'rtp': 'vim/'}
+  Plug 'sonph/onehalf', { 'rtp': 'vim/' }
+  Plug 'tsiemens/vim-aftercolors' " Support for after/colors/ scripts
 " Plugins - Navigation
   " defx - The dark powered file explorer implementation
   if has('nvim')
@@ -21,12 +21,10 @@ set nocompatible
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'kristijanhusak/defx-git' " Git status column for defx
-  " Install FZF via vim (vs referencing existing install) to avoid out of sync version issues.
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf', { 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 " Plugins - Editing
   Plug 'tpope/vim-abolish' " easily search for, substitute, & abbreviate multiple variants of a word
-  Plug 'tpope/vim-commentary' " comment stuff out
   Plug 'tpope/vim-repeat' " enable repeating supported plugin maps with .
   Plug 'tpope/vim-surround' " quoting/parenthesizing made simple.
 " Plugins - Autocomplete
@@ -70,7 +68,6 @@ silent! source ~/.vimrc-local
 " EOW.
   noremap j e|noremap J E
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Other Colemak Arrow-Based Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,7 +88,7 @@ silent! source ~/.vimrc-local
 " General Mappings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " The best!
-  noremap ; :
+  noremap ; :|noremap : ;
 " Sane redo.
   noremap U <C-r>
 " Y consistent with C and D
@@ -109,45 +106,6 @@ silent! source ~/.vimrc-local
   nnoremap <BS> <C-^>
 " Disable bad habits. Unfortunately, <C-m> == <CR>, so Mid is M until my fingers forget <CR>.
   "nnoremap <CR> <Nop>|nnoremap <Space> <Nop>|nnoremap <Del> <Nop>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Leader Mappings
-"
-" Plugin-specific mappings are set in the plugin's section.
-"
-" Reserved leader prefix conventions:
-"   <Leader><Leader> (defx)
-"   <Leader>d_ (Diff Tools)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let mapleader = ","
-
-" Diff
-  " Toggle diff on current window
-  nnoremap <silent> <Leader>dd :call DiffToggle()<CR>
-    function! DiffToggle()
-      if &diff
-        diffoff
-      else
-        diffthis
-      endif
-    :endfunction
-  " Search for merge-conflicts
-  nnoremap <silent> <Leader>d/ /<<<<<<<\\|=======\\|>>>>>>><CR>
-" Text width
-  " Toggle textwidth between 80, 100, and off.
-  nnoremap <silent> <Leader>tw :call TextwidthToggle()<CR>
-    function! TextwidthToggle()
-      if &textwidth == 80
-        set textwidth=100
-      elseif &textwidth == 100
-        set textwidth=0
-      else
-        set textwidth=80
-      endif
-    :endfunction
-" Toggle paste mode.
-  nnoremap <Leader>v :set invpaste<CR>:set paste?<CR>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Options
@@ -170,6 +128,7 @@ let mapleader = ","
   set wrap                             " Wrapping on.
   set lbr                              " Wrap at word.
   set showbreak=···\                   " Line break indicator.
+  set fillchars+=vert:│
 " Two-space tabs.
   set expandtab                        " Use spaces.
   set tabstop=2|set softtabstop=2      " Tabs = 2 spaces.
@@ -198,6 +157,42 @@ let mapleader = ","
   endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Leader Mappings
+"
+" Plugin-specific mappings are set in the plugin's section.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = ","
+
+  " Toggle diff on current window
+  nnoremap <silent> <Leader>dd :call DiffToggle()<CR>
+    function! DiffToggle()
+      if &diff
+        diffoff
+      else
+        diffthis
+      endif
+    :endfunction
+
+  " Search for merge-conflicts
+  nnoremap <silent> <Leader>d/ /<<<<<<<\\|=======\\|>>>>>>><CR>
+
+  " Toggle textwidth between 80, 100, and off.
+  nnoremap <silent> <Leader>tw :call TextwidthToggle()<CR>
+    function! TextwidthToggle()
+      if &textwidth == 80
+        set textwidth=100
+      elseif &textwidth == 100
+        set textwidth=0
+      else
+        set textwidth=80
+      endif
+    :endfunction
+
+  " Toggle paste mode.
+  nnoremap <Leader>v :set invpaste<CR>:set paste?<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Abolish
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nmap <Leader>c <Plug>Coerce
@@ -212,47 +207,10 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-prettier
+" Coc
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:prettier#autoformat = 0
-  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.json,*.md,*.yaml,*.scss,*.css,*.less PrettierAsync
-
-  " max line length that prettier will wrap on
-  " Prettier default: 80
-  let g:prettier#config#print_width = 100
-  " number of spaces per indentation level
-  " Prettier default: 2
-  let g:prettier#config#tab_width = 2
-  " use tabs over spaces
-  " Prettier default: false
-  let g:prettier#config#use_tabs = 'false'
-  " print semicolons
-  " Prettier default: true
-  let g:prettier#config#semi = 'true'
-  " single quotes over double quotes
-  " Prettier default: false
-  let g:prettier#config#single_quote = 'true'
-  " print spaces between brackets
-  " Prettier default: true
-  let g:prettier#config#bracket_spacing = 'true'
-  " put > on the last line instead of new line
-  " Prettier default: false
-  let g:prettier#config#jsx_bracket_same_line = 'true'
-  " avoid|always
-  " Prettier default: avoid
-  let g:prettier#config#arrow_parens = 'always'
-  " none|es5|all
-  " Prettier default: none
-  let g:prettier#config#trailing_comma = 'all'
-  " flow|babylon|typescript|css|less|scss|json|graphql|markdown
-  " Prettier default: babylon
-  let g:prettier#config#parser = 'babylon'
-  " cli-override|file-override|prefer-file
-  let g:prettier#config#config_precedence = 'prefer-file'
-  " always|never|preserve
-  let g:prettier#config#prose_wrap = 'preserve'
-  " css|strict|ignore
-  let g:prettier#config#html_whitespace_sensitivity = 'css'
+  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <C-e> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -319,19 +277,6 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Signify
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  let g:signify_vcs_list = ['git']
-  " No realtime. Signify auto-saves modified buffers with realtime enabled. wtf.
-  let g:signify_realtime = 0
-
-  let g:signify_sign_add = '+'
-  let g:signify_sign_change = '~'
-  let g:signify_sign_delete = '_'
-  let g:signify_sign_delete_first_line = '‾'
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " FZF
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " FZF commands
@@ -371,14 +316,7 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Coc
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  inoremap <expr> <C-n> pumvisible() ? "\<C-n>" : "\<Tab>"
-  inoremap <expr> <C-e> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" lightline
+" Lightline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Hide ex-line mode since it's displayed in lightline.
   set noshowmode
@@ -421,9 +359,73 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Prettier
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:prettier#autoformat = 0
+  autocmd BufWritePre *.js,*.jsx,*.ts,*.tsx,*.json,*.md,*.yaml,*.scss,*.css,*.less PrettierAsync
+
+  " max line length that prettier will wrap on
+  " Prettier default: 80
+  let g:prettier#config#print_width = 100
+  " number of spaces per indentation level
+  " Prettier default: 2
+  let g:prettier#config#tab_width = 2
+  " use tabs over spaces
+  " Prettier default: false
+  let g:prettier#config#use_tabs = 'false'
+  " print semicolons
+  " Prettier default: true
+  let g:prettier#config#semi = 'true'
+  " single quotes over double quotes
+  " Prettier default: false
+  let g:prettier#config#single_quote = 'true'
+  " print spaces between brackets
+  " Prettier default: true
+  let g:prettier#config#bracket_spacing = 'true'
+  " put > on the last line instead of new line
+  " Prettier default: false
+  let g:prettier#config#jsx_bracket_same_line = 'true'
+  " avoid|always
+  " Prettier default: avoid
+  let g:prettier#config#arrow_parens = 'always'
+  " none|es5|all
+  " Prettier default: none
+  let g:prettier#config#trailing_comma = 'all'
+  " flow|babylon|typescript|css|less|scss|json|graphql|markdown
+  " Prettier default: babylon
+  let g:prettier#config#parser = 'babylon'
+  " cli-override|file-override|prefer-file
+  let g:prettier#config#config_precedence = 'prefer-file'
+  " always|never|preserve
+  let g:prettier#config#prose_wrap = 'preserve'
+  " css|strict|ignore
+  let g:prettier#config#html_whitespace_sensitivity = 'css'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Signify
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:signify_vcs_list = ['git']
+  " No realtime. Signify auto-saves modified buffers with realtime enabled. wtf.
+  let g:signify_realtime = 0
+
+  let g:signify_sign_add = '+'
+  let g:signify_sign_change = '~'
+  let g:signify_sign_delete = '_'
+  let g:signify_sign_delete_first_line = '‾'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Colors (Always at bottom of .vimrc)
 "
-" Good ones: bunnyfly, molokai, and pyte!
+" Good ones: bunnyfly, molokai, onehalfdark, wombat!
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Enable true colors
+  if exists('+termguicolors')
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    set termguicolors
+  endif
+
   set background=dark
-  colorscheme bunnyfly
+  colorscheme onehalfdark
