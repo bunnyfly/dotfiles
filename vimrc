@@ -33,7 +33,7 @@ set nocompatible
 " Plugins - Languages
   Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
   Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
-  Plug 'psf/black', { 'for': 'python' } " The uncompromising Python code formatter. “Any color you like.”
+  Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " The uncompromising Python code formatter. “Any color you like.”
   Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
   " Plug 'fatih/vim-go' " Go development plugin for Vim.
 " Wrap up plugins!
@@ -155,6 +155,7 @@ silent! source ~/.vimrc-local
     set guioptions=egm
     set guifont=Source\ Code\ Pro\ for\ Powerline:h14
   endif
+  let g:python3_host_prog='/usr/bin/python3'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Leader Mappings
