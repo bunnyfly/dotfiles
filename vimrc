@@ -31,8 +31,9 @@ set nocompatible
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 " Plugins - Languages
-  Plug 'pangloss/vim-javascript' " syntax highlighting and improved indentation
-  Plug 'leafgarland/typescript-vim' " Typescript syntax files for Vim.
+  Plug 'pangloss/vim-javascript' " JS syntax highlighting and indentation
+  Plug 'leafgarland/typescript-vim' " TS syntax highlighting
+  Plug 'maxmellon/vim-jsx-pretty' " JSX and TSX syntax highlighting
   Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " The uncompromising Python code formatter. “Any color you like.”
   Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
   " Plug 'fatih/vim-go' " Go development plugin for Vim.
