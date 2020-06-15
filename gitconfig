@@ -3,6 +3,8 @@
 
 [core]
   excludesfile = ~/.gitignore_global
+  precomposeunicode = true
+  sparseCheckout = true
 
 [color]
   ui = auto
@@ -22,9 +24,14 @@
   l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
 
 [push]
-  default = simple
+  default = current
+
 [user]
-	name = Chloe Moon
-	email = bunnyfly@gmail.com
+  name = Chloe Moon
+  email = bunnyfly@gmail.com
+
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
+
+[rerere]
+  enabled = true
