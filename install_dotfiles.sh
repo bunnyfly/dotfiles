@@ -6,7 +6,7 @@
 
 dir=~/dotfiles
 olddir=~/dotfiles_old
-files="ackrc colordiffrc config gitconfig gitignore gitignore_global inputrc karabinerrc lesskey pentadactylrc slate slate.js tmux.conf vim vimrc zimrc zshrc"
+files="ackrc colordiffrc config gitconfig gitignore gitignore_global inputrc karabinerrc lesskey pentadactylrc slate slate.js tmux.conf vim vimrc zshrc"
 
 ##########
 

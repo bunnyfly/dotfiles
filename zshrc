@@ -1,26 +1,3 @@
-#
-# User configuration sourced by interactive shells
-#
-
-# Change default zim location
-export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-
-# Start zim
-[[ -s ${ZIM_HOME}/init.zsh ]] && source ${ZIM_HOME}/init.zsh
-
-# Source Prezto.
-  #if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-    #source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-  #fi
-
-  PATH=/usr/local/bin:$HOME/.local/bin:/usr/local/homebrew/share/python/:$PATH
-  PATH=~/Library/Android/sdk/tools:$PATH
-  PATH=~/Library/Android/sdk/platform-tools:$PATH
-
-# macOS is stupid and needs this to run async Python RQ tasks.
-  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
-
-
 ####################################################################################################
 # General
 ####################################################################################################
@@ -28,6 +5,9 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
   export VISUAL='vim'
   export KEYTIMEOUT=1        # Eliminates <Esc> delay for Vi mode.
   export TERM=screen-256color
+
+# macOS is stupid and needs this to run async Python RQ tasks.
+  export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
 # Go
   export GOPATH=$HOME
@@ -63,7 +43,7 @@ export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 ####################################################################################################
 # Vi Mode
 ####################################################################################################
-bindkey -v
+  bindkey -v
 # Colemak.
   bindkey -M vicmd "h" backward-char
   bindkey -M vicmd "n" down-line-or-history
@@ -92,23 +72,12 @@ bindkey -v
 ####################################################################################################
 # Source local zshrc
 ####################################################################################################
-if [ -f ~/.zsh-plugin-golang ]; then
-  source ~/.zsh-plugin-golang
-fi
-if [ -f ~/.zshrc-local ]; then
-  source ~/.zshrc-local
-fi
-
-
-####################################################################################################
-# zim
-####################################################################################################
-if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
-  source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
-fi
-autoload -Uz promptinit
-promptinit
-prompt eriner
+  if [ -f ~/.zsh-plugin-golang ]; then
+    source ~/.zsh-plugin-golang
+  fi
+  if [ -f ~/.zshrc-local ]; then
+    source ~/.zshrc-local
+  fi
 
 
 ####################################################################################################
@@ -169,5 +138,19 @@ xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --
       compctl -K _ng_completion ng
 ###-end-ng-completion###
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+
+####################################################################################################
+# nvm
+####################################################################################################
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+####################################################################################################
+# PATHs
+####################################################################################################
+  export PATH=/usr/local/bin:$HOME/.local/bin:/usr/local/homebrew/share/python/:$PATH
+  export PATH=~/Library/Android/sdk/tools:$PATH
+  export PATH=~/Library/Android/sdk/platform-tools:$PATH
+  export PATH="$PATH:$HOME/.rvm/bin"
