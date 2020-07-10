@@ -146,6 +146,60 @@ xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+  # Automatically use node version when entering a directory that contains an .nvmrc file.
+  autoload -U add-zsh-hook
+  load-nvmrc() {
+    local node_version="$(nvm version)"
+    local nvmrc_path="$(nvm_find_nvmrc)"
+
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        nvm use
+      fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+      echo "Reverting to nvm default version"
+      nvm use default
+    fi
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
+
+
+####################################################################################################
+# rbenv
+####################################################################################################
+  if hash rbenv 2>/dev/null; then
+    eval "$(rbenv init -)"
+  fi
+
+
+####################################################################################################
+# Spaceship prompt
+# https://github.com/denysdovhan/spaceship-prompt
+####################################################################################################
+  autoload -U promptinit; promptinit
+  prompt spaceship
+  spaceship_vi_mode_enable
+
+  export SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=false
+
+  export SPACESHIP_TIME_SHOW=true
+
+  export SPACESHIP_VI_MODE_SUFFIX=''
+  export SPACESHIP_VI_MODE_INSERT='%K{green}%F{black}I %K{black}%F{green}\ue0b0%f%k'
+  export SPACESHIP_VI_MODE_NORMAL='%K{cyan}%F{black}N %K{black}%F{cyan}\ue0b0%f%k'
+
+  export SPACESHIP_CHAR_PREFIX=''
+  export SPACESHIP_CHAR_SYMBOL=$'%K{black}%F{green}\ue0b0%k%f '
+  export SPACESHIP_CHAR_SYMBOL='%b•'
+  export SPACESHIP_CHAR_SYMBOL_SECONDARY='  %F{green}⎸%f '
+  export SPACESHIP_CHAR_COLOR_SUCCESS='black'
+  export SPACESHIP_CHAR_COLOR_FAILURE='red'
+
 
 ####################################################################################################
 # PATHs
@@ -153,4 +207,5 @@ xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --
   export PATH=/usr/local/bin:$HOME/.local/bin:/usr/local/homebrew/share/python/:$PATH
   export PATH=~/Library/Android/sdk/tools:$PATH
   export PATH=~/Library/Android/sdk/platform-tools:$PATH
+  export PATH="/usr/local/opt/thrift@0.9/bin:$PATH"
   export PATH="$PATH:$HOME/.rvm/bin"

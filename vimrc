@@ -21,6 +21,7 @@ set nocompatible
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
   Plug 'kristijanhusak/defx-git' " Git status column for defx
+  Plug 'kristijanhusak/defx-icons' " Nerd Font file icons for defx
   Plug 'junegunn/fzf', { 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 " Plugins - Editing
@@ -31,9 +32,7 @@ set nocompatible
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
 " Plugins - Languages
-  Plug 'pangloss/vim-javascript' " JS syntax highlighting and indentation
-  Plug 'leafgarland/typescript-vim' " TS syntax highlighting
-  Plug 'maxmellon/vim-jsx-pretty' " JSX and TSX syntax highlighting
+  Plug 'sheerun/vim-polyglot' " Multi-language syntax highlighting. “One to rule them all.”
   Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " The uncompromising Python code formatter. “Any color you like.”
   Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
   " Plug 'fatih/vim-go' " Go development plugin for Vim.
@@ -218,15 +217,14 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Defx
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader><Leader> :Defx<CR>
+  nnoremap <silent> <Leader><Leader> :Defx -buffer-name=`'defx' . tabpagenr()`<CR>
 
   call defx#custom#option('_', {
-      \ 'columns': 'git:indent:icon:filename',
+      \ 'columns': 'git:indent:icons:filename',
       \ 'winwidth': 50,
       \ 'split': 'vertical',
       \ 'direction': 'topleft',
       \ 'show_ignored_files': 0,
-      \ 'buffer_name': '',
       \ 'toggle': 1,
       \ 'resume': 1,
       \ 'root_marker': '‣‣‣ ',
@@ -248,34 +246,36 @@ let mapleader = ","
 
   " defx mappings.
   autocmd FileType defx call s:defx_my_settings()
-	function! s:defx_my_settings() abort
-	  " Define mappings
+  function! s:defx_my_settings() abort
+    " Define mappings
     nnoremap <silent><buffer><expr> <CR> defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
     nnoremap <silent><buffer><expr> o defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
-	  nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd p \| split')
-	  nnoremap <silent><buffer><expr> v defx#do_action('open', 'wincmd p \| vsplit')
-	  nnoremap <silent><buffer><expr> t defx#do_action('open', 'tabnew')
-	  nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
-	  nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
-	  " nnoremap <silent><buffer><expr> go defx#do_action('open', 'pedit')
+    nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd p \| split')
+    nnoremap <silent><buffer><expr> v defx#do_action('open', 'wincmd p \| vsplit')
+    nnoremap <silent><buffer><expr> t defx#do_action('open', 'tabnew')
+    nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
+    nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
+    " nnoremap <silent><buffer><expr> go defx#do_action('open', 'pedit')
     nnoremap <silent><buffer><expr> C defx#do_action('cd', defx#get_candidate().action__path)
-	  nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
+    nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
 
-	  nnoremap <silent><buffer><expr> a defx#do_action('new_file')
-	  nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
-	  nnoremap <silent><buffer><expr> c defx#do_action('copy')
-	  nnoremap <silent><buffer><expr> p defx#do_action('paste')
-	  nnoremap <silent><buffer><expr> m defx#do_action('move')
-	  nnoremap <silent><buffer><expr> r defx#do_action('rename')
-	  nnoremap <silent><buffer><expr> dd defx#do_action('remove')
+    nnoremap <silent><buffer><expr> a defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
+    nnoremap <silent><buffer><expr> c defx#do_action('copy')
+    nnoremap <silent><buffer><expr> p defx#do_action('paste')
+    nnoremap <silent><buffer><expr> m defx#do_action('move')
+    nnoremap <silent><buffer><expr> r defx#do_action('rename')
+    nnoremap <silent><buffer><expr> dd defx#do_action('remove')
 
-	  nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
 
-	  nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
-	  nnoremap <silent><buffer><expr> R defx#do_action('redraw')
-	  " nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
-	  nnoremap <silent><buffer><expr> q defx#do_action('quit')
-	endfunction
+    nnoremap <silent><buffer><expr> P defx#do_action('preview')
+
+    nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> R defx#do_action('redraw')
+    nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> q defx#do_action('quit')
+  endfunction
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -331,11 +331,11 @@ let mapleader = ","
         \ 'left': [ ['mode'], ['filename', 'readonly', 'modified'] ],
         \ 'right': [ ['lineinfo'], ['percent'] ],
       \ }
-	let g:lightline.inactive = {
+  let g:lightline.inactive = {
         \ 'left': [ ['filename', 'readonly', 'modified'] ],
         \ 'right': [ ['lineinfo'], [ 'percent'] ],
       \ }
-	let g:lightline.tabline = {
+  let g:lightline.tabline = {
         \ 'left': [ ['tabs'] ],
         \ 'right': [ ],
       \ }
