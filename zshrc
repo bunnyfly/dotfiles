@@ -99,6 +99,14 @@
   export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --bind=ctrl-n:down,ctrl-e:up,ctrl-f:page-down,ctrl-b:page-up'
   # Use tmux panes for fzf to avoid the shell output getting pushed around.
   export FZF_TMUX=1
+  # One Dark color scheme with darker bg highlight color.
+  export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+    --color=dark
+    --color=fg:-1,bg:-1,hl:#c678dd,fg+:#ffffff,bg+:#252931,hl+:#d858fe
+    --color=info:#98c379,prompt:#61afef,pointer:#be5046,marker:#e5c07b,spinner:#61afef,header:#61afef
+  '
+
+
 
 
 ####################################################################################################
