@@ -11,11 +11,14 @@
 
 [alias]
   a = add
+  A = add -A
   b = branch
   co = checkout
+  cob = checkout -b
   ci = commit
   cia = commit -a
   ciam = commit -a -m
+  cim = commit -m
   d = diff
   h = help
   s = status -s
