@@ -282,11 +282,15 @@ let mapleader = ","
   " FZF commands
   let g:fzf_command_prefix = 'Fzf'
   nnoremap <silent> <Leader>a :FzfAg<cr>
+  nnoremap <silent> <Leader>r :FzfAgContent<cr>
   nnoremap <silent> <Leader>f :FzfFiles<cr>
   nnoremap <silent> <Leader>h :FzfHelptags<cr>
   nnoremap <silent> <Leader>/ :FzfBLines<cr>
   nnoremap <silent> <Leader>: :FzfHistory:<cr>
   nnoremap <silent> <Leader>; :FzfHistory:<cr>
+
+  command! -bang -nargs=* FzfAgContent call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
+
 
   " Extra key bindings
   " <C-n> (down), <C-e> (up), etc are mapped via $FZF_DEFAULT_OPTS.
