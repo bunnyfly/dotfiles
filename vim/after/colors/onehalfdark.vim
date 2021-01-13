@@ -1,8 +1,8 @@
 " Darker background
-hi Normal                        ctermbg=none                         guibg=#080808
-hi LineNr            ctermfg=238 ctermbg=232 cterm=none guifg=#444444 guibg=#080808 gui=none
-hi VertSplit         ctermfg=234 ctermbg=234 cterm=none guifg=#1c1c1c guibg=#080808 gui=none
-hi ColorColumn                   ctermbg=234                          guibg=#1c1c1c
+hi Normal                        ctermbg=none                          guibg=#080808
+hi LineNr            ctermfg=238 ctermbg=none cterm=none guifg=#333333 guibg=#080808 gui=none
+hi VertSplit         ctermfg=234 ctermbg=none cterm=none guifg=#1c1c1c guibg=#080808 gui=none
+hi ColorColumn                   ctermbg=234                           guibg=#181818
 
 " Lighter, more readable comments
 hi Comment           ctermfg=245                        guifg=#8a8a8a
