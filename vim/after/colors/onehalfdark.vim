@@ -19,3 +19,6 @@ hi SignifySignAdd    ctermfg=113             cterm=none guifg=#98c379           
 hi SignifySignDelete ctermfg=196             cterm=none guifg=#e06c75               gui=none
 hi SignifySignText   ctermfg=111             cterm=none guifg=#8ac6f2               gui=none
 hi SignifySignChange ctermfg=111             cterm=none guifg=#61afef               gui=none
+
+" vim-wiki
+hi VimwikiLink       ctermfg=75 cterm=bold,underline guifg=#61afef gui=bold,underline

@@ -36,6 +36,8 @@ set nocompatible
   Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " The uncompromising Python code formatter. “Any color you like.”
   Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
   " Plug 'fatih/vim-go' " Go development plugin for Vim.
+" Plugins misc
+  Plug 'vimwiki/vimwiki' " A personal wiki for Vim.
 " Wrap up plugins!
   call plug#end()
   filetype plugin indent on
@@ -417,6 +419,12 @@ let mapleader = ","
   let g:signify_sign_change = '~'
   let g:signify_sign_delete = '_'
   let g:signify_sign_delete_first_line = '‾'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" VimWiki
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " let g:vimwiki_key_mappings = { 'all_maps': 0, }
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
