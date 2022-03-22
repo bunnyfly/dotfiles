@@ -423,8 +423,36 @@ let mapleader = ","
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " VimWiki
+" Plug 'vimwiki/vimwiki' " A personal wiki for Vim.
+" Plug 'michal-h21/vim-zettel'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  nnoremap <silent> <Leader>zn :ZettelNew<space>
+  " nmap <Leader>wy <Plug>ZettelYankNameMap
+  " xmap <Leader>z <Plug>ZettelNewSelectedMap
+
   " let g:vimwiki_key_mappings = { 'all_maps': 0, }
+  let g:vimwiki_url_maxsave = 0  " Don't shorten links
+  let g:vimwiki_list = [
+    \ {
+      \ 'path': '~/vimwiki/',
+      \ 'name': 'VimWiki',
+      \ 'index': 'index',
+      \ 'ext': '.md',
+      \ 'syntax': 'markdown',
+      \ 'auto_tags': 1,
+    \ },
+  \ ]
+  " Use .md extension in links
+  let g:vimwiki_markdown_link_ext = 1
+
+  " VimWiki expansion vim-zettel
+  let g:zettel_options = [ { "front_matter" : [ ["tags", ""], ], }, ]
+  let g:zettel_format = "%Y%m%d%H%M"
+  let g:zettel_date_format = "%Y-%m-%d"
+  " let g:zettel_default_mappings = ''
+  " let g:zettel_fzf_command = ''
+  " let g:zettel_fzf_options = ''
+  " let g:zettel_backlinks_title = ''
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
