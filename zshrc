@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ####################################################################################################
 # General
 ####################################################################################################
@@ -186,28 +193,12 @@ xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --
 
 
 ####################################################################################################
-# Spaceship prompt
-# https://github.com/denysdovhan/spaceship-prompt
+# Powerlevel10k prompt
+# https://github.com/romkatv/powerlevel10k
 ####################################################################################################
-  autoload -U promptinit; promptinit
-  prompt spaceship
-  spaceship_vi_mode_enable
-
-  export SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=false
-
-  export SPACESHIP_TIME_SHOW=true
-
-  export SPACESHIP_VI_MODE_SUFFIX=''
-  export SPACESHIP_VI_MODE_INSERT='%K{green}%F{black}I %K{black}%F{green}\ue0b0%f%k'
-  export SPACESHIP_VI_MODE_NORMAL='%K{cyan}%F{black}N %K{black}%F{cyan}\ue0b0%f%k'
-
-  export SPACESHIP_CHAR_PREFIX=''
-  export SPACESHIP_CHAR_SYMBOL=$'%K{black}%F{green}\ue0b0%k%f '
-  export SPACESHIP_CHAR_SYMBOL='%b•'
-  export SPACESHIP_CHAR_SYMBOL_SECONDARY='  %F{green}⎸%f '
-  export SPACESHIP_CHAR_COLOR_SUCCESS='black'
-  export SPACESHIP_CHAR_COLOR_FAILURE='red'
-
+  source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ####################################################################################################
 # PATHs
