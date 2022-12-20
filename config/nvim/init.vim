@@ -27,7 +27,10 @@ set packpath+=~/.vim
   Plug 'sheerun/vim-polyglot' " Multi-language syntax highlighting. “One to rule them all.”
   Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " Uncompromising Python formatter. “Any color you like.”
   Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
-" Plugins - Misc
+" Plugins - Markdown Wiki
+  Plug 'lervag/wiki.vim'
+  Plug 'godlygeek/tabular'
+  Plug 'preservim/vim-markdown'
   " Plug 'vimwiki/vimwiki'
 " Wrap up plugins!
   call plug#end()
@@ -106,7 +109,7 @@ set packpath+=~/.vim
   set shortmess+=I                     " Hide splash screen.
   set showtabline=1                    " Show tabs only when multiple tabs are open.
   set statusline=%<%t%h%m%r%h%w%y\ %L\,\ Col\ %-3v\ %P
-  set updatetime=100                   " Reduce swap-writing update time (better for vim-gitgutter)
+  set updatetime=100                   " Reduce swap-writing update time (better for vim-signify)
 " Text Display.
   syntax on                            " Syntax highlighting.
   set number                           " Show line numbers.
@@ -192,8 +195,9 @@ let mapleader = ","
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   nnoremap <silent> <Leader><Leader> :Defx -buffer-name=`'defx' . tabpagenr()`<CR>
 
+  " DISABLING GIT: 'columns': 'git:indent:icons:filename',
   call defx#custom#option('_', {
-      \ 'columns': 'git:indent:icons:filename',
+      \ 'columns': 'indent:icons:space:filename',
       \ 'winwidth': 50,
       \ 'split': 'vertical',
       \ 'direction': 'topleft',
@@ -265,7 +269,6 @@ let mapleader = ","
   nnoremap <silent> <Leader>; :FzfHistory:<cr>
 
   command! -bang -nargs=* FzfAgContent call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}), <bang>0)
-
 
   " Extra key bindings
   " <C-n> (down), <C-e> (up), etc are mapped via $FZF_DEFAULT_OPTS.
@@ -387,6 +390,8 @@ let mapleader = ","
   let g:signify_vcs_list = ['git']
   " No realtime. Signify auto-saves modified buffers with realtime enabled. wtf.
   let g:signify_realtime = 0
+  " Highlight line numbers
+  let g:signify_number_highlight = 1
 
   let g:signify_sign_add = '+'
   let g:signify_sign_change = '~'
@@ -398,8 +403,8 @@ let mapleader = ","
 " VimWiki
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   let g:vimwiki_list = [{
-    \    'path':                       '~/vimwiki/',
-    \    'path_html':                  '~/vimwikihtml/',
+    \    'path':                       '~/wiki/',
+    \    'path_html':                  '~/wikihtml/',
     \    'maxhi':                      1,
     \    'css_name':                   'style.css',
     \    'auto_export':                0,
@@ -418,6 +423,41 @@ let mapleader = ","
     \    }]
   let g:vimwiki_camel_case = 0                   " Don't automatically make CamelCase words links.
   noremap <C-S-M-q> @<Plug>VimwikiNextLink       " Avoid <Tab> jumping to next link.
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-markdown
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " Don't auto-fold everything!
+  let g:vim_markdown_folding_disabled = 1
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" wiki.vim
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  let g:wiki_root = '~/wiki'
+  " Only enable wiki.vim for files within g:wiki_root
+  let g:wiki_global_load = 0
+  " Use Markdown!
+  let g:wiki_filetypes = ['md']
+  let g:wiki_link_extension = '.md'
+  " Misc
+  let g:wiki_index_name = 'index'
+  let g:wiki_journal = 'weekly'
+  let g:wiki_journal = {
+      \   'name': 'journal',
+      \   'frequency': 'weekly',
+      \   'index_use_journal_scheme': v:true,
+      \   'date_format': {
+      \     'daily' : '%Y-%m-%d',
+      \     'weekly' : '%Y_w%V',
+      \     'monthly' : '%Y_m%m',
+      \   },
+      \ }
+  " Even though using [Markdown](url), use much nicer [[Wiki Style Links]]
+  let g:wiki_link_target_type = 'wiki'
+  " Auto-save when navigating
+  let g:wiki_write_on_nav = 1
 
 
 
