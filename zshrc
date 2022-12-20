@@ -92,7 +92,7 @@ fi
 ####################################################################################################
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
   # Make sure FZF uses ag (which respects .gitignore files) and ignores .git dirs itself.
-  export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+  export FZF_DEFAULT_COMMAND='ag --skip-vcs-ignores --hidden --ignore .git -g ""'
   export FZF_DEFAULT_OPTS=''
   # Match exact words (don't fuzzy match foo to fzozo)
   export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' --exact'
@@ -208,3 +208,4 @@ xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --
   export PATH=~/Library/Android/sdk/platform-tools:$PATH
   export PATH="/usr/local/opt/thrift@0.9/bin:$PATH"
   export PATH="$PATH:$HOME/.rvm/bin"
+  export PATH="/usr/local/opt/kubernetes-cli@1.22/bin:$PATH"
