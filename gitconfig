@@ -1,43 +1,42 @@
 [include]
   path = ~/.gitconfig-local
 
+# Things to include in ~/.gitconfig-local:
+#
+# [user]
+#   name = Chloe Moon
+#   email = chloe.moon@airbnb.com
+
 [core]
   excludesfile = ~/.gitignore_global
-  precomposeunicode = true
+	precomposeunicode = true
 
 [color]
   ui = auto
 
 [alias]
   a = add
-  A = add -A
   b = branch
   co = checkout
-  cob = checkout -b
   ci = commit
   cia = commit -a
   ciam = commit -a -m
   cim = commit -m
   d = diff
   h = help
+  l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
+  prom = pull --rebase origin master
+  r = rebase
   s = status -s
   st = stash
-  tre = log --graph --decorate --pretty=oneline --abbrev-commit
-  tr = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --abbrev-commit
-  l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
+  stpm = stash push -m
+  tree = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --abbrev-commit
 
 [push]
-  default = current
-
-[user]
-  name = Chloe Moon
-  email = bunnyfly@gmail.com
-
-[credential]
-  helper = osxkeychain
+	default = current
 
 [rerere]
-  enabled = true
+	enabled = true
 
 [pull]
   rebase = false
