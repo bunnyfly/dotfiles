@@ -4,8 +4,8 @@
 # Things to include in ~/.gitconfig-local:
 #
 # [user]
-#   name = Chloe Moon
-#   email = chloe.moon@airbnb.com
+#   name = Name
+#   email = email@email.com
 
 [core]
   excludesfile = ~/.gitignore_global
