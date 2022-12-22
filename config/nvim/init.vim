@@ -13,9 +13,8 @@ set packpath+=~/.vim
   Plug 'sonph/onehalf', { 'rtp': 'vim/' }
   Plug 'tsiemens/vim-aftercolors' " Support for after/colors/ scripts
 " Plugins - Navigation
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' } " Dark powered file explorer
-  Plug 'kristijanhusak/defx-git' " Git status column for defx
-  Plug 'kristijanhusak/defx-icons' " Nerd Font file icons for defx
+  Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
+  Plug 'nvim-tree/nvim-tree.lua'
   Plug 'junegunn/fzf', { 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 " Plugins - Editing
@@ -137,7 +136,7 @@ set packpath+=~/.vim
   set mouse=a                          " Enable the mouse in all possible modes.
   set confirm                          " Confirm quit/save/etc.
   set wildmode=longest,full            " Tab complete longest common string, then each full match.
-  let g:python3_host_prog='/usr/bin/python3'
+  let g:python3_host_prog='/usr/local/bin/python3'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -191,68 +190,10 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Defx
+" nvim-tree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-  nnoremap <silent> <Leader><Leader> :Defx -buffer-name=`'defx' . tabpagenr()`<CR>
-
-  " DISABLING GIT: 'columns': 'git:indent:icons:filename',
-  call defx#custom#option('_', {
-      \ 'columns': 'indent:icons:space:filename',
-      \ 'winwidth': 50,
-      \ 'split': 'vertical',
-      \ 'direction': 'topleft',
-      \ 'show_ignored_files': 0,
-      \ 'toggle': 1,
-      \ 'resume': 1,
-      \ 'root_marker': '‣‣‣ ',
-      \ })
-  call defx#custom#column('indent', { 'indent': '  ' })
-  call defx#custom#column('git', 'indicators', {
-      \ 'Modified'  : '‣',
-      \ 'Staged'    : '✚',
-      \ 'Untracked' : '✭',
-      \ 'Renamed'   : '➜',
-      \ 'Unmerged'  : '═',
-      \ 'Ignored'   : '☒',
-      \ 'Deleted'   : '✖',
-      \ 'Unknown'   : '?',
-      \ })
-
-  " Quit if defx is the last window.
-  autocmd WinEnter * if &ft == 'defx' && winnr('$') == 1 | q | endif
-
-  " defx mappings.
-  autocmd FileType defx call s:defx_my_settings()
-  function! s:defx_my_settings() abort
-    " Define mappings
-    nnoremap <silent><buffer><expr> <CR> defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
-    nnoremap <silent><buffer><expr> o defx#is_directory() ? defx#do_action('open_or_close_tree') : defx#do_action('open', 'wincmd p \| drop')
-    nnoremap <silent><buffer><expr> s defx#do_action('open', 'wincmd p \| split')
-    nnoremap <silent><buffer><expr> v defx#do_action('open', 'wincmd p \| vsplit')
-    nnoremap <silent><buffer><expr> t defx#do_action('open', 'tabnew')
-    nnoremap <silent><buffer><expr> O defx#do_action('open_tree_recursive')
-    nnoremap <silent><buffer><expr> x defx#do_action('close_tree')
-    " nnoremap <silent><buffer><expr> go defx#do_action('open', 'pedit')
-    nnoremap <silent><buffer><expr> C defx#do_action('cd', defx#get_candidate().action__path)
-    nnoremap <silent><buffer><expr> u defx#do_action('cd', '..')
-
-    nnoremap <silent><buffer><expr> a defx#do_action('new_file')
-    nnoremap <silent><buffer><expr> A defx#do_action('new_multiple_files')
-    nnoremap <silent><buffer><expr> c defx#do_action('copy')
-    nnoremap <silent><buffer><expr> p defx#do_action('paste')
-    nnoremap <silent><buffer><expr> m defx#do_action('move')
-    nnoremap <silent><buffer><expr> r defx#do_action('rename')
-    nnoremap <silent><buffer><expr> dd defx#do_action('remove')
-
-    nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
-
-    nnoremap <silent><buffer><expr> P defx#do_action('preview')
-
-    nnoremap <silent><buffer><expr> H defx#do_action('toggle_ignored_files')
-    nnoremap <silent><buffer><expr> R defx#do_action('redraw')
-    nnoremap <silent><buffer><expr> u defx#do_action('cd', ['..'])
-    nnoremap <silent><buffer><expr> q defx#do_action('quit')
-  endfunction
+  lua require('init-nvim-tree')
+  nnoremap <silent> <Leader><Leader> :NvimTreeToggle<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
