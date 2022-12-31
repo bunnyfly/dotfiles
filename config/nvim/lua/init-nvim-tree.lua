@@ -17,55 +17,58 @@ require("nvim-tree").setup({
     adaptive_size = true,
     mappings = {
       list = {
-        { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" }, -- default
-        { key = "<C-e>",                          action = "edit_in_place" }, -- default
-        { key = "O",                              action = "edit_no_picker" }, -- default
-        { key = { "<C-]>", "<2-RightMouse>" },    action = "cd" }, -- default
-        { key = "<C-v>",                          action = "vsplit" }, -- default
-        { key = "<C-x>",                          action = "split" }, -- default
-        { key = "<C-t>",                          action = "tabnew" }, -- default
-        { key = "<",                              action = "prev_sibling" }, -- default
-        { key = ">",                              action = "next_sibling" }, -- default
-        { key = "P",                              action = "parent_node" }, -- default
-        { key = "<BS>",                           action = "close_node" }, -- default
-        { key = "<Tab>",                          action = "preview" }, -- default
-        { key = "K",                              action = "first_sibling" }, -- default
-        { key = "J",                              action = "last_sibling" }, -- default
-        { key = "C",                              action = "toggle_git_clean" }, -- default
-        { key = "I",                              action = "toggle_git_ignored" }, -- default
-        { key = "H",                              action = "toggle_dotfiles" }, -- default
-        { key = "B",                              action = "toggle_no_buffer" }, -- default
-        { key = "U",                              action = "toggle_custom" }, -- default
-        { key = "R",                              action = "refresh" }, -- default
-        { key = "a",                              action = "create" }, -- default
-        { key = "d",                              action = "remove" }, -- default
-        { key = "D",                              action = "trash" }, -- default
-        { key = "r",                              action = "rename" }, -- default
-        { key = "<C-r>",                          action = "full_rename" }, -- default
-        { key = "e",                              action = "" }, -- default action: rename_basename
-        { key = "x",                              action = "cut" }, -- default
-        { key = "c",                              action = "copy" }, -- default
-        { key = "p",                              action = "paste" }, -- default
-        { key = "y",                              action = "copy_name" }, -- default
-        { key = "Y",                              action = "copy_path" }, -- default
-        { key = "gy",                             action = "copy_absolute_path" }, -- default
-        { key = "[e",                             action = "prev_diag_item" }, -- default
-        { key = "[c",                             action = "prev_git_item" }, -- default
-        { key = "]e",                             action = "next_diag_item" }, -- default
-        { key = "]c",                             action = "next_git_item" }, -- default
-        { key = "-",                              action = "dir_up" }, -- default
-        { key = "s",                              action = "system_open" }, -- default
-        { key = "f",                              action = "live_filter" }, -- default
-        { key = "F",                              action = "clear_live_filter" }, -- default
-        { key = "q",                              action = "close" }, -- default
-        { key = "W",                              action = "collapse_all" }, -- default
-        { key = "E",                              action = "expand_all" }, -- default
-        { key = "S",                              action = "search_node" }, -- default
-        { key = ".",                              action = "run_file_command" }, -- default
-        { key = "<C-k>",                          action = "toggle_file_info" }, -- default
-        { key = "g?",                             action = "toggle_help" }, -- default
-        { key = "m",                              action = "toggle_mark" }, -- default
-        { key = "bmv",                            action = "bulk_move" }, -- default
+        -- Passthrough keys for existing mappings
+        { key = "<C-e>",                          action = "" },
+        { key = "e",                              action = "" },
+        { key = "d",                              action = "remove" },
+        { key = "P",                              action = "" },
+        { key = "I",                              action = "" },
+        { key = "B",                              action = "" },
+        { key = "y",                              action = "" },
+        { key = ".",                              action = "" },
+        -- Mappings
+        { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
+        { key = "O",                              action = "edit_no_picker" },
+        { key = "v",                              action = "vsplit" },
+        { key = "s",                              action = "split" },
+        { key = "t",                              action = "tabnew" },
+        { key = "ge",                             action = "prev_sibling" },
+        { key = "gn",                             action = "next_sibling" },
+        { key = "gE",                             action = "first_sibling" },
+        { key = "gN",                             action = "last_sibling" },
+        { key = "U",                              action = "dir_up" },
+        { key = "u",                              action = "parent_node" },
+        { key = "C",                              action = "cd" },
+        { key = "-",                              action = "close_node" },
+        { key = " ",                              action = "preview" },
+        { key = "H",                              action = "toggle_dotfiles" },
+        { key = "R",                              action = "refresh" },
+        { key = "a",                              action = "create" },
+        { key = "dd",                             action = "remove" },
+        -- TODO: Config trash to work!
+        { key = "D",                              action = "trash" },
+        { key = "r",                              action = "rename" },
+        { key = "<C-r>",                          action = "full_rename" },
+        { key = "x",                              action = "cut" },
+        { key = "c",                              action = "copy" },
+        { key = "p",                              action = "paste" },
+        { key = "yy",                             action = "copy_name" },
+        { key = "yu",                             action = "copy_path" },
+        { key = "yU",                             action = "copy_absolute_path" },
+        { key = "[e",                             action = "prev_diag_item" },
+        { key = "[c",                             action = "prev_git_item" },
+        { key = "]e",                             action = "next_diag_item" },
+        { key = "]c",                             action = "next_git_item" },
+        { key = "f",                              action = "live_filter" },
+        { key = "F",                              action = "clear_live_filter" },
+        { key = "q",                              action = "close" },
+        { key = "W",                              action = "collapse_all" },
+        { key = "+",                              action = "expand_all" },
+        { key = "S",                              action = "search_node" },
+        { key = "<C-k>",                          action = "toggle_file_info" },
+        { key = "g?",                             action = "toggle_help" },
+        { key = "m",                              action = "toggle_mark" },
+        { key = "bmv",                            action = "bulk_move" },
       },
     },
   },
