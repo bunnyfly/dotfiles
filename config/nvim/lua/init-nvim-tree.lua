@@ -18,14 +18,15 @@ require("nvim-tree").setup({
     mappings = {
       list = {
         -- Passthrough keys for existing mappings
-        { key = "<C-e>",                          action = "" },
-        { key = "e",                              action = "" },
-        { key = "d",                              action = "remove" },
-        { key = "P",                              action = "" },
-        { key = "I",                              action = "" },
-        { key = "B",                              action = "" },
-        { key = "y",                              action = "" },
         { key = ".",                              action = "" },
+        { key = "<C-e>",                          action = "" },
+        { key = "<C-i>",                          action = "" },
+        { key = "B",                              action = "" },
+        { key = "I",                              action = "" },
+        { key = "P",                              action = "" },
+        { key = "d",                              action = "remove" },
+        { key = "e",                              action = "" },
+        { key = "y",                              action = "" },
         -- Mappings
         { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
         { key = "O",                              action = "edit_no_picker" },
@@ -78,5 +79,8 @@ require("nvim-tree").setup({
 --  filters = {
 --    dotfiles = true,
 --  },
+  git = {
+    enable = false,
+  },
 })
 
