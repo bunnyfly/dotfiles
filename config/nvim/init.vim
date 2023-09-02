@@ -17,6 +17,7 @@ set packpath+=~/.vim
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'junegunn/fzf', { 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
+  Plug 'ggandor/leap.nvim'
 " Plugins - Editing
   Plug 'tpope/vim-abolish' " Easy search for, substitute, & abbreviate multiple variants of a word
   Plug 'tpope/vim-repeat' " Enable repeating supported plugin maps with .
@@ -27,9 +28,9 @@ set packpath+=~/.vim
   Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " Uncompromising Python formatter. “Any color you like.”
   Plug 'prettier/vim-prettier', { 'do': 'npm install' } " JS/TS/CSS/HTML Opinionated code formatter.
 " Plugins - Markdown Wiki
-  Plug 'lervag/wiki.vim'
-  Plug 'godlygeek/tabular'
-  Plug 'preservim/vim-markdown'
+  " Plug 'lervag/wiki.vim'
+  " Plug 'godlygeek/tabular'
+  " Plug 'preservim/vim-markdown'
   " Plug 'vimwiki/vimwiki'
 " Wrap up plugins!
   call plug#end()
@@ -239,6 +240,15 @@ let mapleader = ","
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" leap
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+  " lua require('leap').add_default_mappings()
+  nnoremap ( <Plug>(leap-backward-to)
+  nnoremap ) <Plug>(leap-forward-to)
+  nnoremap g) <Plug>(leap-from-window)
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Lightline
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
   " Hide ex-line mode since it's displayed in lightline.
@@ -406,10 +416,10 @@ let mapleader = ","
 " LSP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " lua require('init-lsp')
-  nnoremap <silent> <space>e <cmd>lua vim.diagnostic.open_float()<cr>
-  nnoremap <silent> [d <cmd>lua vim.diagnostic.goto_prev()<cr>
-  nnoremap <silent> ]d <cmd>lua vim.diagnostic.goto_next()<cr>
-  nnoremap <silent> <space>q <cmd>lua vim.diagnostic.setloclist()<cr>
+  " nnoremap <silent> <space>e <cmd>lua vim.diagnostic.open_float()<cr>
+  " nnoremap <silent> [d <cmd>lua vim.diagnostic.goto_prev()<cr>
+  " nnoremap <silent> ]d <cmd>lua vim.diagnostic.goto_next()<cr>
+  " nnoremap <silent> <space>q <cmd>lua vim.diagnostic.setloclist()<cr>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

@@ -35,7 +35,8 @@ fi
   alias l='less'
   alias lf='less +F'
   alias t='tmux'
-  alias v='vim'
+  alias tp='tmuxp'
+  alias v='nvim'
   alias vim='nvim'
 
 # Verify overwrite/delete

@@ -10,6 +10,7 @@
 [core]
   excludesfile = ~/.gitignore_global
 	precomposeunicode = true
+	compression = 0
 
 [color]
   ui = auto
@@ -24,8 +25,9 @@
   cim = commit -m
   d = diff
   h = help
-  l = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
+  l = log -30 --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s' --decorate --abbrev-commit
   prom = pull --rebase origin master
+  prob = !git pull --rebase origin \"$(git branch --show-current)\"
   r = rebase
   s = status -s
   st = stash
@@ -43,3 +45,6 @@
 
 [credential]
   helper = osxkeychain
+
+[diff]
+  algorithm = histogram
