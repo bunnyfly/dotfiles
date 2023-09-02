@@ -43,6 +43,9 @@ fi
   alias mv='nocorrect mv -i'
   alias rm='nocorrect rm -i'
 
+# yt-dlp
+  alias yt-dlp-video="yt-dlp -o '%(uploader)s/%(upload_date>%Y)d/%(uploader)s - S%(upload_date>%Y)dE%(upload_date>%m)02d%(upload_date>%d)02d - %(title)s [youtube-%(id)s].%(ext)s' --embed-metadata --embed-thumbnail --embed-chapters --write-subs --sub-langs en"
+
 # Symbols
   export STAR=★
 
