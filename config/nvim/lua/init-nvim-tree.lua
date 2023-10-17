@@ -1,86 +1,57 @@
--- examples for your init.lua
-
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
--- set termguicolors to enable highlight groups
--- vim.opt.termguicolors = true
+local function custom_on_attach(bufnr)
+  local api = require "nvim-tree.api"
 
--- empty setup using defaults
--- require("nvim-tree").setup()
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
 
--- OR setup with some options
-require("nvim-tree").setup({
-  -- sort_by = "case_sensitive",
+  -- Skip default mappings:
+  -- api.config.mappings.default_on_attach(bufnr)
+
+  -- Navigating
+  vim.keymap.set('n', 'u',     api.node.navigate.parent,              opts('Parent Directory'))
+  vim.keymap.set('n', 'U',     api.tree.change_root_to_parent,        opts('Up'))
+  vim.keymap.set('n', 'C',     api.tree.change_root_to_node,          opts('CD'))
+  vim.keymap.set('n', '+',     api.tree.expand_all,                   opts('Expand All'))
+  vim.keymap.set('n', '-',     api.node.navigate.parent_close,        opts('Close Directory'))
+  vim.keymap.set('n', 'gn',    api.node.navigate.sibling.last,        opts('Last Sibling'))
+  vim.keymap.set('n', 'ge',    api.node.navigate.sibling.first,       opts('First Sibling'))
+  vim.keymap.set('n', 'H',     api.tree.toggle_hidden_filter,         opts('Toggle Filter: Dotfiles'))
+  vim.keymap.set('n', 'R',     api.tree.reload,                       opts('Refresh'))
+  vim.keymap.set('n', '<C-g>', api.node.show_info_popup,              opts('Info'))
+
+  -- Opening
+  vim.keymap.set('n', 'o',     api.node.open.edit,                    opts('Open'))
+  vim.keymap.set('n', '<CR>',  api.node.open.edit,                    opts('Open'))
+  vim.keymap.set('n', '<2-LeftMouse>', api.node.open.edit,            opts('Open'))
+  vim.keymap.set('n', 'v',     api.node.open.vertical,                opts('Open: Vertical Split'))
+  vim.keymap.set('n', 's',     api.node.open.horizontal,              opts('Open: Horizontal Split'))
+  vim.keymap.set('n', 't',     api.node.open.tab,                     opts('Open: New Tab'))
+
+  -- Editing
+  vim.keymap.set('n', 'a',     api.fs.create,                         opts('Create'))
+  vim.keymap.set('n', 'r',     api.fs.rename,                         opts('Rename: Basename'))
+  vim.keymap.set('n', '<C-r>', api.fs.rename_sub,                     opts('Rename: Omit Filename'))
+  vim.keymap.set('n', 'Y',     api.fs.copy.absolute_path,             opts('Copy Absolute Path'))
+  vim.keymap.set('n', 'yy',    api.fs.copy.filename,                  opts('Copy Name'))
+
+  vim.keymap.set('n', 'x',     api.fs.cut,                            opts('Cut'))
+  vim.keymap.set('n', 'c',     api.fs.copy.node,                      opts('Copy'))
+  vim.keymap.set('n', 'p',     api.fs.paste,                          opts('Paste'))
+  vim.keymap.set('n', 'dd',    api.fs.trash,                          opts('Trash'))
+  vim.keymap.set('n', 'D',     api.fs.remove,                         opts('Delete'))
+end
+
+require("nvim-tree").setup {
+  on_attach = custom_on_attach,
   view = {
     adaptive_size = true,
-    mappings = {
-      list = {
-        -- Passthrough keys for existing mappings
-        { key = ".",                              action = "" },
-        { key = "<C-e>",                          action = "" },
-        { key = "<C-i>",                          action = "" },
-        { key = "B",                              action = "" },
-        { key = "I",                              action = "" },
-        { key = "P",                              action = "" },
-        { key = "d",                              action = "remove" },
-        { key = "e",                              action = "" },
-        { key = "y",                              action = "" },
-        -- Mappings
-        { key = { "<CR>", "o", "<2-LeftMouse>" }, action = "edit" },
-        { key = "O",                              action = "edit_no_picker" },
-        { key = "v",                              action = "vsplit" },
-        { key = "s",                              action = "split" },
-        { key = "t",                              action = "tabnew" },
-        { key = "ge",                             action = "prev_sibling" },
-        { key = "gn",                             action = "next_sibling" },
-        { key = "gE",                             action = "first_sibling" },
-        { key = "gN",                             action = "last_sibling" },
-        { key = "U",                              action = "dir_up" },
-        { key = "u",                              action = "parent_node" },
-        { key = "C",                              action = "cd" },
-        { key = "-",                              action = "close_node" },
-        { key = " ",                              action = "preview" },
-        { key = "H",                              action = "toggle_dotfiles" },
-        { key = "R",                              action = "refresh" },
-        { key = "a",                              action = "create" },
-        { key = "dd",                             action = "remove" },
-        -- TODO: Config trash to work!
-        { key = "D",                              action = "trash" },
-        { key = "r",                              action = "rename" },
-        { key = "<C-r>",                          action = "full_rename" },
-        { key = "x",                              action = "cut" },
-        { key = "c",                              action = "copy" },
-        { key = "p",                              action = "paste" },
-        { key = "yy",                             action = "copy_name" },
-        { key = "yu",                             action = "copy_path" },
-        { key = "yU",                             action = "copy_absolute_path" },
-        { key = "[e",                             action = "prev_diag_item" },
-        { key = "[c",                             action = "prev_git_item" },
-        { key = "]e",                             action = "next_diag_item" },
-        { key = "]c",                             action = "next_git_item" },
-        { key = "f",                              action = "live_filter" },
-        { key = "F",                              action = "clear_live_filter" },
-        { key = "q",                              action = "close" },
-        { key = "W",                              action = "collapse_all" },
-        { key = "+",                              action = "expand_all" },
-        { key = "S",                              action = "search_node" },
-        { key = "<C-k>",                          action = "toggle_file_info" },
-        { key = "g?",                             action = "toggle_help" },
-        { key = "m",                              action = "toggle_mark" },
-        { key = "bmv",                            action = "bulk_move" },
-      },
-    },
   },
---  renderer = {
---    group_empty = true,
---  },
---  filters = {
---    dotfiles = true,
---  },
   git = {
     enable = false,
   },
-})
-
+}
