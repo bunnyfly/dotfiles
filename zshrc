@@ -1,9 +1,77 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Start configuration added by Zim install {{{
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
+
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
+bindkey -v
+
+# Prompt for spelling correction of commands.
+#setopt CORRECT
+
+# Customize spelling correction prompt.
+#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
+
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# ------------------
+# Initialize modules
+# ------------------
+
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
+
+# ------------------------------
+# Post-init module configuration
+# ------------------------------
+
+zmodload -F zsh/terminfo +p:terminfo
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+# }}} End configuration added by Zim install
+
+
+####################################################################################################
+# Powerlevel10k prompt
+# https://github.com/romkatv/powerlevel10k
+####################################################################################################
+  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+  # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+  # Initialization code that may require console input (password prompts, [y/n]
+  # confirmations, etc.) must go above this block; everything else may go below.
+  if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+  fi
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
 
 ####################################################################################################
 # General
@@ -16,10 +84,16 @@ fi
 # macOS is stupid and needs this to run async Python RQ tasks.
   export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
+# Brew
+  export PATH=$PATH:/opt/homebrew/bin
+
 # Go
   export GOPATH=$HOME
   export PATH=$PATH:$GOPATH/bin
   export PATH=$PATH:/usr/local/opt/go/libexec/bin
+
+# Pip3
+  export PATH=$PATH:~/Library/Python/3.9/bin
 
 # Shortcuts
   if hash ag 2>/dev/null; then
@@ -38,6 +112,7 @@ fi
   alias tp='tmuxp'
   alias v='nvim'
   alias vim='nvim'
+  alias vim-mv="\ls | vim - -c \"set nowrap | set tw=0 | %s/.*/mv -i '&' '&'/g | let @/ = '' | %sort | norm ggO# To move, run :w \!sh\""
 
 # Verify overwrite/delete
   alias cp='nocorrect cp -i'
@@ -195,14 +270,6 @@ xi18n) opts="--app --i18n-format --locale --out-file --output-path --progress --
     eval "$(rbenv init -)"
   fi
 
-
-####################################################################################################
-# Powerlevel10k prompt
-# https://github.com/romkatv/powerlevel10k
-####################################################################################################
-  source $(brew --prefix)/opt/powerlevel10k/powerlevel10k.zsh-theme
-  # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 ####################################################################################################
 # PATHs
