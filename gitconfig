@@ -29,6 +29,7 @@
   prom = pull --rebase origin master
   prob = !git pull --rebase origin \"$(git branch --show-current)\"
   r = rebase
+  aarc = !git add -A && git rebase --continue
   s = status -s
   st = stash
   stpm = stash push -m

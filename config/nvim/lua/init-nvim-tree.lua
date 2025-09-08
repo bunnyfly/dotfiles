@@ -11,6 +11,7 @@ local function custom_on_attach(bufnr)
 
   -- Skip default mappings:
   -- api.config.mappings.default_on_attach(bufnr)
+  vim.keymap.set('n', '?',     api.tree.toggle_help,                  opts('Help'))
 
   -- Navigating
   vim.keymap.set('n', 'u',     api.node.navigate.parent,              opts('Parent Directory'))
@@ -50,6 +51,10 @@ require("nvim-tree").setup {
   on_attach = custom_on_attach,
   view = {
     adaptive_size = true,
+    width = {
+      min = 40,
+      max = 80,
+    },
   },
   git = {
     enable = false,
